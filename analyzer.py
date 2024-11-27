@@ -326,6 +326,24 @@ class TemplateAnalyzer:
                 
                 f.write('---\n\n')
 
+    def _write_properties_section(self, f, var_info):
+        if var_info.nested_patterns:
+            f.write('<details class="expandable-section">\n')
+            f.write('<summary><strong>Properties</strong></summary>\n\n')
+            f.write('| Property | Example Value |\n')
+            f.write('|----------|---------------|\n')
+            
+            for pattern, examples in sorted(var_info.nested_patterns.items()):
+                example = next(iter(examples))
+                pattern = pattern.strip().replace('|', '\\|')
+                example = example.strip().replace('|', '\\|')
+                pattern = pattern.replace('`', '')
+                example = example.replace('`', '')
+                f.write(f'| `{pattern}` | `{example}` |\n')
+            
+            f.write('\n')
+            f.write('</details>\n\n')
+
     def _write_files_section(self, f, var_info):
         f.write('<details class="expandable-section">\n')
         f.write('<summary><strong>Found in files</strong></summary>\n\n')
@@ -353,7 +371,6 @@ class TemplateAnalyzer:
                 
                 cleaned_context = clean_example_content(ex["context"])
                 if cleaned_context:
-                    # Add raw tags around the entire code block
                     f.write('```django\n')
                     f.write(cleaned_context + '\n')
                     f.write('```\n\n')
@@ -362,28 +379,6 @@ class TemplateAnalyzer:
                 if len(seen_examples) >= 3:
                     break
             
-            f.write('</details>\n\n')
-
-    def _write_properties_section(self, f, var_info):
-        if var_info.nested_patterns:
-            f.write('<details class="expandable-section">\n')
-            f.write('<summary><strong>Properties</strong></summary>\n\n')
-            f.write('| Property | Example Value |\n')
-            f.write('|----------|---------------|\n')
-            
-            for pattern, examples in sorted(var_info.nested_patterns.items()):
-                example = next(iter(examples))
-                pattern = pattern.strip().replace('|', '\\|')
-                example = example.strip().replace('|', '\\|')
-                pattern = pattern.replace('`', '')
-                example = example.replace('`', '')
-                
-                # Escape Django template syntax in the example
-                example = example.replace('{{', '{%raw%}{{').replace('}}', '}}{%endraw%}')
-                
-                f.write(f'| `{pattern}` | `{example}` |\n')
-            
-            f.write('\n')
             f.write('</details>\n\n')
 
 def main():

@@ -49,6 +49,7 @@ layout: default
 - [payload](#payload)
 - [promptset](#promptset)
 - [property](#property)
+- [property_refs](#property_refs)
 - [purchaseorder](#purchaseorder)
 - [quote](#quote)
 - [rectification](#rectification)
@@ -144,14 +145,14 @@ layout: default
 
 | Property | Example Value |
 |----------|---------------|
-| `scheduled_start` | `{%raw%}{{appt.scheduled_start}}{%endraw%}` |
-| `task.authorisation_ref` | `{%raw%}{{appt.task.authorisation_ref}}{%endraw%}` |
-| `task.description` | `{%raw%}{{appt.task.description}}{%endraw%}` |
-| `task.name` | `{%raw%}{{appt.task.name}}{%endraw%}` |
-| `task.property.name` | `{%raw%}{{appt.task.property.name}}{%endraw%}` |
-| `task.ref` | `{%raw%}{{appt.task.ref}}{%endraw%}` |
-| `task.scope_of_works` | `{%raw%}{{appt.task.scope_of_works}}{%endraw%}` |
-| `technicians.first` | `{%raw%}{{appt.technicians.first}}{%endraw%}` |
+| `scheduled_start` | `{{appt.scheduled_start}}` |
+| `task.authorisation_ref` | `{{appt.task.authorisation_ref}}` |
+| `task.description` | `{{appt.task.description}}` |
+| `task.name` | `{{appt.task.name}}` |
+| `task.property.name` | `{{appt.task.property.name}}` |
+| `task.ref` | `{{appt.task.ref}}` |
+| `task.scope_of_works` | `{{ appt.task.scope_of_works }}` |
+| `technicians.first` | `{{appt.technicians.first}}` |
 
 </details>
 
@@ -193,6 +194,7 @@ layout: default
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
+- generic.md
 - generic.txt
 
 </details>
@@ -209,27 +211,27 @@ layout: default
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
+<p>Regards,<br />
+`config.SITE_ORGANISATION`</p>
+<p>Dear {{ attention }},</p>
+<p>Please find attached your documents for services recently carried out at `property.name`.</p>
+  <p>Your invoice:</p>
+```
+
+```django
+[[ dispatch_public_url_text ]]
+<p>For any questions, please contact us.</p>
+<p>Dear {{ attention }},</p>
+<p>Please find attached your documents for services recently carried out at `property.name`.</p>
+  <p>Your invoice:</p>
+```
+
+```django
 <td style="width: 600px;">
             <div style="font-family: 'Arial', sans-serif; font-size: 10.5pt;">
                 <p style="padding: 10px 0;">Dear {{ attention }},</p>
                 <p>Please be advised we will need access to complete the following:</p>
                 <table style="width: 100%; border-collapse: collapse; border-bottom: 1px solid #dcdddd;">
-```
-
-```django
-</table>
-{% endblock %}
-<p>Dear {{ attention }},</p>
-<p>Please find attached your defect quote for {{ property.name }}.</p>
-<p>To view and approve this quote online, visit:</p>
-```
-
-```django
-<p>Regards,<br />
-{{ config.SITE_ORGANISATION }}</p>
-<p>Dear {{ attention|default:"manager" }},</p>
-<p>Please find attached your documents for services recently carried out at {{ property.name }}.</p>
-{% if invoice %}
 ```
 
 </details>
@@ -338,9 +340,9 @@ Sent: {{ failure_datetime }}<br />
 
 | Property | Example Value |
 |----------|---------------|
-| `get_absolute_url` | `{%raw%}{{ changerequest.get_absolute_url }}{%endraw%}` |
-| `ref` | `{%raw%}{{ changerequest.ref }}{%endraw%}` |
-| `status` | `{%raw%}{{ changerequest.status }}{%endraw%}` |
+| `get_absolute_url` | `{{ changerequest.get_absolute_url }}` |
+| `ref` | `{{ changerequest.ref }}` |
+| `status` | `{{ changerequest.status }}` |
 
 </details>
 
@@ -389,7 +391,7 @@ Sent: {{ failure_datetime }}<br />
 
 | Property | Example Value |
 |----------|---------------|
-| `text` | `{%raw%}{{ chat_message.text }}{%endraw%}` |
+| `text` | `{{ chat_message.text }}` |
 
 </details>
 
@@ -430,7 +432,7 @@ Sent: {{ failure_datetime }}<br />
 
 | Property | Example Value |
 |----------|---------------|
-| `primary_contact.name` | `{%raw%}{{ client.primary_contact.name }}{%endraw%}` |
+| `primary_contact.name` | `{{ client.primary_contact.name }}` |
 
 </details>
 
@@ -471,9 +473,9 @@ Sent: {{ failure_datetime }}<br />
 
 | Property | Example Value |
 |----------|---------------|
-| `CONTACT_EMAIL` | `{%raw%}{{ config.CONTACT_EMAIL }}{%endraw%}` |
-| `CONTACT_PHONE` | `{%raw%}{{config.CONTACT_PHONE}}{%endraw%}` |
-| `SITE_ORGANISATION` | `{%raw%}{{config.SITE_ORGANISATION}}{%endraw%}` |
+| `CONTACT_EMAIL` | `{{ config.CONTACT_EMAIL }}` |
+| `CONTACT_PHONE` | `{{config.CONTACT_PHONE}}` |
+| `SITE_ORGANISATION` | `{{config.SITE_ORGANISATION}}` |
 
 </details>
 
@@ -522,8 +524,8 @@ Sent: {{ failure_datetime }}<br />
 
 | Property | Example Value |
 |----------|---------------|
-| `account` | `{%raw%}{{ contractor.account }}{%endraw%}` |
-| `name` | `{%raw%}{{ contractor.name }}{%endraw%}` |
+| `account` | `{{ contractor.account }}` |
+| `name` | `{{ contractor.name }}` |
 
 </details>
 
@@ -572,7 +574,7 @@ Sent: {{ failure_datetime }}<br />
 
 | Property | Example Value |
 |----------|---------------|
-| `name` | `{%raw%}{{ contractor_contact.name }}{%endraw%}` |
+| `name` | `{{ contractor_contact.name }}` |
 
 </details>
 
@@ -951,8 +953,8 @@ Bounce Reason: {{ formatted_reason }}<br />
 
 | Property | Example Value |
 |----------|---------------|
-| `submitter` | `{%raw%}{{ formresponse.submitter }}{%endraw%}` |
-| `template_version.template.name` | `{%raw%}{{ formresponse.template_version.template.name }}{%endraw%}` |
+| `submitter` | `{{ formresponse.submitter }}` |
+| `template_version.template.name` | `{{ formresponse.template_version.template.name }}` |
 
 </details>
 
@@ -1034,8 +1036,8 @@ Bounce Reason: {{ formatted_reason }}<br />
 
 | Property | Example Value |
 |----------|---------------|
-| `number` | `{%raw%}{{ inv.number }}{%endraw%}` |
-| `ref` | `{%raw%}{{ inv.ref }}{%endraw%}` |
+| `number` | `{{ inv.number }}` |
+| `ref` | `{{ inv.ref }}` |
 
 </details>
 
@@ -1067,6 +1069,7 @@ Bounce Reason: {{ formatted_reason }}<br />
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
+- generic.md
 - generic.txt
 
 </details>
@@ -1076,12 +1079,21 @@ Bounce Reason: {{ formatted_reason }}<br />
 
 | Property | Example Value |
 |----------|---------------|
-| `ref` | `{%raw%}{{ invoice.ref }}{%endraw%}` |
+| `number` | `{{ invoice.number }}` |
+| `ref` | `{{ invoice.ref }}` |
 
 </details>
 
 <details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
+
+```django
+<p>Your invoice:</p>
+  <ul>
+    <li>{{ invoice.number }} {% if invoice.ref %}(`invoice.ref`)</li>
+  </ul>
+{% endif %}
+```
 
 ```django
 <p>Your invoice:</p>
@@ -1110,7 +1122,7 @@ Bounce Reason: {{ formatted_reason }}<br />
 
 | Property | Example Value |
 |----------|---------------|
-| `label` | `{%raw%}{{ item.label }}{%endraw%}` |
+| `label` | `{{ item.label }}` |
 
 </details>
 
@@ -1168,13 +1180,13 @@ Bounce Reason: {{ formatted_reason }}<br />
 
 | Property | Example Value |
 |----------|---------------|
-| `annual_subtotal` | `{%raw%}{{ line.annual_subtotal\|currency }}{%endraw%}` |
-| `product.name` | `{%raw%}{{ line.product.name }}{%endraw%}` |
-| `quantity` | `{%raw%}{{ line.quantity\|floatformat:2 }}{%endraw%}` |
-| `routineservicetype.name` | `{%raw%}{{ line.routineservicetype.name }}{%endraw%}` |
-| `site_price` | `{%raw%}{{ line.site_price\|currency }}{%endraw%}` |
-| `subtotal` | `{%raw%}{{ line.subtotal\|currency }}{%endraw%}` |
-| `unit_price` | `{%raw%}{{ line.unit_price\|currency }}{%endraw%}` |
+| `annual_subtotal` | `{{ line.annual_subtotal\|currency }}` |
+| `product.name` | `{{ line.product.name }}` |
+| `quantity` | `{{ line.quantity\|floatformat:2 }}` |
+| `routineservicetype.name` | `{{ line.routineservicetype.name }}` |
+| `site_price` | `{{ line.site_price\|currency }}` |
+| `subtotal` | `{{ line.subtotal\|currency }}` |
+| `unit_price` | `{{ line.unit_price\|currency }}` |
 
 </details>
 
@@ -1232,7 +1244,7 @@ Bounce Reason: {{ formatted_reason }}<br />
 
 | Property | Example Value |
 |----------|---------------|
-| `name` | `{%raw%}{{ logbook.name }}{%endraw%}` |
+| `name` | `{{ logbook.name }}` |
 
 </details>
 
@@ -1393,8 +1405,8 @@ Uptick Team</p>
 
 | Property | Example Value |
 |----------|---------------|
-| `name` | `{%raw%}{{ promptset.name }}{%endraw%}` |
-| `ref` | `{%raw%}{{ promptset.ref }}{%endraw%}` |
+| `name` | `{{ promptset.name }}` |
+| `ref` | `{{ promptset.ref }}` |
 
 </details>
 
@@ -1428,11 +1440,11 @@ Uptick Team</p>
 
 | Property | Example Value |
 |----------|---------------|
-| `client_ref` | `{%raw%}{{ property.client_ref }}{%endraw%}` |
-| `name` | `{%raw%}{{ property.name }}{%endraw%}` |
-| `property__name` | `{%raw%}{{ property.property__name }}{%endraw%}` |
-| `property_id` | `{%raw%}{{property.property_id}}{%endraw%}` |
-| `ref` | `{%raw%}{{ property.ref }}{%endraw%}` |
+| `client_ref` | `{{ property.client_ref }}` |
+| `name` | `{{ property.name }}` |
+| `property__name` | `{{ property.property__name }}` |
+| `property_id` | `{{property.property_id}}` |
+| `ref` | `{{ property.ref }}` |
 
 </details>
 
@@ -1467,6 +1479,30 @@ Uptick Team</p>
 
 ---
 
+## property_refs
+
+<details class="expandable-section">
+<summary><strong>Found in files</strong></summary>
+
+- generic.md
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Usage Examples</strong></summary>
+
+```django
+`contractor`
+      <br />
+      {{ property_refs }}
+      <br />
+      `message`
+```
+
+</details>
+
+---
+
 ## purchaseorder
 
 <details class="expandable-section">
@@ -1481,7 +1517,7 @@ Uptick Team</p>
 
 | Property | Example Value |
 |----------|---------------|
-| `delivery_instructions` | `{%raw%}{{purchaseorder.delivery_instructions}}{%endraw%}` |
+| `delivery_instructions` | `{{purchaseorder.delivery_instructions}}` |
 
 </details>
 
@@ -1506,6 +1542,7 @@ Uptick Team</p>
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
+- generic.md
 - generic.txt
 
 </details>
@@ -1515,10 +1552,10 @@ Uptick Team</p>
 
 | Property | Example Value |
 |----------|---------------|
-| `get_uuid_approval_url` | `{%raw%}{{ quote.get_uuid_approval_url }}{%endraw%}` |
-| `property.name` | `{%raw%}{{ quote.property.name }}{%endraw%}` |
-| `ref` | `{%raw%}{{ quote.ref }}{%endraw%}` |
-| `status.upper` | `{%raw%}{{ quote.status.upper }}{%endraw%}` |
+| `get_uuid_approval_url` | `{{ quote.get_uuid_approval_url\|absolute }}` |
+| `property.name` | `{{ quote.property.name }}` |
+| `ref` | `{{ quote.ref }}` |
+| `status.upper` | `{{ quote.status.upper }}` |
 
 </details>
 
@@ -1531,6 +1568,14 @@ Uptick Team</p>
 
 <details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
+
+```django
+</div>
+                                    <div class="d-flex">
+                                      <a href="{{ quote.get_uuid_approval_url }}">
+                                        <div class='d-flex flex-row'>
+                                          <div class="status quote `quote.status.upper`">
+```
 
 ```django
 <p>Please find attached your defect quote for {{ property.name }}.</p>
@@ -1546,14 +1591,6 @@ Uptick Team</p>
       <li>Reference: {{ quote.ref }}<a href="{{ base_url }}{{ quote.get_uuid_approval_url }}"> (approve online)</a></li>
     {% endfor %}
   </ul>
-```
-
-```django
-{% endif %}
-<p>To view and approve this quote online, visit:</p>
-<p><a href="{{ base_url }}{{ quote.get_uuid_approval_url }}">{{ base_url }}{{ quote.get_uuid_approval_url }}</a></p>
-<p>Regards,<br />
-{{ config.SITE_ORGANISATION }}</p>
 ```
 
 </details>
@@ -1574,8 +1611,8 @@ Uptick Team</p>
 
 | Property | Example Value |
 |----------|---------------|
-| `ref` | `{%raw%}{{ rectification.ref }}{%endraw%}` |
-| `rejection_reason` | `{%raw%}{{ rectification.rejection_reason\|markdowner }}{%endraw%}` |
+| `ref` | `{{ rectification.ref }}` |
+| `rejection_reason` | `{{ rectification.rejection_reason\|markdowner }}` |
 
 </details>
 
@@ -1671,6 +1708,7 @@ Uptick Team</p>
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
+- generic.md
 - generic.txt
 
 </details>
@@ -1680,15 +1718,15 @@ Uptick Team</p>
 
 | Property | Example Value |
 |----------|---------------|
-| `get_description` | `{%raw%}{{ remark.get_description\|markdowner }}{%endraw%}` |
-| `get_public_url` | `{%raw%}{{ remark.get_public_url }}{%endraw%}` |
-| `get_resolution` | `{%raw%}{{ remark.get_resolution\|markdowner }}{%endraw%}` |
-| `get_severity_display` | `{%raw%}{{ remark.get_severity_display }}{%endraw%}` |
-| `id` | `{%raw%}{{ remark.id }}{%endraw%}` |
-| `identified` | `{%raw%}{{ remark.identified }}{%endraw%}` |
-| `last_verified_date` | `{%raw%}{{ remark.last_verified_date }}{%endraw%}` |
-| `location` | `{%raw%}{{ remark.location\|markdowner }}{%endraw%}` |
-| `severity` | `{%raw%}{{ remark.severity }}{%endraw%}` |
+| `get_description` | `{{ remark.get_description }}` |
+| `get_public_url` | `{{ remark.get_public_url }}` |
+| `get_resolution` | `{{ remark.get_resolution\|markdowner }}` |
+| `get_severity_display` | `{{ remark.get_severity_display }}` |
+| `id` | `{{ remark.id }}` |
+| `identified` | `{{ remark.identified }}` |
+| `last_verified_date` | `{{ remark.last_verified_date }}` |
+| `location` | `{{ remark.location }}` |
+| `severity` | `{{ remark.severity }}` |
 
 </details>
 
@@ -1703,27 +1741,27 @@ Uptick Team</p>
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-<tr>
-                        <td class="m-0 p-0">
-                          <div id="{{ remark.id }}"
-                               class="remark severity-{{ remark.severity }} keep-together">
-                            <div class="d-flex flex-row justify-content-between header">
+<div class="body px-3 py-2">
+                              <div>
+                                <strong>Description:</strong> {{ remark.get_description }}
+                              </div>
+                                <div>
 ```
 
 ```django
-<td class="m-0 p-0">
-                          <div id="{{ remark.id }}"
-                               class="remark severity-{{ remark.severity }} keep-together">
-                            <div class="d-flex flex-row justify-content-between header">
-                              <div class="px-3 py-2">
+</div>
+                                <div>
+                                  <strong>Resolution:</strong> {{ remark.get_resolution }}
+                                </div>
+                                <div>
 ```
 
 ```django
-<div class="d-flex flex-row justify-content-between header">
-                              <div class="px-3 py-2">
-                                <strong>{{ remark.get_severity_display }}</strong>
-                                <br/>
-                                <a href="{{ remark.get_public_url }}">
+</div>
+                                <div>
+                                  <strong>Location:</strong> {{ remark.location }}
+                                </div>
+                              {% get_quotes_for_remark report remark as remark_quotes %}
 ```
 
 </details>
@@ -1745,7 +1783,7 @@ Uptick Team</p>
 
 | Property | Example Value |
 |----------|---------------|
-| `get_title` | `{%raw%}{{ report.get_title }}{%endraw%}` |
+| `get_title` | `{{ report.get_title }}` |
 
 </details>
 
@@ -1778,8 +1816,8 @@ Uptick Team</p>
 
 | Property | Example Value |
 |----------|---------------|
-| `email` | `{%raw%}{{request_user.email}}{%endraw%}` |
-| `name` | `{%raw%}{{request_user.name}}{%endraw%}` |
+| `email` | `{{request_user.email}}` |
+| `name` | `{{request_user.name}}` |
 
 </details>
 
@@ -1852,8 +1890,8 @@ Uptick Team</p>
 
 | Property | Example Value |
 |----------|---------------|
-| `get_routine_display_name` | `{%raw%}{{ routineserviceleveltype.get_routine_display_name }}{%endraw%}` |
-| `routineservicetype.standard.name` | `{%raw%}{{ routineserviceleveltype.routineservicetype.standard.name }}{%endraw%}` |
+| `get_routine_display_name` | `{{ routineserviceleveltype.get_routine_display_name }}` |
+| `routineservicetype.standard.name` | `{{ routineserviceleveltype.routineservicetype.standard.name }}` |
 
 </details>
 
@@ -1895,7 +1933,7 @@ Uptick Team</p>
 
 | Property | Example Value |
 |----------|---------------|
-| `name` | `{%raw%}{{ rslt.name }}{%endraw%}` |
+| `name` | `{{ rslt.name }}` |
 
 </details>
 
@@ -1960,7 +1998,7 @@ Uptick Team</p>
 
 | Property | Example Value |
 |----------|---------------|
-| `name` | `{%raw%}{{ sender.name }}{%endraw%}` |
+| `name` | `{{ sender.name }}` |
 
 </details>
 
@@ -1993,20 +2031,20 @@ Uptick Team</p>
 
 | Property | Example Value |
 |----------|---------------|
-| `annual_gst` | `{%raw%}{{ servicequote.annual_gst\|currency }}{%endraw%}` |
-| `annual_subtotal` | `{%raw%}{{ servicequote.annual_subtotal\|currency }}{%endraw%}` |
-| `annual_total` | `{%raw%}{{ servicequote.annual_total\|currency }}{%endraw%}` |
-| `description` | `{%raw%}{{ servicequote.description }}{%endraw%}` |
-| `expiry_date` | `{%raw%}{{ servicequote.expiry_date }}{%endraw%}` |
-| `get_absolute_url` | `{%raw%}{{ servicequote.get_absolute_url }}{%endraw%}` |
-| `product_gst` | `{%raw%}{{ servicequote.product_gst\|currency }}{%endraw%}` |
-| `product_subtotal` | `{%raw%}{{ servicequote.product_subtotal\|currency }}{%endraw%}` |
-| `product_total` | `{%raw%}{{ servicequote.product_total\|currency }}{%endraw%}` |
-| `ref` | `{%raw%}{{ servicequote.ref }}{%endraw%}` |
-| `salesperson.email` | `{%raw%}{{ servicequote.salesperson.email }}{%endraw%}` |
-| `salesperson.name` | `{%raw%}{{ servicequote.salesperson.name }}{%endraw%}` |
-| `scope_of_works` | `{%raw%}{{ servicequote.scope_of_works\|markdowner }}{%endraw%}` |
-| `terms_and_conditions` | `{%raw%}{{ servicequote.terms_and_conditions\|markdowner }}{%endraw%}` |
+| `annual_gst` | `{{ servicequote.annual_gst\|currency }}` |
+| `annual_subtotal` | `{{ servicequote.annual_subtotal\|currency }}` |
+| `annual_total` | `{{ servicequote.annual_total\|currency }}` |
+| `description` | `{{ servicequote.description }}` |
+| `expiry_date` | `{{ servicequote.expiry_date }}` |
+| `get_absolute_url` | `{{ servicequote.get_absolute_url }}` |
+| `product_gst` | `{{ servicequote.product_gst\|currency }}` |
+| `product_subtotal` | `{{ servicequote.product_subtotal\|currency }}` |
+| `product_total` | `{{ servicequote.product_total\|currency }}` |
+| `ref` | `{{ servicequote.ref }}` |
+| `salesperson.email` | `{{ servicequote.salesperson.email }}` |
+| `salesperson.name` | `{{ servicequote.salesperson.name }}` |
+| `scope_of_works` | `{{ servicequote.scope_of_works\|markdowner }}` |
+| `terms_and_conditions` | `{{ servicequote.terms_and_conditions\|markdowner }}` |
 
 </details>
 
@@ -2055,6 +2093,7 @@ Kind regards,<br /><br />
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
+- generic.md
 - generic.txt
 
 </details>
@@ -2064,20 +2103,20 @@ Kind regards,<br /><br />
 
 | Property | Example Value |
 |----------|---------------|
-| `get_result_display.upper` | `{%raw%}{{ servicetask.get_result_display.upper }}{%endraw%}` |
-| `item` | `{%raw%}{{ servicetask.item\|bsecure_url }}{%endraw%}` |
-| `item.extra_fields.door_depth` | `{%raw%}{{servicetask.item.extra_fields.door_depth}}{%endraw%}` |
-| `item.extra_fields.door_width` | `{%raw%}{{servicetask.item.extra_fields.door_width}}{%endraw%}` |
-| `item.get_extra_fields_display.certification_id_present` | `{%raw%}{{servicetask.item.get_extra_fields_display.certification_id_present}}{%endraw%}` |
-| `item.get_extra_fields_display.comments` | `{%raw%}{{servicetask.item.get_extra_fields_display.comments}}{%endraw%}` |
-| `item.get_extra_fields_display.door_height` | `{%raw%}{{servicetask.item.get_extra_fields_display.door_height}}{%endraw%}` |
-| `item.get_extra_fields_display.door_material` | `{%raw%}{{servicetask.item.get_extra_fields_display.door_material}}{%endraw%}` |
-| `item.get_extra_fields_display.door_rating` | `{%raw%}{{servicetask.item.get_extra_fields_display.door_rating}}{%endraw%}` |
-| `item.get_extra_fields_display.frame_material` | `{%raw%}{{servicetask.item.get_extra_fields_display.frame_material}}{%endraw%}` |
-| `item.get_label` | `{%raw%}{{ servicetask.item.get_label }}{%endraw%}` |
-| `item.inspection_ref` | `{%raw%}{{ servicetask.item.inspection_ref }}{%endraw%}` |
-| `item.location` | `{%raw%}{{ servicetask.item.location }}{%endraw%}` |
-| `result` | `{%raw%}{{ servicetask.result }}{%endraw%}` |
+| `get_result_display.upper` | `{{ servicetask.get_result_display.upper }}` |
+| `item` | `{{ servicetask.item }}` |
+| `item.extra_fields.door_depth` | `{{servicetask.item.extra_fields.door_depth}}` |
+| `item.extra_fields.door_width` | `{{servicetask.item.extra_fields.door_width}}` |
+| `item.get_extra_fields_display.certification_id_present` | `{{servicetask.item.get_extra_fields_display.certification_id_present}}` |
+| `item.get_extra_fields_display.comments` | `{{servicetask.item.get_extra_fields_display.comments}}` |
+| `item.get_extra_fields_display.door_height` | `{{servicetask.item.get_extra_fields_display.door_height}}` |
+| `item.get_extra_fields_display.door_material` | `{{servicetask.item.get_extra_fields_display.door_material}}` |
+| `item.get_extra_fields_display.door_rating` | `{{servicetask.item.get_extra_fields_display.door_rating}}` |
+| `item.get_extra_fields_display.frame_material` | `{{servicetask.item.get_extra_fields_display.frame_material}}` |
+| `item.get_label` | `{{ servicetask.item.get_label }}` |
+| `item.inspection_ref` | `{{ servicetask.item.inspection_ref }}` |
+| `item.location` | `{{ servicetask.item.location }}` |
+| `result` | `{{ servicetask.result }}` |
 
 </details>
 
@@ -2093,27 +2132,27 @@ Kind regards,<br /><br />
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
+<th width="50%" class="bg-white light-text-weight">
+                  <strong>Serial:</strong> `servicetask.item.inspection_ref`
+                  <a href="{{ servicetask.item }}">
+                    <strong>BSecure:</strong> {{ servicetask.item }}
+                    {% include "reports/library/arrow-up-right-from-square-icon.svg" with width="11" height="11" %}
+```
+
+```django
+<strong>Serial:</strong> `servicetask.item.inspection_ref`
+                  <a href="{{ servicetask.item }}">
+                    <strong>BSecure:</strong> {{ servicetask.item }}
+                    {% include "reports/library/arrow-up-right-from-square-icon.svg" with width="11" height="11" %}
+                  </a>
+```
+
+```django
 <tbody>
             <tr class="keep-together bottom-border">
               <th width="35%" class="bg-white">{{ servicetask.item.get_label }}</th>
               <th width="50%" class="bg-white light-text-weight">
                 {% if servicetask.item.inspection_ref %}
-```
-
-```django
-<th width="50%" class="bg-white light-text-weight">
-                {% if servicetask.item.inspection_ref %}
-                  <strong>Serial:</strong> {{ servicetask.item.inspection_ref }}
-                {% endif %}
-                {% if servicetask.item.bsecure_latest_sticker_guid %}
-```
-
-```django
-{% endif %}
-                {% if servicetask.item.bsecure_latest_sticker_guid %}
-                  <a href="{{ servicetask.item|bsecure_url }}">
-                    <strong>BSecure:</strong> {{ servicetask.item|bsecure_badge_code }}
-                    {% include "reports/library/arrow-up-right-from-square-icon.svg" with width="11" height="11" %}
 ```
 
 </details>
@@ -2134,11 +2173,11 @@ Kind regards,<br /><br />
 
 | Property | Example Value |
 |----------|---------------|
-| `account` | `{%raw%}{{ signoff.account }}{%endraw%}` |
-| `contractor` | `{%raw%}{{ signoff.contractor }}{%endraw%}` |
-| `period_finish` | `{%raw%}{{ signoff.period_finish }}{%endraw%}` |
-| `period_start` | `{%raw%}{{ signoff.period_start}}{%endraw%}` |
-| `pk` | `{%raw%}{{ signoff.pk }}{%endraw%}` |
+| `account` | `{{ signoff.account }}` |
+| `contractor` | `{{ signoff.contractor }}` |
+| `period_finish` | `{{ signoff.period_finish }}` |
+| `period_start` | `{{ signoff.period_start}}` |
+| `pk` | `{{ signoff.pk }}` |
 
 </details>
 
@@ -2180,9 +2219,9 @@ Kind regards,<br /><br />
 
 | Property | Example Value |
 |----------|---------------|
-| `label` | `{%raw%}{{ signoffitem.label }}{%endraw%}` |
-| `new_serviced_date` | `{%raw%}{{ signoffitem.new_serviced_date }}{%endraw%}` |
-| `new_signoff_note` | `{%raw%}{{ signoffitem.new_signoff_note }}{%endraw%}` |
+| `label` | `{{ signoffitem.label }}` |
+| `new_serviced_date` | `{{ signoffitem.new_serviced_date }}` |
+| `new_signoff_note` | `{{ signoffitem.new_signoff_note }}` |
 
 </details>
 
@@ -2279,13 +2318,13 @@ Kind regards,<br /><br />
 
 | Property | Example Value |
 |----------|---------------|
-| `created` | `{%raw%}{{ signoffproperty.created\|date }}{%endraw%}` |
-| `disclaimed_reason` | `{%raw%}{{signoffproperty.disclaimed_reason}}{%endraw%}` |
-| `due` | `{%raw%}{{ signoffproperty.due\|date }}{%endraw%}` |
-| `is_disclaimed` | `{%raw%}{{ signoffproperty.is_disclaimed }}{%endraw%}` |
-| `note` | `{%raw%}{{ signoffproperty.note }}{%endraw%}` |
-| `property` | `{%raw%}{{ signoffproperty.property }}{%endraw%}` |
-| `property.name` | `{%raw%}{{ signoffproperty.property.name }}{%endraw%}` |
+| `created` | `{{ signoffproperty.created\|date }}` |
+| `disclaimed_reason` | `{{signoffproperty.disclaimed_reason}}` |
+| `due` | `{{ signoffproperty.due\|date }}` |
+| `is_disclaimed` | `{{ signoffproperty.is_disclaimed }}` |
+| `note` | `{{ signoffproperty.note }}` |
+| `property` | `{{ signoffproperty.property }}` |
+| `property.name` | `{{ signoffproperty.property.name }}` |
 
 </details>
 
@@ -2398,11 +2437,11 @@ Address: {{ bounce_address }}<br />
 
 | Property | Example Value |
 |----------|---------------|
-| `address` | `{%raw%}{{ task.address }}{%endraw%}` |
-| `description` | `{%raw%}{{ task.description }}{%endraw%}` |
-| `name` | `{%raw%}{{ task.name }}{%endraw%}` |
-| `property.name` | `{%raw%}{{ task.property.name }}{%endraw%}` |
-| `ref` | `{%raw%}{{ task.ref }}{%endraw%}` |
+| `address` | `{{ task.address }}` |
+| `description` | `{{ task.description }}` |
+| `name` | `{{ task.name }}` |
+| `property.name` | `{{ task.property.name }}` |
+| `ref` | `{{ task.ref }}` |
 
 </details>
 
@@ -2451,8 +2490,8 @@ Address: {{ bounce_address }}<br />
 
 | Property | Example Value |
 |----------|---------------|
-| `status` | `{%raw%}{{ task_origin_defectquote.status }}{%endraw%}` |
-| `status.upper` | `{%raw%}{{ task_origin_defectquote.status.upper }}{%endraw%}` |
+| `status` | `{{ task_origin_defectquote.status }}` |
+| `status.upper` | `{{ task_origin_defectquote.status.upper }}` |
 
 </details>
 
@@ -2484,6 +2523,7 @@ Address: {{ bounce_address }}<br />
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
+- generic.md
 - generic.txt
 
 </details>
@@ -2493,8 +2533,8 @@ Address: {{ bounce_address }}<br />
 
 | Property | Example Value |
 |----------|---------------|
-| `get_uuid_approval_url` | `{%raw%}{{ task_quote.get_uuid_approval_url\|absolute }}{%endraw%}` |
-| `ref` | `{%raw%}{{ task_quote.ref }}{%endraw%}` |
+| `get_uuid_approval_url` | `{{ task_quote.get_uuid_approval_url }}` |
+| `ref` | `{{ task_quote.ref }}` |
 
 </details>
 
@@ -2507,6 +2547,14 @@ Address: {{ bounce_address }}<br />
 
 <details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
+
+```django
+{% if task_quote.ref %}
+        <div class="subtitle d-flex flex-row">
+          <a href="{{ task_quote.get_uuid_approval_url }}">
+            `task_quote.ref`
+            {% include "reports/library/arrow-up-right-from-square-icon.svg" with width="14" height="14" %}
+```
 
 ```django
 {% if task_quote.ref %}
@@ -2542,8 +2590,8 @@ Address: {{ bounce_address }}<br />
 
 | Property | Example Value |
 |----------|---------------|
-| `id` | `{%raw%}{{ tasksession.id }}{%endraw%}` |
-| `technician.name` | `{%raw%}{{ tasksession.technician.name }}{%endraw%}` |
+| `id` | `{{ tasksession.id }}` |
+| `technician.name` | `{{ tasksession.technician.name }}` |
 
 </details>
 
