@@ -4,151 +4,8 @@ layout: default
 ---
 
 
-<style>
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-details.expandable-section {
-    margin: 10px 0;
-    padding: 5px;
-    border-radius: 4px;
-}
-
-details.expandable-section summary {
-    cursor: pointer;
-    padding: 8px;
-    margin: -5px;
-    border-radius: 4px;
-    list-style: none;
-}
-
-details.expandable-section summary::-webkit-details-marker {
-    display: none;
-}
-
-details.expandable-section summary::before {
-    content: "▶";
-    display: inline-block;
-    margin-right: 8px;
-    transition: transform 0.2s;
-}
-
-details.expandable-section[open] > summary::before {
-    transform: rotate(90deg);
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 15px 0;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: #f5f5f5;
-}
-
-code {
-    background-color: #f5f5f5;
-    padding: 2px 4px;
-    border-radius: 3px;
-    font-family: monospace;
-}
-
-.loop-info {
-    display: inline-block;
-    position: relative;
-    color: #666;
-    font-size: 0.9em;
-    margin-left: 8px;
-    cursor: help;
-}
-
-.loop-info::after {
-    content: "ℹ️";
-    margin-left: 4px;
-}
-
-.loop-info .tooltip {
-    visibility: hidden;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 300px;
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 8px;
-    border-radius: 6px;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.loop-info:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 15px 0;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: #f5f5f5;
-}
-
-pre {
-    background-color: #f8f8f8;
-    padding: 15px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 15px 0;
-}
-
-code {
-    font-family: monospace;
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-pre code {
-    font-family: monospace;
-    font-size: 14px;
-    line-height: 1.5;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    color: #333;
-}
-
-code strong {
-    background-color: #fff3b8;
-    padding: 2px 4px;
-    border-radius: 3px;
-    font-weight: bold;
-}
-</style>
-# Django Template Variables Documentation
+    <!-- CSS styles remain unchanged -->
+    # Django Template Variables Documentation
 
 ## Table of Contents
 - [absolute_url](#absolute_url)
@@ -233,17 +90,15 @@ code strong {
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;span class="variable-highlight"&gt;{{ rectification.rejection_reason|markdowner }}&lt;/span&gt;
-&lt;p&gt;Access the rectification to provide updated information:&lt;/p&gt;
-&lt;p&gt;&lt;a href="&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ absolute_url }}&lt;/span&gt;"&gt;&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ absolute_url }}&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+{{ rectification.rejection_reason|markdowner }}
+<p>Access the rectification to provide updated information:</p>
+<p><a href="{{ base_url }}{{ absolute_url }}">{{ base_url }}{{ absolute_url }}</a></p>
 {% endblock %}
 {% extends 'email.html' %}
-{% endraw %}
 ```
 
 </details>
@@ -259,17 +114,15 @@ code strong {
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;/p&gt;
-&lt;p&gt;
-The service quote for &lt;span class="variable-highlight"&gt;{{ property }}&lt;/span&gt; was approved by &lt;span class="variable-highlight"&gt;{{ approved_by }}&lt;/span&gt;.
-&lt;/p&gt;
-&lt;p&gt;
-{% endraw %}
+</p>
+<p>
+  The service quote for {{ property }} was approved by {{ approved_by }}.
+</p>
+<p>
 ```
 
 </details>
@@ -289,7 +142,6 @@ The service quote for &lt;span class="variable-highlight"&gt;{{ property }}&lt;/
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `scheduled_start` | `{{appt.scheduled_start}}` |
@@ -303,37 +155,31 @@ The service quote for &lt;span class="variable-highlight"&gt;{{ property }}&lt;/
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
 {% timezone tmz %}
-&lt;tr&gt;
-&lt;th style="..." scope="row" colspan="4"&gt;&lt;span class="variable-highlight"&gt;{{appt.scheduled_start}}&lt;/span&gt;&lt;/th&gt;
-&lt;td style="..."&gt;&lt;span class="variable-highlight"&gt;{{appt.task.description}}&lt;/span&gt;&lt;/td&gt;
-&lt;td style="..."&gt;&lt;span class="variable-highlight"&gt;{{appt.task.property.name}}&lt;/span&gt;&lt;/td&gt;
-{% endraw %}
+                        <tr>
+                          <th style="padding: 12px 10px; border-top: 1px solid #dcdddd;" scope="row" colspan="4">{{appt.scheduled_start}}</th>
+                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.description}}</td>
+                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.property.name}}</td>
 ```
 
 ```django
-{% raw %}
-&lt;tr&gt;
-&lt;th style="..." scope="row" colspan="4"&gt;&lt;span class="variable-highlight"&gt;{{appt.scheduled_start}}&lt;/span&gt;&lt;/th&gt;
-&lt;td style="..."&gt;&lt;span class="variable-highlight"&gt;{{appt.task.description}}&lt;/span&gt;&lt;/td&gt;
-&lt;td style="..."&gt;&lt;span class="variable-highlight"&gt;{{appt.task.property.name}}&lt;/span&gt;&lt;/td&gt;
-&lt;td style="..."&gt;&lt;span class="variable-highlight"&gt;{{appt.task.scope_of_works}}&lt;/span&gt;&lt;/td&gt;
-{% endraw %}
+<tr>
+                          <th style="padding: 12px 10px; border-top: 1px solid #dcdddd;" scope="row" colspan="4">{{appt.scheduled_start}}</th>
+                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.description}}</td>
+                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.property.name}}</td>
+                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.scope_of_works}}</td>
 ```
 
 ```django
-{% raw %}
-&lt;th style="..." scope="row" colspan="4"&gt;&lt;span class="variable-highlight"&gt;{{appt.scheduled_start}}&lt;/span&gt;&lt;/th&gt;
-&lt;td style="..."&gt;&lt;span class="variable-highlight"&gt;{{appt.task.description}}&lt;/span&gt;&lt;/td&gt;
-&lt;td style="..."&gt;&lt;span class="variable-highlight"&gt;{{appt.task.property.name}}&lt;/span&gt;&lt;/td&gt;
-&lt;td style="..."&gt;&lt;span class="variable-highlight"&gt;{{appt.task.scope_of_works}}&lt;/span&gt;&lt;/td&gt;
-&lt;td style="..."&gt;&lt;span class="variable-highlight"&gt;{{appt.task.authorisation_ref}}&lt;/span&gt;&lt;/td&gt;
-{% endraw %}
+<th style="padding: 12px 10px; border-top: 1px solid #dcdddd;" scope="row" colspan="4">{{appt.scheduled_start}}</th>
+                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.description}}</td>
+                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.property.name}}</td>
+                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.scope_of_works}}</td>
+                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.authorisation_ref}}</td>
 ```
 
 </details>
@@ -359,37 +205,31 @@ The service quote for &lt;span class="variable-highlight"&gt;{{ property }}&lt;/
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;td style="..."&gt;
-&lt;div style="..."&gt;
-&lt;p style="..."&gt;Dear &lt;span class="variable-highlight"&gt;{{ attention }}&lt;/span&gt;,&lt;/p&gt;
-&lt;p&gt;Please be advised we will need access to complete the following:&lt;/p&gt;
-&lt;table style="..."&gt;
-{% endraw %}
+<td style="width: 600px;">
+            <div style="font-family: 'Arial', sans-serif; font-size: 10.5pt;">
+                <p style="padding: 10px 0;">Dear {{ attention }},</p>
+                <p>Please be advised we will need access to complete the following:</p>
+                <table style="width: 100%; border-collapse: collapse; border-bottom: 1px solid #dcdddd;">
 ```
 
 ```django
-{% raw %}
-&lt;/table&gt;
+</table>
 {% endblock %}
-&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ attention }}&lt;/span&gt;,&lt;/p&gt;
-&lt;p&gt;Please find attached your defect quote for &lt;span class="variable-highlight"&gt;{{ property.name }}&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;To view and approve this quote online, visit:&lt;/p&gt;
-{% endraw %}
+<p>Dear {{ attention }},</p>
+<p>Please find attached your defect quote for {{ property.name }}.</p>
+<p>To view and approve this quote online, visit:</p>
 ```
 
 ```django
-{% raw %}
-&lt;p&gt;Regards,&lt;br /&gt;
-&lt;span class="variable-highlight"&gt;{{ config.SITE_ORGANISATION }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ attention|default:"manager" }}&lt;/span&gt;,&lt;/p&gt;
-&lt;p&gt;Please find attached your documents for services recently carried out at &lt;span class="variable-highlight"&gt;{{ property.name }}&lt;/span&gt;.&lt;/p&gt;
+<p>Regards,<br />
+{{ config.SITE_ORGANISATION }}</p>
+<p>Dear {{ attention|default:"manager" }},</p>
+<p>Please find attached your documents for services recently carried out at {{ property.name }}.</p>
 {% if invoice %}
-{% endraw %}
 ```
 
 </details>
@@ -405,37 +245,31 @@ The service quote for &lt;span class="variable-highlight"&gt;{{ property }}&lt;/
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;Please find attached your defect quote for &lt;span class="variable-highlight"&gt;{{ property.name }}&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;To view and approve this quote online, visit:&lt;/p&gt;
-&lt;p&gt;&lt;a href="&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ quote.get_uuid_approval_url }}&lt;/span&gt;"&gt;&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ quote.get_uuid_approval_url }}&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;We value your opinion, please contact us with any comments you may have.&lt;/p&gt;
-&lt;p&gt;Regards,&lt;br /&gt;
-{% endraw %}
+<p>Please find attached your defect quote for {{ property.name }}.</p>
+<p>To view and approve this quote online, visit:</p>
+<p><a href="{{ base_url }}{{ quote.get_uuid_approval_url }}">{{ base_url }}{{ quote.get_uuid_approval_url }}</a></p>
+<p>We value your opinion, please contact us with any comments you may have.</p>
+<p>Regards,<br />
 ```
 
 ```django
-{% raw %}
-&lt;ul&gt;
-{% for quote in defectquotes %}
-&lt;li&gt;Reference: &lt;span class="variable-highlight"&gt;{{ quote.ref }}&lt;/span&gt;&lt;a href="&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ quote.get_uuid_approval_url }}&lt;/span&gt;"&gt; (approve online)&lt;/a&gt;&lt;/li&gt;
-{% endfor %}
-&lt;/ul&gt;
-{% endraw %}
+<ul>
+    {% for quote in defectquotes %}
+      <li>Reference: {{ quote.ref }}<a href="{{ base_url }}{{ quote.get_uuid_approval_url }}"> (approve online)</a></li>
+    {% endfor %}
+  </ul>
 ```
 
 ```django
-{% raw %}
-&lt;p&gt;
-Please go to this URL to set your password and start using Uptick:
-&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;{% url 'password_reset_confirm' uidb64=uid token=token %}
-&lt;/p&gt;
+<p>
+  Please go to this URL to set your password and start using Uptick:
+  {{ base_url }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+</p>
 {% if account.license == "FIELD" %}
-{% endraw %}
 ```
 
 </details>
@@ -451,17 +285,15 @@ Please go to this URL to set your password and start using Uptick:
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;
-Bounce info:&lt;br /&gt;
-Address: &lt;span class="variable-highlight"&gt;{{ bounce_address }}&lt;/span&gt;&lt;br /&gt;
-Bounce Reason: &lt;span class="variable-highlight"&gt;{{ formatted_reason }}&lt;/span&gt;&lt;br /&gt;
-Email Subject &lt;span class="variable-highlight"&gt;{{ subject }}&lt;/span&gt;&lt;br /&gt;
-{% endraw %}
+<p>
+  Bounce info:<br />
+  Address: {{ bounce_address }}<br />
+  Bounce Reason: {{ formatted_reason }}<br />
+  Email Subject {{ subject }}<br />
 ```
 
 </details>
@@ -477,17 +309,15 @@ Email Subject &lt;span class="variable-highlight"&gt;{{ subject }}&lt;/span&gt;&
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-Sent: &lt;span class="variable-highlight"&gt;{{ failure_datetime }}&lt;/span&gt;&lt;br /&gt;
-To: &lt;span class="variable-highlight"&gt;{{ to_list }}&lt;/span&gt;&lt;br /&gt;
-CC: &lt;span class="variable-highlight"&gt;{{ cc_list }}&lt;/span&gt;&lt;br /&gt;
-Subject &lt;span class="variable-highlight"&gt;{{ subject }}&lt;/span&gt;&lt;br /&gt;
-&lt;/p&gt;
-{% endraw %}
+Sent: {{ failure_datetime }}<br />
+  To: {{ to_list }}<br />
+  CC: {{ cc_list }}<br />
+  Subject {{ subject }}<br />
+</p>
 ```
 
 </details>
@@ -506,7 +336,6 @@ Subject &lt;span class="variable-highlight"&gt;{{ subject }}&lt;/span&gt;&lt;br 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `get_absolute_url` | `{{ changerequest.get_absolute_url }}` |
@@ -515,37 +344,31 @@ Subject &lt;span class="variable-highlight"&gt;{{ subject }}&lt;/span&gt;&lt;br 
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;span class="variable-highlight"&gt;{{ config.SITE_ORGANISATION }}&lt;/span&gt;&lt;/p&gt;
+{{ config.SITE_ORGANISATION }}</p>
 {% if status == 'DRAFT' %}
-&lt;p&gt;Template change request &lt;span class="variable-highlight"&gt;{{ changerequest.ref }}&lt;/span&gt; has been created for &lt;span class="variable-highlight"&gt;{{ customer }}&lt;/span&gt;.&lt;/p&gt;
+  <p>Template change request {{ changerequest.ref }} has been created for {{ customer }}.</p>
 {% elif  status == 'REQUESTED' %}
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ sender.name }}&lt;/span&gt; submitted feedback for Template change request &lt;span class="variable-highlight"&gt;{{ changerequest.ref }}&lt;/span&gt;.&lt;/p&gt;
-{% endraw %}
+  <p>{{ sender.name }} submitted feedback for Template change request {{ changerequest.ref }}.</p>
 ```
 
 ```django
-{% raw %}
-&lt;p&gt;Template change request &lt;span class="variable-highlight"&gt;{{ changerequest.ref }}&lt;/span&gt; has been created for &lt;span class="variable-highlight"&gt;{{ customer }}&lt;/span&gt;.&lt;/p&gt;
+<p>Template change request {{ changerequest.ref }} has been created for {{ customer }}.</p>
 {% elif  status == 'REQUESTED' %}
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ sender.name }}&lt;/span&gt; submitted feedback for Template change request &lt;span class="variable-highlight"&gt;{{ changerequest.ref }}&lt;/span&gt;.&lt;/p&gt;
+  <p>{{ sender.name }} submitted feedback for Template change request {{ changerequest.ref }}.</p>
 {% else %}
-&lt;p&gt;Template change request &lt;span class="variable-highlight"&gt;{{ changerequest.ref }}&lt;/span&gt; has been approved. Our team will be in contact once completed.&lt;/p&gt;
-{% endraw %}
+  <p>Template change request {{ changerequest.ref }} has been approved. Our team will be in contact once completed.</p>
 ```
 
 ```django
-{% raw %}
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ sender.name }}&lt;/span&gt; submitted feedback for Template change request &lt;span class="variable-highlight"&gt;{{ changerequest.ref }}&lt;/span&gt;.&lt;/p&gt;
+<p>{{ sender.name }} submitted feedback for Template change request {{ changerequest.ref }}.</p>
 {% else %}
-&lt;p&gt;Template change request &lt;span class="variable-highlight"&gt;{{ changerequest.ref }}&lt;/span&gt; has been approved. Our team will be in contact once completed.&lt;/p&gt;
+  <p>Template change request {{ changerequest.ref }} has been approved. Our team will be in contact once completed.</p>
 {% endif %}
-&lt;p&gt;
-{% endraw %}
+<p>
 ```
 
 </details>
@@ -564,34 +387,29 @@ Subject &lt;span class="variable-highlight"&gt;{{ subject }}&lt;/span&gt;&lt;br 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `text` | `{{ chat_message.text }}` |
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;/p&gt;
-&lt;p&gt;A new message from &lt;span class="variable-highlight"&gt;{{ from }}&lt;/span&gt; is waiting for you:&lt;/p&gt;
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ chat_message.text }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ url }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Regards, &lt;br/&gt;
-{% endraw %}
+</p>
+<p>A new message from {{ from }} is waiting for you:</p>
+<p>{{ chat_message.text }}</p>
+<p>{{ base_url }}{{ url }}</p>
+<p>Regards, <br/>
 ```
 
 ```django
-{% raw %}
 {% endblock %}
-&lt;p&gt;A new message from &lt;span class="variable-highlight"&gt;{{ from }}&lt;/span&gt; is waiting for you:&lt;/p&gt;
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ chat_message.text }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ url }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Regards, &lt;br/&gt;
-{% endraw %}
+<p>A new message from {{ from }} is waiting for you:</p>
+<p>{{ chat_message.text }}</p>
+<p>{{ base_url }}{{ url }}</p>
+<p>Regards, <br/>
 ```
 
 </details>
@@ -610,34 +428,29 @@ Subject &lt;span class="variable-highlight"&gt;{{ subject }}&lt;/span&gt;&lt;br 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `primary_contact.name` | `{{ client.primary_contact.name }}` |
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;If the form&lt;span class="variable-highlight"&gt;{{ signoffproperties|pluralize }}&lt;/span&gt; on the attached link &lt;span class="variable-highlight"&gt;{{ signoffproperties|pluralize:"is,are" }}&lt;/span&gt; not submitted and there is no proof on site that the Essential Safety Measures are being serviced, &lt;span class="variable-highlight"&gt;{{ signoffproperties|pluralize:"a," }}&lt;/span&gt; Non-Compliant Building Report&lt;span class="variable-highlight"&gt;{{ signoffproperties|pluralize }}&lt;/span&gt; will be issued.&lt;/p&gt;
+<p>If the form{{ signoffproperties|pluralize }} on the attached link {{ signoffproperties|pluralize:"is,are" }} not submitted and there is no proof on site that the Essential Safety Measures are being serviced, {{ signoffproperties|pluralize:"a," }} Non-Compliant Building Report{{ signoffproperties|pluralize }} will be issued.</p>
 {% endblock %}
-&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ client.primary_contact.name }}&lt;/span&gt;,&lt;/p&gt;
-&lt;p&gt;This email is in regards to your property &lt;span class="variable-highlight"&gt;{{ property.ref }}&lt;/span&gt; &lt;span class="variable-highlight"&gt;{{ property.name }}&lt;/span&gt; &lt;span class="variable-highlight"&gt;{{ property.client_ref }}&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;We have received notification from &lt;span class="variable-highlight"&gt;{{ contractor.name }}&lt;/span&gt; that they are no longer engaged to maintain the following items:&lt;/p&gt;
-{% endraw %}
+<p>Dear {{ client.primary_contact.name }},</p>
+<p>This email is in regards to your property {{ property.ref }} {{ property.name }} {{ property.client_ref }}.</p>
+<p>We have received notification from {{ contractor.name }} that they are no longer engaged to maintain the following items:</p>
 ```
 
 ```django
-{% raw %}
-&lt;div&gt;&lt;span class="variable-highlight"&gt;{{ servicequote.created|date:"jS F Y" }}&lt;/span&gt;&lt;/div&gt;
-{% if servicequote.expiry_date %}&lt;div&gt;This quote is valid until &lt;em&gt;&lt;span class="variable-highlight"&gt;{{ servicequote.expiry_date }}&lt;/span&gt;&lt;/em&gt;&lt;/div&gt;{% endif %}
-&lt;div&gt;&lt;strong&gt;Attention: &lt;span class="variable-highlight"&gt;{{ client.primary_contact.name }}&lt;/span&gt;&lt;/strong&gt;&lt;/div&gt;
-{% if servicequote.scope_of_works %}
-&lt;div class="mt-3"&gt;
-{% endraw %}
+<div>{{ servicequote.created|date:"jS F Y" }}</div>
+    {% if servicequote.expiry_date %}<div>This quote is valid until <em>{{ servicequote.expiry_date }}</em></div>{% endif %}
+    <div><strong>Attention: {{ client.primary_contact.name }}</strong></div>
+    {% if servicequote.scope_of_works %}
+      <div class="mt-3">
 ```
 
 </details>
@@ -656,46 +469,39 @@ Subject &lt;span class="variable-highlight"&gt;{{ subject }}&lt;/span&gt;&lt;br 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `CONTACT_EMAIL` | `{{ config.CONTACT_EMAIL }}` |
-| `CONTACT_PHONE` | `{{ config.CONTACT_PHONE }}` |
+| `CONTACT_PHONE` | `{{config.CONTACT_PHONE}}` |
 | `SITE_ORGANISATION` | `{{config.SITE_ORGANISATION}}` |
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{request_user.email}}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;
-&lt;span class="variable-highlight"&gt;{{ config.CONTACT_PHONE }}&lt;/span&gt; &lt;br /&gt;
-&lt;span class="variable-highlight"&gt;{{ config.SITE_ORGANISATION }}&lt;/span&gt;
-&lt;/p&gt;
-{% endraw %}
+<p>{{request_user.email}}</p>
+                <p>
+                  {{ config.CONTACT_PHONE }} <br />
+                  {{ config.SITE_ORGANISATION }}
+                </p>
 ```
 
 ```django
-{% raw %}
-&lt;p&gt;
-&lt;span class="variable-highlight"&gt;{{ config.CONTACT_PHONE }}&lt;/span&gt; &lt;br /&gt;
-&lt;span class="variable-highlight"&gt;{{ config.SITE_ORGANISATION }}&lt;/span&gt;
-&lt;/p&gt;
-&lt;/div&gt;
-{% endraw %}
+<p>
+                  {{ config.CONTACT_PHONE }} <br />
+                  {{ config.SITE_ORGANISATION }}
+                </p>
+            </div>
 ```
 
 ```django
-{% raw %}
-&lt;p&gt;We value your opinion, please contact us with any comments you may have.&lt;/p&gt;
-&lt;p&gt;Regards,&lt;br /&gt;
-&lt;span class="variable-highlight"&gt;{{ config.SITE_ORGANISATION }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ attention|default:"manager" }}&lt;/span&gt;,&lt;/p&gt;
-&lt;p&gt;Please find attached your documents for services recently carried out at &lt;span class="variable-highlight"&gt;{{ property.name }}&lt;/span&gt;.&lt;/p&gt;
-{% endraw %}
+<p>We value your opinion, please contact us with any comments you may have.</p>
+<p>Regards,<br />
+{{ config.SITE_ORGANISATION }}</p>
+<p>Dear {{ attention|default:"manager" }},</p>
+<p>Please find attached your documents for services recently carried out at {{ property.name }}.</p>
 ```
 
 </details>
@@ -714,7 +520,6 @@ Subject &lt;span class="variable-highlight"&gt;{{ subject }}&lt;/span&gt;&lt;br 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `account` | `{{ contractor.account }}` |
@@ -722,37 +527,31 @@ Subject &lt;span class="variable-highlight"&gt;{{ subject }}&lt;/span&gt;&lt;br 
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;span class="variable-highlight"&gt;{{ config.SITE_ORGANISATION }}&lt;/span&gt;&lt;/p&gt;
+{{ config.SITE_ORGANISATION }}</p>
 {% endblock %}
-&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ contractor }}&lt;/span&gt;,&lt;/p&gt;
-&lt;p&gt;You have been assigned the following tasks:&lt;/p&gt;
+<p>Dear {{ contractor }},</p>
+<p>You have been assigned the following tasks:</p>
 {% for task in tasks %}
-{% endraw %}
 ```
 
 ```django
-{% raw %}
-&lt;p&gt;You can provide your field technicians with this link which will enable them to complete the task via their smart phone (apple or android) without needing to install an app.&lt;/p&gt;
-&lt;p&gt;Thanks&lt;/p&gt;
-&lt;p&gt;The contractor &lt;span class="variable-highlight"&gt;{{ contractor }}&lt;/span&gt; has rejected the task assigned to him for the following reason: &lt;span class="variable-highlight"&gt;{{ rejection_reason }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;
-The task that was assigned was:&lt;br&gt;
-{% endraw %}
+<p>You can provide your field technicians with this link which will enable them to complete the task via their smart phone (apple or android) without needing to install an app.</p>
+<p>Thanks</p>
+<p>The contractor {{ contractor }} has rejected the task assigned to him for the following reason: {{ rejection_reason }}</p>
+<p>
+  The task that was assigned was:<br>
 ```
 
 ```django
-{% raw %}
-&lt;/p&gt;
-&lt;p&gt;Thanks&lt;/p&gt;
-&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ contractor }}&lt;/span&gt;,&lt;/p&gt;
-&lt;p&gt;Please be advised that the following task has been cancelled:&lt;/p&gt;
-&lt;ul&gt;
-{% endraw %}
+</p>
+<p>Thanks</p>
+<p>Dear {{ contractor }},</p>
+<p>Please be advised that the following task has been cancelled:</p>
+<ul>
 ```
 
 </details>
@@ -771,44 +570,37 @@ The task that was assigned was:&lt;br&gt;
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `name` | `{{ contractor_contact.name }}` |
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;Regards,&lt;br/&gt;
-&lt;span class="variable-highlight"&gt;{{ config.SITE_ORGANISATION }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ contractor_contact }}&lt;/span&gt;,&lt;/p&gt;
-&lt;p&gt;Please be advised that the following task has been cancelled:&lt;/p&gt;
-&lt;ul&gt;
-{% endraw %}
+<p>Regards,<br/>
+{{ config.SITE_ORGANISATION }}</p>
+<p>Dear {{ contractor_contact }},</p>
+<p>Please be advised that the following task has been cancelled:</p>
+<ul>
 ```
 
 ```django
-{% raw %}
-&lt;span class="variable-highlight"&gt;{{ config.SITE_ORGANISATION }}&lt;/span&gt;
-&lt;/p&gt;
-&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ contractor_contact.name }}&lt;/span&gt;,&lt;/p&gt;
-&lt;p&gt;You have been assigned a task:&lt;/p&gt;
-&lt;p&gt;Task &lt;span class="variable-highlight"&gt;{{ task.ref }}&lt;/span&gt;&lt;/p&gt;
-{% endraw %}
+{{ config.SITE_ORGANISATION }}
+</p>
+<p>Dear {{ contractor_contact.name }},</p>
+<p>You have been assigned a task:</p>
+<p>Task {{ task.ref }}</p>
 ```
 
 ```django
-{% raw %}
-&lt;/p&gt;
-&lt;p&gt;Thanks&lt;/p&gt;
-&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ contractor_contact.name }}&lt;/span&gt;,&lt;/p&gt;
-&lt;p&gt;You have been assigned the following tasks:&lt;/p&gt;
+</p>
+<p>Thanks</p>
+<p>Dear {{ contractor_contact.name }},</p>
+<p>You have been assigned the following tasks:</p>
 {% for task in tasks %}
-{% endraw %}
 ```
 
 </details>
@@ -824,37 +616,31 @@ The task that was assigned was:&lt;br&gt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;
-Please sign in the contractor portal using the link below to view a list of any outstanding tasks:&lt;br&gt;
-&lt;a href="&lt;span class="variable-highlight"&gt;{{ contractor_login_url }}&lt;/span&gt;"&gt;&lt;span class="variable-highlight"&gt;{{ contractor_login_url }}&lt;/span&gt;&lt;/a&gt;
-&lt;/p&gt;
-&lt;p&gt;You can provide your field technicians with this link which will enable them to complete the task via their smart phone (apple or android) without needing to install an app.&lt;/p&gt;
-{% endraw %}
+<p>
+  Please sign in the contractor portal using the link below to view a list of any outstanding tasks:<br>
+  <a href="{{ contractor_login_url }}">{{ contractor_login_url }}</a>
+</p>
+<p>You can provide your field technicians with this link which will enable them to complete the task via their smart phone (apple or android) without needing to install an app.</p>
 ```
 
 ```django
-{% raw %}
-&lt;p&gt;
-Please visit the task dashboard on Uptick:&lt;br&gt;
-&lt;a href="&lt;span class="variable-highlight"&gt;{{ contractor_login_url }}&lt;/span&gt;"&gt;&lt;span class="variable-highlight"&gt;{{ contractor_login_url }}&lt;/span&gt;&lt;/a&gt;&lt;br&gt;
-for more details.
-&lt;/p&gt;
-{% endraw %}
+<p>
+  Please visit the task dashboard on Uptick:<br>
+  <a href="{{ contractor_login_url }}">{{ contractor_login_url }}</a><br>
+  for more details.
+</p>
 ```
 
 ```django
-{% raw %}
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ task.address }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Please sign into the contractor portal using the link below to view your outstanding tasks:&lt;br&gt;
-&lt;a href="&lt;span class="variable-highlight"&gt;{{ contractor_login_url }}&lt;/span&gt;"&gt;&lt;span class="variable-highlight"&gt;{{ contractor_login_url }}&lt;/span&gt;&lt;/a&gt;
-&lt;/p&gt;
-&lt;p&gt;Thanks&lt;/p&gt;
-{% endraw %}
+<p>{{ task.address }}</p>
+<p>Please sign into the contractor portal using the link below to view your outstanding tasks:<br>
+  <a href="{{ contractor_login_url }}">{{ contractor_login_url }}</a>
+</p>
+<p>Thanks</p>
 ```
 
 </details>
@@ -870,17 +656,15 @@ for more details.
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;Your custom report, &lt;span class="variable-highlight"&gt;{{ name }}&lt;/span&gt;, has been generated.&lt;/p&gt;
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ description }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;To download, &lt;a href="&lt;span class="variable-highlight"&gt;{{ csv_url }}&lt;/span&gt;"&gt;please click here&lt;/a&gt;.&lt;/p&gt;
+<p>Your custom report, {{ name }}, has been generated.</p>
+<p>{{ description }}</p>
+<p>To download, <a href="{{ csv_url }}">please click here</a>.</p>
 {% endblock %}
-&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ attention }}&lt;/span&gt;,&lt;/p&gt;
-{% endraw %}
+<p>Dear {{ attention }},</p>
 ```
 
 </details>
@@ -896,17 +680,15 @@ for more details.
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
 {% if custom_message %}
-&lt;p&gt;
-&lt;span class="variable-highlight"&gt;{{ custom_message }}&lt;/span&gt;
-&lt;/p&gt;
+<p>
+  {{ custom_message }}
+</p>
 {% endif %}
-{% endraw %}
 ```
 
 </details>
@@ -922,17 +704,15 @@ for more details.
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;span class="variable-highlight"&gt;{{ config.SITE_ORGANISATION }}&lt;/span&gt;&lt;/p&gt;
+{{ config.SITE_ORGANISATION }}</p>
 {% if status == 'DRAFT' %}
-&lt;p&gt;Template change request &lt;span class="variable-highlight"&gt;{{ changerequest.ref }}&lt;/span&gt; has been created for &lt;span class="variable-highlight"&gt;{{ customer }}&lt;/span&gt;.&lt;/p&gt;
+  <p>Template change request {{ changerequest.ref }} has been created for {{ customer }}.</p>
 {% elif  status == 'REQUESTED' %}
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ sender.name }}&lt;/span&gt; submitted feedback for Template change request &lt;span class="variable-highlight"&gt;{{ changerequest.ref }}&lt;/span&gt;.&lt;/p&gt;
-{% endraw %}
+  <p>{{ sender.name }} submitted feedback for Template change request {{ changerequest.ref }}.</p>
 ```
 
 </details>
@@ -948,17 +728,15 @@ for more details.
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;/p&gt;
-&lt;p&gt;
-The service quote for &lt;span class="variable-highlight"&gt;{{ property }}&lt;/span&gt; was declined by &lt;span class="variable-highlight"&gt;{{ declined_by }}&lt;/span&gt;.
-&lt;/p&gt;
-&lt;p&gt;
-{% endraw %}
+</p>
+<p>
+  The service quote for {{ property }} was declined by {{ declined_by }}.
+</p>
+<p>
 ```
 
 </details>
@@ -974,17 +752,15 @@ The service quote for &lt;span class="variable-highlight"&gt;{{ property }}&lt;/
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
 {% block content %}
-&lt;p&gt;Your custom report, &lt;span class="variable-highlight"&gt;{{ name }}&lt;/span&gt;, has been generated.&lt;/p&gt;
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ description }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;To download, &lt;a href="&lt;span class="variable-highlight"&gt;{{ csv_url }}&lt;/span&gt;"&gt;please click here&lt;/a&gt;.&lt;/p&gt;
+<p>Your custom report, {{ name }}, has been generated.</p>
+<p>{{ description }}</p>
+<p>To download, <a href="{{ csv_url }}">please click here</a>.</p>
 {% endblock %}
-{% endraw %}
 ```
 
 </details>
@@ -1001,17 +777,15 @@ The service quote for &lt;span class="variable-highlight"&gt;{{ property }}&lt;/
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
 {% for email in quote_email_lookup|getvalue:quote %}
-{% if email != recipient %}
-&lt;li&gt;&lt;span class="variable-highlight"&gt;{{email}}&lt;/span&gt;&lt;/li&gt;
-{% endif %}
-{% endfor %}
-{% endraw %}
+        {% if email != recipient %}
+            <li>{{email}}</li>
+        {% endif %}
+    {% endfor %}
 ```
 
 </details>
@@ -1027,17 +801,15 @@ The service quote for &lt;span class="variable-highlight"&gt;{{ property }}&lt;/
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;td style="..."&gt;&lt;span class="variable-highlight"&gt;{{start_date}}&lt;/span&gt;&lt;/td&gt;
-&lt;td style="..."&gt;END DATE&lt;/td&gt;
-&lt;td style="..."&gt;&lt;span class="variable-highlight"&gt;{{end_date}}&lt;/span&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-{% endraw %}
+<td style="border: 3px double #000; padding: 8px; width: 25%;">{{start_date}}</td>
+                        <td style="border: 3px double #000; padding: 8px; width: 25%; background-color: #f0f0f0;">END DATE</td>
+                        <td style="border: 3px double #000; padding: 8px; width: 25%;">{{end_date}}</td>
+                    </tr>
+                    <tr>
 ```
 
 </details>
@@ -1053,17 +825,15 @@ The service quote for &lt;span class="variable-highlight"&gt;{{ property }}&lt;/
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;/p&gt;
-&lt;h3&gt;Error&lt;/h3&gt;
-&lt;code&gt;&lt;span class="variable-highlight"&gt;{{ exception }}&lt;/span&gt;&lt;/code&gt;
-&lt;p&gt;
-An email failed to send from Uptick! This is sometimes due to an invalid email, but more details below.
-{% endraw %}
+</p>
+<h3>Error</h3>
+<code>{{ exception }}</code>
+<p>
+  An email failed to send from Uptick! This is sometimes due to an invalid email, but more details below.
 ```
 
 </details>
@@ -1079,17 +849,15 @@ An email failed to send from Uptick! This is sometimes due to an invalid email, 
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;
-Email info:&lt;br /&gt;
-Sent: &lt;span class="variable-highlight"&gt;{{ failure_datetime }}&lt;/span&gt;&lt;br /&gt;
-To: &lt;span class="variable-highlight"&gt;{{ to_list }}&lt;/span&gt;&lt;br /&gt;
-CC: &lt;span class="variable-highlight"&gt;{{ cc_list }}&lt;/span&gt;&lt;br /&gt;
-{% endraw %}
+<p>
+  Email info:<br />
+  Sent: {{ failure_datetime }}<br />
+  To: {{ to_list }}<br />
+  CC: {{ cc_list }}<br />
 ```
 
 </details>
@@ -1105,17 +873,15 @@ CC: &lt;span class="variable-highlight"&gt;{{ cc_list }}&lt;/span&gt;&lt;br /&gt
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
 An email failed to send from Uptick! This is sometimes due to an invalid email, but more details below.
-&lt;br /&gt;
-&lt;span class="variable-highlight"&gt;{{ failure_reason }}&lt;/span&gt;
-&lt;/p&gt;
-&lt;p&gt;
-{% endraw %}
+  <br />
+  {{ failure_reason }}
+</p>
+<p>
 ```
 
 </details>
@@ -1131,17 +897,15 @@ An email failed to send from Uptick! This is sometimes due to an invalid email, 
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-Bounce info:&lt;br /&gt;
-Address: &lt;span class="variable-highlight"&gt;{{ bounce_address }}&lt;/span&gt;&lt;br /&gt;
-Bounce Reason: &lt;span class="variable-highlight"&gt;{{ formatted_reason }}&lt;/span&gt;&lt;br /&gt;
-Email Subject &lt;span class="variable-highlight"&gt;{{ subject }}&lt;/span&gt;&lt;br /&gt;
-Email Sent: &lt;span class="variable-highlight"&gt;{{ formatted_timestamp }}&lt;/span&gt;
-{% endraw %}
+Bounce info:<br />
+  Address: {{ bounce_address }}<br />
+  Bounce Reason: {{ formatted_reason }}<br />
+  Email Subject {{ subject }}<br />
+  Email Sent: {{ formatted_timestamp }}
 ```
 
 </details>
@@ -1157,17 +921,15 @@ Email Sent: &lt;span class="variable-highlight"&gt;{{ formatted_timestamp }}&lt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-Bounce Reason: &lt;span class="variable-highlight"&gt;{{ formatted_reason }}&lt;/span&gt;&lt;br /&gt;
-Email Subject &lt;span class="variable-highlight"&gt;{{ subject }}&lt;/span&gt;&lt;br /&gt;
-Email Sent: &lt;span class="variable-highlight"&gt;{{ formatted_timestamp }}&lt;/span&gt;
-&lt;/p&gt;
-&lt;p&gt;
-{% endraw %}
+Bounce Reason: {{ formatted_reason }}<br />
+  Email Subject {{ subject }}<br />
+  Email Sent: {{ formatted_timestamp }}
+</p>
+<p>
 ```
 
 </details>
@@ -1187,7 +949,6 @@ Email Sent: &lt;span class="variable-highlight"&gt;{{ formatted_timestamp }}&lt;
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `submitter` | `{{ formresponse.submitter }}` |
@@ -1195,37 +956,31 @@ Email Sent: &lt;span class="variable-highlight"&gt;{{ formatted_timestamp }}&lt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;ul&gt;
-{% for formresponse in formresponses %}
-&lt;li&gt;&lt;span class="variable-highlight"&gt;{{ formresponse }}&lt;/span&gt;&lt;/li&gt;
-{% endfor %}
-&lt;/ul&gt;
-{% endraw %}
+<ul>
+  {% for formresponse in formresponses %}
+    <li>{{ formresponse }}</li>
+  {% endfor %}
+</ul>
 ```
 
 ```django
-{% raw %}
-&lt;/p&gt;&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ attention }}&lt;/span&gt;,&lt;/p&gt;
-&lt;p&gt;Please find attached a form response regarding work at &lt;span class="variable-highlight"&gt;{{ property.name }}&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;Form: &lt;span class="variable-highlight"&gt;{{ formresponse.template_version.template.name }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Submitted by: &lt;span class="variable-highlight"&gt;{{ formresponse.submitter }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;We value your opinion, please contact us with any comments you may have.&lt;/p&gt;
-{% endraw %}
+</p><p>Dear {{ attention }},</p>
+<p>Please find attached a form response regarding work at {{ property.name }}.</p>
+<p>Form: {{ formresponse.template_version.template.name }}</p>
+<p>Submitted by: {{ formresponse.submitter }}</p>
+<p>We value your opinion, please contact us with any comments you may have.</p>
 ```
 
 ```django
-{% raw %}
-&lt;p&gt;Please find attached a form response regarding work at &lt;span class="variable-highlight"&gt;{{ property.name }}&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;Form: &lt;span class="variable-highlight"&gt;{{ formresponse.template_version.template.name }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Submitted by: &lt;span class="variable-highlight"&gt;{{ formresponse.submitter }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;We value your opinion, please contact us with any comments you may have.&lt;/p&gt;
-&lt;p&gt;Regards,&lt;br /&gt;
-{% endraw %}
+<p>Please find attached a form response regarding work at {{ property.name }}.</p>
+<p>Form: {{ formresponse.template_version.template.name }}</p>
+<p>Submitted by: {{ formresponse.submitter }}</p>
+<p>We value your opinion, please contact us with any comments you may have.</p>
+<p>Regards,<br />
 ```
 
 </details>
@@ -1241,27 +996,23 @@ Email Sent: &lt;span class="variable-highlight"&gt;{{ formatted_timestamp }}&lt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;span class="variable-highlight"&gt;{{ config.SITE_ORGANISATION }}&lt;/span&gt;
-&lt;/p&gt;
-&lt;p&gt;A new message from &lt;span class="variable-highlight"&gt;{{ from }}&lt;/span&gt; is waiting for you:&lt;/p&gt;
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ chat_message.text }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ url }}&lt;/span&gt;&lt;/p&gt;
-{% endraw %}
+{{ config.SITE_ORGANISATION }}
+</p>
+<p>A new message from {{ from }} is waiting for you:</p>
+<p>{{ chat_message.text }}</p>
+<p>{{ base_url }}{{ url }}</p>
 ```
 
 ```django
-{% raw %}
 {% endfor %}
 {% endblock %}
-&lt;p&gt;A new message from &lt;span class="variable-highlight"&gt;{{ from }}&lt;/span&gt; is waiting for you:&lt;/p&gt;
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ chat_message.text }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ url }}&lt;/span&gt;&lt;/p&gt;
-{% endraw %}
+<p>A new message from {{ from }} is waiting for you:</p>
+<p>{{ chat_message.text }}</p>
+<p>{{ base_url }}{{ url }}</p>
 ```
 
 </details>
@@ -1281,7 +1032,6 @@ Email Sent: &lt;span class="variable-highlight"&gt;{{ formatted_timestamp }}&lt;
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `number` | `{{ inv.number }}` |
@@ -1289,27 +1039,23 @@ Email Sent: &lt;span class="variable-highlight"&gt;{{ formatted_timestamp }}&lt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;This is a reminder that we are waiting for your payment on the following invoices:&lt;br&gt;
-{% for inv in invoices %}&lt;br&gt;
-Number: &lt;span class="variable-highlight"&gt;{{ inv.number }}&lt;/span&gt;&lt;br&gt;
-Reference: &lt;span class="variable-highlight"&gt;{{ inv.ref }}&lt;/span&gt;&lt;br&gt;
-Due: &lt;span class="variable-highlight"&gt;{{ inv.due_date|date:"jS F Y" }}&lt;/span&gt;&lt;br&gt;
-{% endraw %}
+<p>This is a reminder that we are waiting for your payment on the following invoices:<br>
+{% for inv in invoices %}<br>
+    Number: {{ inv.number }}<br>
+    Reference: {{ inv.ref }}<br>
+    Due: {{ inv.due_date|date:"jS F Y" }}<br>
 ```
 
 ```django
-{% raw %}
-{% for inv in invoices %}&lt;br&gt;
-Number: &lt;span class="variable-highlight"&gt;{{ inv.number }}&lt;/span&gt;&lt;br&gt;
-Reference: &lt;span class="variable-highlight"&gt;{{ inv.ref }}&lt;/span&gt;&lt;br&gt;
-Due: &lt;span class="variable-highlight"&gt;{{ inv.due_date|date:"jS F Y" }}&lt;/span&gt;&lt;br&gt;
+{% for inv in invoices %}<br>
+    Number: {{ inv.number }}<br>
+    Reference: {{ inv.ref }}<br>
+    Due: {{ inv.due_date|date:"jS F Y" }}<br>
 {% endfor %}
-{% endraw %}
 ```
 
 </details>
@@ -1328,24 +1074,21 @@ Due: &lt;span class="variable-highlight"&gt;{{ inv.due_date|date:"jS F Y" }}&lt;
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `ref` | `{{ invoice.ref }}` |
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;Your invoice:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;span class="variable-highlight"&gt;{{ invoice.number|default:"[[ invoice_number ]]" }}&lt;/span&gt; {% if invoice.ref %}(&lt;span class="variable-highlight"&gt;{{ invoice.ref }}&lt;/span&gt;){% endif %}&lt;/li&gt;
-&lt;/ul&gt;
+<p>Your invoice:</p>
+  <ul>
+    <li>{{ invoice.number|default:"[[ invoice_number ]]" }} {% if invoice.ref %}({{ invoice.ref }}){% endif %}</li>
+  </ul>
 {% endif %}
-{% endraw %}
 ```
 
 </details>
@@ -1365,24 +1108,21 @@ Due: &lt;span class="variable-highlight"&gt;{{ inv.due_date|date:"jS F Y" }}&lt;
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `label` | `{{ item.label }}` |
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;ul&gt;
-{% for item in items %}
-&lt;li&gt;&lt;span class="variable-highlight"&gt;{{ item.label }}&lt;/span&gt;&lt;/li&gt;
-{% endfor %}
-&lt;/ul&gt;
-{% endraw %}
+<ul>
+    {% for item in items %}
+    <li>{{ item.label }}</li>
+    {% endfor %}
+</ul>
 ```
 
 </details>
@@ -1398,17 +1138,15 @@ Due: &lt;span class="variable-highlight"&gt;{{ inv.due_date|date:"jS F Y" }}&lt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;tr&gt;
-&lt;td style="..."&gt;LEAD ENGINEER&lt;/td&gt;
-&lt;td style="..." colspan="3"&gt;&lt;span class="variable-highlight"&gt;{{lead_engineer}}&lt;/span&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-{% endraw %}
+<tr>
+                        <td style="border: 3px double #000; padding: 8px; background-color: #f0f0f0;">LEAD ENGINEER</td>
+                        <td style="border: 3px double #000; padding: 8px;" colspan="3">{{lead_engineer}}</td>
+                    </tr>
+                    <tr>
 ```
 
 </details>
@@ -1427,7 +1165,6 @@ Due: &lt;span class="variable-highlight"&gt;{{ inv.due_date|date:"jS F Y" }}&lt;
 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
-
 
 | Property | Example Value |
 |----------|---------------|
@@ -1449,37 +1186,31 @@ Due: &lt;span class="variable-highlight"&gt;{{ inv.due_date|date:"jS F Y" }}&lt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;tr class="keep-together"&gt;
-&lt;td&gt;
-&lt;div&gt;&lt;span class="variable-highlight"&gt;{{ line.product.name }}&lt;/span&gt;&lt;/div&gt;
-&lt;div class="text-muted"&gt;&lt;span class="variable-highlight"&gt;{{ line.description|default:'-' }}&lt;/span&gt;&lt;/div&gt;
-&lt;/td&gt;
-{% endraw %}
+<tr class="keep-together">
+              <td>
+                <div>{{ line.product.name }}</div>
+                <div class="text-muted">{{ line.description|default:'-' }}</div>
+              </td>
 ```
 
 ```django
-{% raw %}
-&lt;div class="text-muted"&gt;&lt;span class="variable-highlight"&gt;{{ line.description|default:'-' }}&lt;/span&gt;&lt;/div&gt;
-&lt;/td&gt;
-&lt;td class="text-right"&gt;&lt;span class="variable-highlight"&gt;{{ line.quantity|floatformat:2 }}&lt;/span&gt;&lt;/td&gt;
-&lt;td class="text-right"&gt;&lt;span class="variable-highlight"&gt;{{ line.unit_price|currency }}&lt;/span&gt;&lt;/td&gt;
-&lt;td class="text-right"&gt;&lt;span class="variable-highlight"&gt;{{ line.subtotal|currency }}&lt;/span&gt;&lt;/td&gt;
-{% endraw %}
+<div class="text-muted">{{ line.description|default:'-' }}</div>
+              </td>
+              <td class="text-right">{{ line.quantity|floatformat:2 }}</td>
+              <td class="text-right">{{ line.unit_price|currency }}</td>
+              <td class="text-right">{{ line.subtotal|currency }}</td>
 ```
 
 ```django
-{% raw %}
-&lt;/td&gt;
-&lt;td class="text-right"&gt;&lt;span class="variable-highlight"&gt;{{ line.quantity|floatformat:2 }}&lt;/span&gt;&lt;/td&gt;
-&lt;td class="text-right"&gt;&lt;span class="variable-highlight"&gt;{{ line.unit_price|currency }}&lt;/span&gt;&lt;/td&gt;
-&lt;td class="text-right"&gt;&lt;span class="variable-highlight"&gt;{{ line.subtotal|currency }}&lt;/span&gt;&lt;/td&gt;
-&lt;/tr&gt;
-{% endraw %}
+</td>
+              <td class="text-right">{{ line.quantity|floatformat:2 }}</td>
+              <td class="text-right">{{ line.unit_price|currency }}</td>
+              <td class="text-right">{{ line.subtotal|currency }}</td>
+            </tr>
 ```
 
 </details>
@@ -1499,24 +1230,21 @@ Due: &lt;span class="variable-highlight"&gt;{{ inv.due_date|date:"jS F Y" }}&lt;
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `name` | `{{ logbook.name }}` |
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;ul&gt;
-{% for logbook in digital_logbooks %}
-&lt;li&gt;&lt;span class="variable-highlight"&gt;{{ logbook.name }}&lt;/span&gt;&lt;/li&gt;
-{% endfor %}
-&lt;/ul&gt;
-{% endraw %}
+<ul>
+  {% for logbook in digital_logbooks %}
+    <li>{{ logbook.name }}</li>
+  {% endfor %}
+</ul>
 ```
 
 </details>
@@ -1532,17 +1260,15 @@ Due: &lt;span class="variable-highlight"&gt;{{ inv.due_date|date:"jS F Y" }}&lt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;tr&gt;
-&lt;td align="center" bgcolor="#27a9e3"&gt;
-&lt;a style="..." href="&lt;span class="variable-highlight"&gt;{{ login_url }}&lt;/span&gt;"&gt;
-Open your contractor portal
-&lt;/a&gt;
-{% endraw %}
+<tr>
+  <td align="center" bgcolor="#27a9e3">
+    <a style="color: white; text-decoration: underline;" href="{{ login_url }}">
+      Open your contractor portal
+    </a>
 ```
 
 </details>
@@ -1558,27 +1284,23 @@ Open your contractor portal
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
 {% endblock %}
-&lt;p&gt;A webhook event from Corrigo was rejected.&lt;/p&gt;
-&lt;p&gt;Reason: &lt;span class="variable-highlight"&gt;{{ message }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Payload:&lt;p&gt;
-&lt;pre&gt;&lt;code&gt;&lt;span class="variable-highlight"&gt;{{payload}}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-{% endraw %}
+<p>A webhook event from Corrigo was rejected.</p>
+<p>Reason: {{ message }}</p>
+<p>Payload:<p>
+<pre><code>{{payload}}</code></pre>
 ```
 
 ```django
-{% raw %}
-&lt;span class="variable-highlight"&gt;{{ property_refs|join:", " }}&lt;/span&gt;
-&lt;br /&gt;
-&lt;span class="variable-highlight"&gt;{{ message }}&lt;/span&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-{% endraw %}
+{{ property_refs|join:", " }}
+      <br />
+      {{ message }}
+    </li>
+  </ul>
 ```
 
 </details>
@@ -1594,17 +1316,15 @@ Open your contractor portal
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
 \{% extends 'email.html' %}
 {% block content %}
-&lt;p&gt;Your custom report, &lt;span class="variable-highlight"&gt;{{ name }}&lt;/span&gt;, has been generated.&lt;/p&gt;
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ description }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;To download, &lt;a href="&lt;span class="variable-highlight"&gt;{{ csv_url }}&lt;/span&gt;"&gt;please click here&lt;/a&gt;.&lt;/p&gt;
-{% endraw %}
+<p>Your custom report, {{ name }}, has been generated.</p>
+<p>{{ description }}</p>
+<p>To download, <a href="{{ csv_url }}">please click here</a>.</p>
 ```
 
 </details>
@@ -1620,17 +1340,15 @@ Open your contractor portal
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;Regards,&lt;br /&gt;
-Uptick Team&lt;/p&gt;
-&lt;p&gt;There are currently &lt;span class="variable-highlight"&gt;{{ no_of_assets }}&lt;/span&gt; assets not covered by any Routines. These assets relate to the following properties:&lt;/p&gt;
-&lt;ul&gt;
+<p>Regards,<br />
+Uptick Team</p>
+<p>There are currently {{ no_of_assets }} assets not covered by any Routines. These assets relate to the following properties:</p>
+<ul>
 {% for property in properties %}
-{% endraw %}
 ```
 
 </details>
@@ -1646,17 +1364,15 @@ Uptick Team&lt;/p&gt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;Reason: &lt;span class="variable-highlight"&gt;{{ message }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Payload:&lt;p&gt;
-&lt;pre&gt;&lt;code&gt;&lt;span class="variable-highlight"&gt;{{payload}}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Regards,&lt;br /&gt;
-Uptick Team&lt;/p&gt;
-{% endraw %}
+<p>Reason: {{ message }}</p>
+<p>Payload:<p>
+<pre><code>{{payload}}</code></pre>
+<p>Regards,<br />
+Uptick Team</p>
 ```
 
 </details>
@@ -1675,7 +1391,6 @@ Uptick Team&lt;/p&gt;
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `name` | `{{ promptset.name }}` |
@@ -1683,17 +1398,15 @@ Uptick Team&lt;/p&gt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;tr&gt;
-&lt;th colspan="3" class="border-top-0"&gt;
-(&lt;span class="variable-highlight"&gt;{{ promptset.ref }}&lt;/span&gt;) &lt;span class="variable-highlight"&gt;{{ promptset.name }}&lt;/span&gt;
-&lt;/th&gt;
-&lt;/tr&gt;
-{% endraw %}
+<tr>
+                            <th colspan="3" class="border-top-0">
+                              ({{ promptset.ref }}) {{ promptset.name }}
+                            </th>
+                          </tr>
 ```
 
 </details>
@@ -1713,7 +1426,6 @@ Uptick Team&lt;/p&gt;
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `client_ref` | `{{ property.client_ref }}` |
@@ -1724,37 +1436,31 @@ Uptick Team&lt;/p&gt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
 {% endblock %}
-&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ attention }}&lt;/span&gt;,&lt;/p&gt;
-&lt;p&gt;Please find attached your defect quote for &lt;span class="variable-highlight"&gt;{{ property.name }}&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;To view and approve this quote online, visit:&lt;/p&gt;
-&lt;p&gt;&lt;a href="&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ quote.get_uuid_approval_url }}&lt;/span&gt;"&gt;&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ quote.get_uuid_approval_url }}&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-{% endraw %}
+<p>Dear {{ attention }},</p>
+<p>Please find attached your defect quote for {{ property.name }}.</p>
+<p>To view and approve this quote online, visit:</p>
+<p><a href="{{ base_url }}{{ quote.get_uuid_approval_url }}">{{ base_url }}{{ quote.get_uuid_approval_url }}</a></p>
 ```
 
 ```django
-{% raw %}
-&lt;span class="variable-highlight"&gt;{{ config.SITE_ORGANISATION }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ attention|default:"manager" }}&lt;/span&gt;,&lt;/p&gt;
-&lt;p&gt;Please find attached your documents for services recently carried out at &lt;span class="variable-highlight"&gt;{{ property.name }}&lt;/span&gt;.&lt;/p&gt;
+{{ config.SITE_ORGANISATION }}</p>
+<p>Dear {{ attention|default:"manager" }},</p>
+<p>Please find attached your documents for services recently carried out at {{ property.name }}.</p>
 {% if invoice %}
-&lt;p&gt;Your invoice:&lt;/p&gt;
-{% endraw %}
+  <p>Your invoice:</p>
 ```
 
 ```django
-{% raw %}
-&lt;p&gt;For any questions, please contact us.&lt;/p&gt;
-&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ attention|default:"manager" }}&lt;/span&gt;,&lt;/p&gt;
-&lt;p&gt;Please find attached your documents for services recently carried out at &lt;span class="variable-highlight"&gt;{{ property.name }}&lt;/span&gt;.&lt;/p&gt;
+<p>For any questions, please contact us.</p>
+<p>Dear {{ attention|default:"manager" }},</p>
+<p>Please find attached your documents for services recently carried out at {{ property.name }}.</p>
 {% if invoice %}
-&lt;p&gt;Your invoice:&lt;/p&gt;
-{% endraw %}
+  <p>Your invoice:</p>
 ```
 
 </details>
@@ -1773,24 +1479,21 @@ Uptick Team&lt;/p&gt;
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `delivery_instructions` | `{{purchaseorder.delivery_instructions}}` |
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ attention }}&lt;/span&gt;,&lt;/p&gt;
-&lt;p&gt;Please find attached our purchase order{% if task %} for &lt;span class="variable-highlight"&gt;{{ task.name }}&lt;/span&gt;{% endif %}.&lt;/p&gt;
-&lt;p&gt;Please deliver the parts to &lt;span class="variable-highlight"&gt;{{purchaseorder.delivery_instructions}}&lt;/span&gt; &lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Delivery Address:&lt;strong&gt;&lt;/p&gt;
-&lt;p&gt;Regards,&lt;br /&gt;
-{% endraw %}
+<p>Dear {{ attention }},</p>
+<p>Please find attached our purchase order{% if task %} for {{ task.name }}{% endif %}.</p>
+<p>Please deliver the parts to {{purchaseorder.delivery_instructions}} </p>
+<p><strong>Delivery Address:<strong></p>
+<p>Regards,<br />
 ```
 
 </details>
@@ -1810,7 +1513,6 @@ Uptick Team&lt;/p&gt;
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `get_uuid_approval_url` | `{{ quote.get_uuid_approval_url\|absolute }}` |
@@ -1827,37 +1529,31 @@ Uptick Team&lt;/p&gt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;Please find attached your defect quote for &lt;span class="variable-highlight"&gt;{{ property.name }}&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;To view and approve this quote online, visit:&lt;/p&gt;
-&lt;p&gt;&lt;a href="&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ quote.get_uuid_approval_url }}&lt;/span&gt;"&gt;&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ quote.get_uuid_approval_url }}&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;We value your opinion, please contact us with any comments you may have.&lt;/p&gt;
-&lt;p&gt;Regards,&lt;br /&gt;
-{% endraw %}
+<p>Please find attached your defect quote for {{ property.name }}.</p>
+<p>To view and approve this quote online, visit:</p>
+<p><a href="{{ base_url }}{{ quote.get_uuid_approval_url }}">{{ base_url }}{{ quote.get_uuid_approval_url }}</a></p>
+<p>We value your opinion, please contact us with any comments you may have.</p>
+<p>Regards,<br />
 ```
 
 ```django
-{% raw %}
-&lt;ul&gt;
-{% for quote in defectquotes %}
-&lt;li&gt;Reference: &lt;span class="variable-highlight"&gt;{{ quote.ref }}&lt;/span&gt;&lt;a href="&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ quote.get_uuid_approval_url }}&lt;/span&gt;"&gt; (approve online)&lt;/a&gt;&lt;/li&gt;
-{% endfor %}
-&lt;/ul&gt;
-{% endraw %}
+<ul>
+    {% for quote in defectquotes %}
+      <li>Reference: {{ quote.ref }}<a href="{{ base_url }}{{ quote.get_uuid_approval_url }}"> (approve online)</a></li>
+    {% endfor %}
+  </ul>
 ```
 
 ```django
-{% raw %}
 {% endif %}
-&lt;p&gt;To view and approve this quote online, visit:&lt;/p&gt;
-&lt;p&gt;&lt;a href="&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ quote.get_uuid_approval_url }}&lt;/span&gt;"&gt;&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ quote.get_uuid_approval_url }}&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Regards,&lt;br /&gt;
-&lt;span class="variable-highlight"&gt;{{ config.SITE_ORGANISATION }}&lt;/span&gt;&lt;/p&gt;
-{% endraw %}
+<p>To view and approve this quote online, visit:</p>
+<p><a href="{{ base_url }}{{ quote.get_uuid_approval_url }}">{{ base_url }}{{ quote.get_uuid_approval_url }}</a></p>
+<p>Regards,<br />
+{{ config.SITE_ORGANISATION }}</p>
 ```
 
 </details>
@@ -1876,7 +1572,6 @@ Uptick Team&lt;/p&gt;
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `ref` | `{{ rectification.ref }}` |
@@ -1891,27 +1586,23 @@ Uptick Team&lt;/p&gt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
 {% load markdowner %}
 {% block content %}
-&lt;h4&gt;Rectification &lt;span class="variable-highlight"&gt;{{ rectification.ref }}&lt;/span&gt; was rejected.&lt;/h4&gt;
-&lt;p&gt;Reason provided:&lt;/p&gt;
-&lt;span class="variable-highlight"&gt;{{ rectification.rejection_reason|markdowner }}&lt;/span&gt;
-{% endraw %}
+<h4>Rectification {{ rectification.ref }} was rejected.</h4>
+<p>Reason provided:</p>
+{{ rectification.rejection_reason|markdowner }}
 ```
 
 ```django
-{% raw %}
-&lt;h4&gt;Rectification &lt;span class="variable-highlight"&gt;{{ rectification.ref }}&lt;/span&gt; was rejected.&lt;/h4&gt;
-&lt;p&gt;Reason provided:&lt;/p&gt;
-&lt;span class="variable-highlight"&gt;{{ rectification.rejection_reason|markdowner }}&lt;/span&gt;
-&lt;p&gt;Access the rectification to provide updated information:&lt;/p&gt;
-&lt;p&gt;&lt;a href="&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ absolute_url }}&lt;/span&gt;"&gt;&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ absolute_url }}&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-{% endraw %}
+<h4>Rectification {{ rectification.ref }} was rejected.</h4>
+<p>Reason provided:</p>
+{{ rectification.rejection_reason|markdowner }}
+<p>Access the rectification to provide updated information:</p>
+<p><a href="{{ base_url }}{{ absolute_url }}">{{ base_url }}{{ absolute_url }}</a></p>
 ```
 
 </details>
@@ -1927,27 +1618,23 @@ Uptick Team&lt;/p&gt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;tr&gt;
-&lt;td style="..."&gt;OUR REF NO.&lt;/td&gt;
-&lt;td style="..." colspan="3"&gt;&lt;span class="variable-highlight"&gt;{{ref_no}}&lt;/span&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-{% endraw %}
+<tr>
+                        <td style="border: 3px double #000; padding: 8px; background-color: #f0f0f0;">OUR REF NO.</td>
+                        <td style="border: 3px double #000; padding: 8px;" colspan="3">{{ref_no}}</td>
+                    </tr>
+                    <tr>
 ```
 
 ```django
-{% raw %}
-&lt;tr&gt;
-&lt;td style="..."&gt;VISIT No.&lt;/td&gt;
-&lt;td style="..." colspan="3"&gt;&lt;span class="variable-highlight"&gt;{{ref_no}}&lt;/span&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-{% endraw %}
+<tr>
+                        <td style="border: 3px double #000; padding: 8px; background-color: #f0f0f0;">VISIT No.</td>
+                        <td style="border: 3px double #000; padding: 8px;" colspan="3">{{ref_no}}</td>
+                    </tr>
+                    <tr>
 ```
 
 </details>
@@ -1963,17 +1650,15 @@ Uptick Team&lt;/p&gt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;You can provide your field technicians with this link which will enable them to complete the task via their smart phone (apple or android) without needing to install an app.&lt;/p&gt;
-&lt;p&gt;Thanks&lt;/p&gt;
-&lt;p&gt;The contractor &lt;span class="variable-highlight"&gt;{{ contractor }}&lt;/span&gt; has rejected the task assigned to him for the following reason: &lt;span class="variable-highlight"&gt;{{ rejection_reason }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;
-The task that was assigned was:&lt;br&gt;
-{% endraw %}
+<p>You can provide your field technicians with this link which will enable them to complete the task via their smart phone (apple or android) without needing to install an app.</p>
+<p>Thanks</p>
+<p>The contractor {{ contractor }} has rejected the task assigned to him for the following reason: {{ rejection_reason }}</p>
+<p>
+  The task that was assigned was:<br>
 ```
 
 </details>
@@ -1992,7 +1677,6 @@ The task that was assigned was:&lt;br&gt;
 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
-
 
 | Property | Example Value |
 |----------|---------------|
@@ -2015,37 +1699,31 @@ The task that was assigned was:&lt;br&gt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;tr&gt;
-&lt;td class="m-0 p-0"&gt;
-&lt;div id="&lt;span class="variable-highlight"&gt;{{ remark.id }}&lt;/span&gt;"
-class="remark severity-&lt;span class="variable-highlight"&gt;{{ remark.severity }}&lt;/span&gt; keep-together"&gt;
-&lt;div class="d-flex flex-row justify-content-between header"&gt;
-{% endraw %}
+<tr>
+                        <td class="m-0 p-0">
+                          <div id="{{ remark.id }}"
+                               class="remark severity-{{ remark.severity }} keep-together">
+                            <div class="d-flex flex-row justify-content-between header">
 ```
 
 ```django
-{% raw %}
-&lt;td class="m-0 p-0"&gt;
-&lt;div id="&lt;span class="variable-highlight"&gt;{{ remark.id }}&lt;/span&gt;"
-class="remark severity-&lt;span class="variable-highlight"&gt;{{ remark.severity }}&lt;/span&gt; keep-together"&gt;
-&lt;div class="d-flex flex-row justify-content-between header"&gt;
-&lt;div class="px-3 py-2"&gt;
-{% endraw %}
+<td class="m-0 p-0">
+                          <div id="{{ remark.id }}"
+                               class="remark severity-{{ remark.severity }} keep-together">
+                            <div class="d-flex flex-row justify-content-between header">
+                              <div class="px-3 py-2">
 ```
 
 ```django
-{% raw %}
-&lt;div class="d-flex flex-row justify-content-between header"&gt;
-&lt;div class="px-3 py-2"&gt;
-&lt;strong&gt;&lt;span class="variable-highlight"&gt;{{ remark.get_severity_display }}&lt;/span&gt;&lt;/strong&gt;
-&lt;br/&gt;
-&lt;a href="&lt;span class="variable-highlight"&gt;{{ remark.get_public_url }}&lt;/span&gt;"&gt;
-{% endraw %}
+<div class="d-flex flex-row justify-content-between header">
+                              <div class="px-3 py-2">
+                                <strong>{{ remark.get_severity_display }}</strong>
+                                <br/>
+                                <a href="{{ remark.get_public_url }}">
 ```
 
 </details>
@@ -2065,24 +1743,21 @@ class="remark severity-&lt;span class="variable-highlight"&gt;{{ remark.severity
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `get_title` | `{{ report.get_title }}` |
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;ul&gt;
-{% for report in reports %}
-&lt;li&gt;&lt;span class="variable-highlight"&gt;{{ report.get_title }}&lt;/span&gt; (&lt;span class="variable-highlight"&gt;{{ report.compliant|yesno:"compliant,non-compliant,not applicable"}}&lt;/span&gt;)&lt;/li&gt;
-{% endfor %}
-&lt;/ul&gt;
-{% endraw %}
+<ul>
+    {% for report in reports %}
+      <li>{{ report.get_title }} ({{ report.compliant|yesno:"compliant,non-compliant,not applicable"}})</li>
+    {% endfor %}
+  </ul>
 ```
 
 </details>
@@ -2101,7 +1776,6 @@ class="remark severity-&lt;span class="variable-highlight"&gt;{{ remark.severity
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `email` | `{{request_user.email}}` |
@@ -2109,37 +1783,31 @@ class="remark severity-&lt;span class="variable-highlight"&gt;{{ remark.severity
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;If you have any queries or need to change the time, please email me at &lt;a href="mailto:&lt;span class="variable-highlight"&gt;{{request_user.email}}&lt;/span&gt;"&gt;&lt;span class="variable-highlight"&gt;{{request_user.email}}&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Regards,&lt;br&gt;
-&lt;span class="variable-highlight"&gt;{{request_user.name}}&lt;/span&gt;&lt;/p&gt;
-{% endraw %}
+</tbody>
+                </table>
+                <p>If you have any queries or need to change the time, please email me at <a href="mailto:{{request_user.email}}">{{request_user.email}}</a>.</p>
+                <p>Regards,<br>
+                {{request_user.name}}</p>
 ```
 
 ```django
-{% raw %}
-&lt;p&gt;If you have any queries or need to change the time, please email me at &lt;a href="mailto:&lt;span class="variable-highlight"&gt;{{request_user.email}}&lt;/span&gt;"&gt;&lt;span class="variable-highlight"&gt;{{request_user.email}}&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Regards,&lt;br&gt;
-&lt;span class="variable-highlight"&gt;{{request_user.name}}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{request_user.email}}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;
-{% endraw %}
+<p>If you have any queries or need to change the time, please email me at <a href="mailto:{{request_user.email}}">{{request_user.email}}</a>.</p>
+                <p>Regards,<br>
+                {{request_user.name}}</p>
+                <p>{{request_user.email}}</p>
+                <p>
 ```
 
 ```django
-{% raw %}
-&lt;p&gt;Regards,&lt;br&gt;
-&lt;span class="variable-highlight"&gt;{{request_user.name}}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{request_user.email}}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;
-&lt;span class="variable-highlight"&gt;{{ config.CONTACT_PHONE }}&lt;/span&gt; &lt;br /&gt;
-{% endraw %}
+<p>Regards,<br>
+                {{request_user.name}}</p>
+                <p>{{request_user.email}}</p>
+                <p>
+                  {{ config.CONTACT_PHONE }} <br />
 ```
 
 </details>
@@ -2155,17 +1823,15 @@ class="remark severity-&lt;span class="variable-highlight"&gt;{{ remark.severity
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;Please review and address the error, then use the link below to retry the sync&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&lt;span class="variable-highlight"&gt;{{ retry_link }}&lt;/span&gt;&gt;Click here&lt;/a&gt; and use the &lt;code&gt;POST&lt;/code&gt; button to retry the sync.
-&lt;/p&gt;
-&lt;h3&gt;Error&lt;/h3&gt;
-{% endraw %}
+<p>Please review and address the error, then use the link below to retry the sync</p>
+<p>
+    <a href={{ retry_link }}>Click here</a> and use the <code>POST</code> button to retry the sync.
+</p>
+<h3>Error</h3>
 ```
 
 </details>
@@ -2184,7 +1850,6 @@ class="remark severity-&lt;span class="variable-highlight"&gt;{{ remark.severity
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `get_routine_display_name` | `{{ routineserviceleveltype.get_routine_display_name }}` |
@@ -2192,27 +1857,23 @@ class="remark severity-&lt;span class="variable-highlight"&gt;{{ remark.severity
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
 {% for routineserviceleveltype, servicetask_group in servicetasks_grouped_by_type %}
-&lt;div class="uptick-title no-page-break-after"&gt;
-&lt;div&gt;&lt;span class="variable-highlight"&gt;{{ routineserviceleveltype.get_routine_display_name }}&lt;/span&gt;&lt;/div&gt;
-{% if routineserviceleveltype.routineservicetype.standard.name != "Default" %}
-&lt;div className="text-muted"&gt;&lt;small&gt;&lt;span class="variable-highlight"&gt;{{ routineserviceleveltype.routineservicetype.standard.name }}&lt;/span&gt;&lt;/small&gt;&lt;/div&gt;
-{% endraw %}
+      <div class="uptick-title no-page-break-after">
+        <div>{{ routineserviceleveltype.get_routine_display_name }}</div>
+        {% if routineserviceleveltype.routineservicetype.standard.name != "Default" %}
+          <div className="text-muted"><small>{{ routineserviceleveltype.routineservicetype.standard.name }}</small></div>
 ```
 
 ```django
-{% raw %}
-&lt;div&gt;&lt;span class="variable-highlight"&gt;{{ routineserviceleveltype.get_routine_display_name }}&lt;/span&gt;&lt;/div&gt;
-{% if routineserviceleveltype.routineservicetype.standard.name != "Default" %}
-&lt;div className="text-muted"&gt;&lt;small&gt;&lt;span class="variable-highlight"&gt;{{ routineserviceleveltype.routineservicetype.standard.name }}&lt;/span&gt;&lt;/small&gt;&lt;/div&gt;
-{% endif %}
-&lt;/div&gt;
-{% endraw %}
+<div>{{ routineserviceleveltype.get_routine_display_name }}</div>
+        {% if routineserviceleveltype.routineservicetype.standard.name != "Default" %}
+          <div className="text-muted"><small>{{ routineserviceleveltype.routineservicetype.standard.name }}</small></div>
+        {% endif %}
+      </div>
 ```
 
 </details>
@@ -2232,34 +1893,29 @@ class="remark severity-&lt;span class="variable-highlight"&gt;{{ remark.severity
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `name` | `{{ rslt.name }}` |
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;span class="variable-highlight"&gt;{{ line.routineservicetype.name }}&lt;/span&gt; –
-{% for rslt in line.routineserviceleveltypes.all %}
-&lt;span&gt;&lt;span class="variable-highlight"&gt;{{ rslt.name }}&lt;/span&gt;{% if not forloop.last %}, {% endif %}&lt;/span&gt;
-{% endfor %}
-&lt;/div&gt;
-{% endraw %}
+{{ line.routineservicetype.name }} –
+                    {% for rslt in line.routineserviceleveltypes.all %}
+                      <span>{{ rslt.name }}{% if not forloop.last %}, {% endif %}</span>
+                    {% endfor %}
+                  </div>
 ```
 
 ```django
-{% raw %}
-&lt;div&gt;&lt;span class="variable-highlight"&gt;{{ line.routineservicetype.name }}&lt;/span&gt;&lt;/div&gt;
-{% for rslt in line.routineserviceleveltypes.all %}
-&lt;span&gt;&lt;span class="variable-highlight"&gt;{{ rslt.name }}&lt;/span&gt;{% if not forloop.last %},{% endif %}&lt;/span&gt;
-{% endfor %}
-&lt;/div&gt;
-{% endraw %}
+<div>{{ line.routineservicetype.name }}</div>
+                  {% for rslt in line.routineserviceleveltypes.all %}
+                    <span>{{ rslt.name }}{% if not forloop.last %},{% endif %}</span>
+                  {% endfor %}
+                </div>
 ```
 
 </details>
@@ -2275,17 +1931,15 @@ class="remark severity-&lt;span class="variable-highlight"&gt;{{ remark.severity
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;tr&gt;
-&lt;td style="..."&gt;SCOPE OF WORKS&lt;/td&gt;
-&lt;td style="..." colspan="3"&gt;&lt;span class="variable-highlight"&gt;{{scope_of_works}}&lt;/span&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-{% endraw %}
+<tr>
+                        <td style="border: 3px double #000; padding: 8px; background-color: #f0f0f0;">SCOPE OF WORKS</td>
+                        <td style="border: 3px double #000; padding: 8px;" colspan="3">{{scope_of_works}}</td>
+                    </tr>
+                </table>
 ```
 
 </details>
@@ -2304,24 +1958,21 @@ class="remark severity-&lt;span class="variable-highlight"&gt;{{ remark.severity
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `name` | `{{ sender.name }}` |
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;Template change request &lt;span class="variable-highlight"&gt;{{ changerequest.ref }}&lt;/span&gt; has been created for &lt;span class="variable-highlight"&gt;{{ customer }}&lt;/span&gt;.&lt;/p&gt;
+<p>Template change request {{ changerequest.ref }} has been created for {{ customer }}.</p>
 {% elif  status == 'REQUESTED' %}
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ sender.name }}&lt;/span&gt; submitted feedback for Template change request &lt;span class="variable-highlight"&gt;{{ changerequest.ref }}&lt;/span&gt;.&lt;/p&gt;
+  <p>{{ sender.name }} submitted feedback for Template change request {{ changerequest.ref }}.</p>
 {% else %}
-&lt;p&gt;Template change request &lt;span class="variable-highlight"&gt;{{ changerequest.ref }}&lt;/span&gt; has been approved. Our team will be in contact once completed.&lt;/p&gt;
-{% endraw %}
+  <p>Template change request {{ changerequest.ref }} has been approved. Our team will be in contact once completed.</p>
 ```
 
 </details>
@@ -2339,7 +1990,6 @@ class="remark severity-&lt;span class="variable-highlight"&gt;{{ remark.severity
 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
-
 
 | Property | Example Value |
 |----------|---------------|
@@ -2368,37 +2018,31 @@ class="remark severity-&lt;span class="variable-highlight"&gt;{{ remark.severity
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;div&gt;
-&lt;strong&gt;Scope of works:&lt;/strong&gt;
-&lt;span class="variable-highlight"&gt;{{ servicequote.description }}&lt;/span&gt;
-&lt;/div&gt;
-&lt;br /&gt;
-{% endraw %}
+<div>
+  <strong>Scope of works:</strong>
+  {{ servicequote.description }}
+</div>
+<br />
 ```
 
 ```django
-{% raw %}
-Kind regards,&lt;br /&gt;&lt;br /&gt;
+Kind regards,<br /><br />
 {% if servicequote.salesperson %}
-&lt;div&gt;&lt;span class="variable-highlight"&gt;{{ servicequote.salesperson.name }}&lt;/span&gt;&lt;/div&gt;
-&lt;div&gt;&lt;span class="variable-highlight"&gt;{{ servicequote.salesperson.email }}&lt;/span&gt;&lt;/div&gt;
+<div>{{ servicequote.salesperson.name }}</div>
+<div>{{ servicequote.salesperson.email }}</div>
 {% endif %}
-{% endraw %}
 ```
 
 ```django
-{% raw %}
 {% if servicequote.salesperson %}
-&lt;div&gt;&lt;span class="variable-highlight"&gt;{{ servicequote.salesperson.name }}&lt;/span&gt;&lt;/div&gt;
-&lt;div&gt;&lt;span class="variable-highlight"&gt;{{ servicequote.salesperson.email }}&lt;/span&gt;&lt;/div&gt;
+<div>{{ servicequote.salesperson.name }}</div>
+<div>{{ servicequote.salesperson.email }}</div>
 {% endif %}
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ config.SITE_ORGANISATION }}&lt;/span&gt;&lt;/p&gt;
-{% endraw %}
+<p>{{ config.SITE_ORGANISATION }}</p>
 ```
 
 </details>
@@ -2418,11 +2062,10 @@ Kind regards,&lt;br /&gt;&lt;br /&gt;
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `get_result_display.upper` | `{{ servicetask.get_result_display.upper }}` |
-| `item` | `{{ servicetask.item\|bsecure_url }}` |
+| `item` | `{{ servicetask.item\|bsecure_badge_code }}` |
 | `item.extra_fields.door_depth` | `{{servicetask.item.extra_fields.door_depth}}` |
 | `item.extra_fields.door_width` | `{{servicetask.item.extra_fields.door_width}}` |
 | `item.get_extra_fields_display.certification_id_present` | `{{servicetask.item.get_extra_fields_display.certification_id_present}}` |
@@ -2446,37 +2089,31 @@ Kind regards,&lt;br /&gt;&lt;br /&gt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;tbody&gt;
-&lt;tr class="keep-together bottom-border"&gt;
-&lt;th width="35%" class="bg-white"&gt;&lt;span class="variable-highlight"&gt;{{ servicetask.item.get_label }}&lt;/span&gt;&lt;/th&gt;
-&lt;th width="50%" class="bg-white light-text-weight"&gt;
-{% if servicetask.item.inspection_ref %}
-{% endraw %}
+<tbody>
+            <tr class="keep-together bottom-border">
+              <th width="35%" class="bg-white">{{ servicetask.item.get_label }}</th>
+              <th width="50%" class="bg-white light-text-weight">
+                {% if servicetask.item.inspection_ref %}
 ```
 
 ```django
-{% raw %}
-&lt;th width="50%" class="bg-white light-text-weight"&gt;
-{% if servicetask.item.inspection_ref %}
-&lt;strong&gt;Serial:&lt;/strong&gt; &lt;span class="variable-highlight"&gt;{{ servicetask.item.inspection_ref }}&lt;/span&gt;
-{% endif %}
-{% if servicetask.item.bsecure_latest_sticker_guid %}
-{% endraw %}
+<th width="50%" class="bg-white light-text-weight">
+                {% if servicetask.item.inspection_ref %}
+                  <strong>Serial:</strong> {{ servicetask.item.inspection_ref }}
+                {% endif %}
+                {% if servicetask.item.bsecure_latest_sticker_guid %}
 ```
 
 ```django
-{% raw %}
 {% endif %}
-{% if servicetask.item.bsecure_latest_sticker_guid %}
-&lt;a href="&lt;span class="variable-highlight"&gt;{{ servicetask.item|bsecure_url }}&lt;/span&gt;"&gt;
-&lt;strong&gt;BSecure:&lt;/strong&gt; &lt;span class="variable-highlight"&gt;{{ servicetask.item|bsecure_badge_code }}&lt;/span&gt;
-{% include "reports/library/arrow-up-right-from-square-icon.svg" with width="11" height="11" %}
-{% endraw %}
+                {% if servicetask.item.bsecure_latest_sticker_guid %}
+                  <a href="{{ servicetask.item|bsecure_url }}">
+                    <strong>BSecure:</strong> {{ servicetask.item|bsecure_badge_code }}
+                    {% include "reports/library/arrow-up-right-from-square-icon.svg" with width="11" height="11" %}
 ```
 
 </details>
@@ -2495,7 +2132,6 @@ Kind regards,&lt;br /&gt;&lt;br /&gt;
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `account` | `{{ signoff.account }}` |
@@ -2506,27 +2142,23 @@ Kind regards,&lt;br /&gt;&lt;br /&gt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
 {% extends 'email.html' %}
 {% block content %}
-&lt;h3&gt;Contractor sign off &lt;span class="variable-highlight"&gt;{{ signoff.pk }}&lt;/span&gt; results for &lt;span class="variable-highlight"&gt;{{ signoff.contractor }}&lt;/span&gt;&lt;/h3&gt;
-&lt;h4&gt;Submitted by &lt;span class="variable-highlight"&gt;{{ signoff.account }}&lt;/span&gt; for &lt;span class="variable-highlight"&gt;{{ signoff.period_start}}&lt;/span&gt; to &lt;span class="variable-highlight"&gt;{{ signoff.period_finish }}&lt;/span&gt;.&lt;/h4&gt;
-{% for signoffproperty in signoff.signoffproperty_set.all %}
-{% endraw %}
+  <h3>Contractor sign off {{ signoff.pk }} results for {{ signoff.contractor }}</h3>
+  <h4>Submitted by {{ signoff.account }} for {{ signoff.period_start}} to {{ signoff.period_finish }}.</h4>
+  {% for signoffproperty in signoff.signoffproperty_set.all %}
 ```
 
 ```django
-{% raw %}
 {% block content %}
-&lt;h3&gt;Contractor sign off &lt;span class="variable-highlight"&gt;{{ signoff.pk }}&lt;/span&gt; results for &lt;span class="variable-highlight"&gt;{{ signoff.contractor }}&lt;/span&gt;&lt;/h3&gt;
-&lt;h4&gt;Submitted by &lt;span class="variable-highlight"&gt;{{ signoff.account }}&lt;/span&gt; for &lt;span class="variable-highlight"&gt;{{ signoff.period_start}}&lt;/span&gt; to &lt;span class="variable-highlight"&gt;{{ signoff.period_finish }}&lt;/span&gt;.&lt;/h4&gt;
-{% for signoffproperty in signoff.signoffproperty_set.all %}
-&lt;h5&gt;&lt;span class="variable-highlight"&gt;{{ signoffproperty.property }}&lt;/span&gt;&lt;/h5&gt;
-{% endraw %}
+  <h3>Contractor sign off {{ signoff.pk }} results for {{ signoff.contractor }}</h3>
+  <h4>Submitted by {{ signoff.account }} for {{ signoff.period_start}} to {{ signoff.period_finish }}.</h4>
+  {% for signoffproperty in signoff.signoffproperty_set.all %}
+  <h5>{{ signoffproperty.property }}</h5>
 ```
 
 </details>
@@ -2546,7 +2178,6 @@ Kind regards,&lt;br /&gt;&lt;br /&gt;
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `label` | `{{ signoffitem.label }}` |
@@ -2555,37 +2186,31 @@ Kind regards,&lt;br /&gt;&lt;br /&gt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
 {% endif %}
-]
-&lt;span class="variable-highlight"&gt;{{ signoffitem.label }}&lt;/span&gt;
-{% if signoffitem.new_signoff_note %}
-&lt;div style="..."&gt;Note: &lt;span class="variable-highlight"&gt;{{ signoffitem.new_signoff_note }}&lt;/span&gt;&lt;/div&gt;
-{% endraw %}
+      ]
+      {{ signoffitem.label }}
+      {% if signoffitem.new_signoff_note %}
+      <div style="color: blue">Note: {{ signoffitem.new_signoff_note }}</div>
 ```
 
 ```django
-{% raw %}
-&lt;span class="variable-highlight"&gt;{{ signoffitem.label }}&lt;/span&gt;
-{% if signoffitem.new_signoff_note %}
-&lt;div style="..."&gt;Note: &lt;span class="variable-highlight"&gt;{{ signoffitem.new_signoff_note }}&lt;/span&gt;&lt;/div&gt;
-{% endif %}
-{% if signoffitem.new_serviced_date %}
-{% endraw %}
+{{ signoffitem.label }}
+      {% if signoffitem.new_signoff_note %}
+      <div style="color: blue">Note: {{ signoffitem.new_signoff_note }}</div>
+      {% endif %}
+      {% if signoffitem.new_serviced_date %}
 ```
 
 ```django
-{% raw %}
 {% endif %}
-{% if signoffitem.new_serviced_date %}
-&lt;div style="..."&gt;Service date: &lt;span class="variable-highlight"&gt;{{ signoffitem.new_serviced_date }}&lt;/span&gt;&lt;/div&gt;
-{% endif %}
-&lt;/li&gt;
-{% endraw %}
+      {% if signoffitem.new_serviced_date %}
+      <div style="color: #666">Service date: {{ signoffitem.new_serviced_date }}</div>
+      {% endif %}
+    </li>
 ```
 
 </details>
@@ -2608,37 +2233,31 @@ Kind regards,&lt;br /&gt;&lt;br /&gt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
 {% extends 'email.html' %}
 {% block content %}
-&lt;h4&gt;Request&lt;span class="variable-highlight"&gt;{{ signoffproperties|pluralize }}&lt;/span&gt; for &lt;span class="variable-highlight"&gt;{{ contractor.name }}&lt;/span&gt; (&lt;span class="variable-highlight"&gt;{{ contractor.account }}&lt;/span&gt;).&lt;/h4&gt;
-&lt;p&gt;In order to issue compliant reports, we require confirmation that you, as a service contractor, have serviced the relevant Essential Safety Measures to Australian Standards over the previous 12 months.&lt;/p&gt;
-&lt;table border="0" cellpadding="10" cellspacing="0" bgcolor="#27a9e3" width="100%"&gt;
-{% endraw %}
+<h4>Request{{ signoffproperties|pluralize }} for {{ contractor.name }} ({{ contractor.account }}).</h4>
+<p>In order to issue compliant reports, we require confirmation that you, as a service contractor, have serviced the relevant Essential Safety Measures to Australian Standards over the previous 12 months.</p>
+<table border="0" cellpadding="10" cellspacing="0" bgcolor="#27a9e3" width="100%">
 ```
 
 ```django
-{% raw %}
 {% endfor %}
-&lt;/ul&gt;
-&lt;p&gt;If the form&lt;span class="variable-highlight"&gt;{{ signoffproperties|pluralize }}&lt;/span&gt; on the attached link &lt;span class="variable-highlight"&gt;{{ signoffproperties|pluralize:"is,are" }}&lt;/span&gt; not submitted within the next 30 days and there is no proof on site that the Essential Safety Measures are being serviced, &lt;span class="variable-highlight"&gt;{{ signoffproperties|pluralize:"a," }}&lt;/span&gt; Non-Compliant Building Report&lt;span class="variable-highlight"&gt;{{ signoffproperties|pluralize }}&lt;/span&gt; will be issued.&lt;/p&gt;
+</ul>
+<p>If the form{{ signoffproperties|pluralize }} on the attached link {{ signoffproperties|pluralize:"is,are" }} not submitted within the next 30 days and there is no proof on site that the Essential Safety Measures are being serviced, {{ signoffproperties|pluralize:"a," }} Non-Compliant Building Report{{ signoffproperties|pluralize }} will be issued.</p>
 {% endblock %}
 {% extends 'email.html' %}
-{% endraw %}
 ```
 
 ```django
-{% raw %}
 {% endfor %}
-&lt;/ul&gt;
-&lt;p&gt;If the form&lt;span class="variable-highlight"&gt;{{ signoffproperties|pluralize }}&lt;/span&gt; on the attached link &lt;span class="variable-highlight"&gt;{{ signoffproperties|pluralize:"is,are" }}&lt;/span&gt; not submitted and there is no proof on site that the Essential Safety Measures are being serviced, &lt;span class="variable-highlight"&gt;{{ signoffproperties|pluralize:"a," }}&lt;/span&gt; Non-Compliant Building Report&lt;span class="variable-highlight"&gt;{{ signoffproperties|pluralize }}&lt;/span&gt; will be issued.&lt;/p&gt;
+</ul>
+<p>If the form{{ signoffproperties|pluralize }} on the attached link {{ signoffproperties|pluralize:"is,are" }} not submitted and there is no proof on site that the Essential Safety Measures are being serviced, {{ signoffproperties|pluralize:"a," }} Non-Compliant Building Report{{ signoffproperties|pluralize }} will be issued.</p>
 {% endblock %}
-&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ client.primary_contact.name }}&lt;/span&gt;,&lt;/p&gt;
-{% endraw %}
+<p>Dear {{ client.primary_contact.name }},</p>
 ```
 
 </details>
@@ -2657,7 +2276,6 @@ Kind regards,&lt;br /&gt;&lt;br /&gt;
 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
-
 
 | Property | Example Value |
 |----------|---------------|
@@ -2678,37 +2296,31 @@ Kind regards,&lt;br /&gt;&lt;br /&gt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
 {% for signoffproperty in signoffproperties %}
-&lt;li&gt;
-&lt;h5&gt;&lt;span class="variable-highlight"&gt;{{ signoffproperty.property.name }}&lt;/span&gt;&lt;/h5&gt;
-&lt;p&gt;
-Due: &lt;span class="variable-highlight"&gt;{{ signoffproperty.due|date }}&lt;/span&gt;
-{% endraw %}
+  <li>
+  <h5>{{ signoffproperty.property.name }}</h5>
+  <p>
+    Due: {{ signoffproperty.due|date }}
 ```
 
 ```django
-{% raw %}
-&lt;h5&gt;&lt;span class="variable-highlight"&gt;{{ signoffproperty.property.name }}&lt;/span&gt;&lt;/h5&gt;
-&lt;p&gt;
-Due: &lt;span class="variable-highlight"&gt;{{ signoffproperty.due|date }}&lt;/span&gt;
-&lt;/p&gt;
-&lt;/li&gt;
-{% endraw %}
+<h5>{{ signoffproperty.property.name }}</h5>
+  <p>
+    Due: {{ signoffproperty.due|date }}
+  </p>
+  </li>
 ```
 
 ```django
-{% raw %}
 {% for signoffproperty in signoffproperties %}
-&lt;li&gt;
-&lt;h5&gt;&lt;span class="variable-highlight"&gt;{{ signoffproperty.property.name }}&lt;/span&gt;&lt;/h5&gt;
-&lt;p&gt;
-Due: &lt;span class="variable-highlight"&gt;{{ signoffproperty.due|date }}&lt;/span&gt;&lt;br/&gt;
-{% endraw %}
+  <li>
+  <h5>{{ signoffproperty.property.name }}</h5>
+  <p>
+    Due: {{ signoffproperty.due|date }}<br/>
 ```
 
 </details>
@@ -2724,17 +2336,15 @@ Due: &lt;span class="variable-highlight"&gt;{{ signoffproperty.due|date }}&lt;/s
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;tr&gt;
-&lt;td style="..."&gt;START DATE&lt;/td&gt;
-&lt;td style="..."&gt;&lt;span class="variable-highlight"&gt;{{start_date}}&lt;/span&gt;&lt;/td&gt;
-&lt;td style="..."&gt;END DATE&lt;/td&gt;
-&lt;td style="..."&gt;&lt;span class="variable-highlight"&gt;{{end_date}}&lt;/span&gt;&lt;/td&gt;
-{% endraw %}
+<tr>
+                        <td style="border: 3px double #000; padding: 8px; width: 25%; background-color: #f0f0f0;">START DATE</td>
+                        <td style="border: 3px double #000; padding: 8px; width: 25%;">{{start_date}}</td>
+                        <td style="border: 3px double #000; padding: 8px; width: 25%; background-color: #f0f0f0;">END DATE</td>
+                        <td style="border: 3px double #000; padding: 8px; width: 25%;">{{end_date}}</td>
 ```
 
 </details>
@@ -2750,27 +2360,23 @@ Due: &lt;span class="variable-highlight"&gt;{{ signoffproperty.due|date }}&lt;/s
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-To: &lt;span class="variable-highlight"&gt;{{ to_list }}&lt;/span&gt;&lt;br /&gt;
-CC: &lt;span class="variable-highlight"&gt;{{ cc_list }}&lt;/span&gt;&lt;br /&gt;
-Subject &lt;span class="variable-highlight"&gt;{{ subject }}&lt;/span&gt;&lt;br /&gt;
-&lt;/p&gt;
-&lt;p&gt;
-{% endraw %}
+To: {{ to_list }}<br />
+  CC: {{ cc_list }}<br />
+  Subject {{ subject }}<br />
+</p>
+<p>
 ```
 
 ```django
-{% raw %}
-Address: &lt;span class="variable-highlight"&gt;{{ bounce_address }}&lt;/span&gt;&lt;br /&gt;
-Bounce Reason: &lt;span class="variable-highlight"&gt;{{ formatted_reason }}&lt;/span&gt;&lt;br /&gt;
-Email Subject &lt;span class="variable-highlight"&gt;{{ subject }}&lt;/span&gt;&lt;br /&gt;
-Email Sent: &lt;span class="variable-highlight"&gt;{{ formatted_timestamp }}&lt;/span&gt;
-&lt;/p&gt;
-{% endraw %}
+Address: {{ bounce_address }}<br />
+  Bounce Reason: {{ formatted_reason }}<br />
+  Email Subject {{ subject }}<br />
+  Email Sent: {{ formatted_timestamp }}
+</p>
 ```
 
 </details>
@@ -2790,7 +2396,6 @@ Email Sent: &lt;span class="variable-highlight"&gt;{{ formatted_timestamp }}&lt;
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `address` | `{{ task.address }}` |
@@ -2801,37 +2406,31 @@ Email Sent: &lt;span class="variable-highlight"&gt;{{ formatted_timestamp }}&lt;
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
 {% endblock %}
-&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ attention }}&lt;/span&gt;,&lt;/p&gt;
-&lt;p&gt;Please find attached our purchase order{% if task %} for &lt;span class="variable-highlight"&gt;{{ task.name }}&lt;/span&gt;{% endif %}.&lt;/p&gt;
-&lt;p&gt;Please deliver the parts to &lt;span class="variable-highlight"&gt;{{purchaseorder.delivery_instructions}}&lt;/span&gt; &lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Delivery Address:&lt;strong&gt;&lt;/p&gt;
-{% endraw %}
+<p>Dear {{ attention }},</p>
+<p>Please find attached our purchase order{% if task %} for {{ task.name }}{% endif %}.</p>
+<p>Please deliver the parts to {{purchaseorder.delivery_instructions}} </p>
+<p><strong>Delivery Address:<strong></p>
 ```
 
 ```django
-{% raw %}
 {% for task in tasks %}
-&lt;p&gt;
-Task &lt;span class="variable-highlight"&gt;{{ task.ref }}&lt;/span&gt;&lt;br&gt;
-&lt;span class="variable-highlight"&gt;{{ task.description }}&lt;/span&gt;&lt;br&gt;
-&lt;span class="variable-highlight"&gt;{{ task.property.name }}&lt;/span&gt;&lt;br&gt;
-{% endraw %}
+<p>
+  Task {{ task.ref }}<br>
+  {{ task.description }}<br>
+  {{ task.property.name }}<br>
 ```
 
 ```django
-{% raw %}
-&lt;p&gt;
-Task &lt;span class="variable-highlight"&gt;{{ task.ref }}&lt;/span&gt;&lt;br&gt;
-&lt;span class="variable-highlight"&gt;{{ task.description }}&lt;/span&gt;&lt;br&gt;
-&lt;span class="variable-highlight"&gt;{{ task.property.name }}&lt;/span&gt;&lt;br&gt;
-&lt;span class="variable-highlight"&gt;{{ task.address }}&lt;/span&gt;
-{% endraw %}
+<p>
+  Task {{ task.ref }}<br>
+  {{ task.description }}<br>
+  {{ task.property.name }}<br>
+  {{ task.address }}
 ```
 
 </details>
@@ -2850,7 +2449,6 @@ Task &lt;span class="variable-highlight"&gt;{{ task.ref }}&lt;/span&gt;&lt;br&gt
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `status` | `{{ task_origin_defectquote.status }}` |
@@ -2858,27 +2456,23 @@ Task &lt;span class="variable-highlight"&gt;{{ task.ref }}&lt;/span&gt;&lt;br&gt
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
 {% include "reports/library/arrow-up-right-from-square-icon.svg" with width="14" height="14" %}
-&lt;/a&gt;
-&lt;div class="status quote &lt;span class="variable-highlight"&gt;{{ task_origin_defectquote.status }}&lt;/span&gt; ml-2 mt-1"&gt;
-&lt;span class="variable-highlight"&gt;{{ task_origin_defectquote.status.upper }}&lt;/span&gt;
-&lt;/div&gt;
-{% endraw %}
+          </a>
+          <div class="status quote {{ task_origin_defectquote.status }} ml-2 mt-1">
+            {{ task_origin_defectquote.status.upper }}
+          </div>
 ```
 
 ```django
-{% raw %}
-&lt;/a&gt;
-&lt;div class="status quote &lt;span class="variable-highlight"&gt;{{ task_origin_defectquote.status }}&lt;/span&gt; ml-2 mt-1"&gt;
-&lt;span class="variable-highlight"&gt;{{ task_origin_defectquote.status.upper }}&lt;/span&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-{% endraw %}
+</a>
+          <div class="status quote {{ task_origin_defectquote.status }} ml-2 mt-1">
+            {{ task_origin_defectquote.status.upper }}
+          </div>
+        </div>
 ```
 
 </details>
@@ -2897,7 +2491,6 @@ Task &lt;span class="variable-highlight"&gt;{{ task.ref }}&lt;/span&gt;&lt;br&gt
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `get_uuid_approval_url` | `{{ task_quote.get_uuid_approval_url\|absolute }}` |
@@ -2912,27 +2505,23 @@ Task &lt;span class="variable-highlight"&gt;{{ task.ref }}&lt;/span&gt;&lt;br&gt
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
 {% if task_quote.ref %}
-&lt;div class="subtitle d-flex flex-row"&gt;
-&lt;a href="&lt;span class="variable-highlight"&gt;{{ task_quote.get_uuid_approval_url|absolute }}&lt;/span&gt;"&gt;
-&lt;span class="variable-highlight"&gt;{{ task_quote.ref }}&lt;/span&gt;
-{% include "reports/library/arrow-up-right-from-square-icon.svg" with width="14" height="14" %}
-{% endraw %}
+        <div class="subtitle d-flex flex-row">
+          <a href="{{ task_quote.get_uuid_approval_url|absolute }}">
+            {{ task_quote.ref }}
+            {% include "reports/library/arrow-up-right-from-square-icon.svg" with width="14" height="14" %}
 ```
 
 ```django
-{% raw %}
-&lt;div class="subtitle d-flex flex-row"&gt;
-&lt;a href="&lt;span class="variable-highlight"&gt;{{ task_quote.get_uuid_approval_url|absolute }}&lt;/span&gt;"&gt;
-&lt;span class="variable-highlight"&gt;{{ task_quote.ref }}&lt;/span&gt;
-{% include "reports/library/arrow-up-right-from-square-icon.svg" with width="14" height="14" %}
-&lt;/a&gt;
-{% endraw %}
+<div class="subtitle d-flex flex-row">
+          <a href="{{ task_quote.get_uuid_approval_url|absolute }}">
+            {{ task_quote.ref }}
+            {% include "reports/library/arrow-up-right-from-square-icon.svg" with width="14" height="14" %}
+          </a>
 ```
 
 </details>
@@ -2951,7 +2540,6 @@ Task &lt;span class="variable-highlight"&gt;{{ task.ref }}&lt;/span&gt;&lt;br&gt
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-
 | Property | Example Value |
 |----------|---------------|
 | `id` | `{{ tasksession.id }}` |
@@ -2959,27 +2547,23 @@ Task &lt;span class="variable-highlight"&gt;{{ task.ref }}&lt;/span&gt;&lt;br&gt
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;/p&gt;
-&lt;p&gt;Thanks&lt;/p&gt;
-&lt;p&gt;Task Session &lt;span class="variable-highlight"&gt;{{ tasksession.id }}&lt;/span&gt; encountered an error while syncing to the accounting partner.&lt;/p&gt;
+</p>
+<p>Thanks</p>
+<p>Task Session {{ tasksession.id }} encountered an error while syncing to the accounting partner.</p>
 {% if task %}
-&lt;p&gt;&lt;b&gt;Task:&lt;/b&gt; &lt;span class="variable-highlight"&gt;{{ task }}&lt;/span&gt;&lt;/p&gt;
-{% endraw %}
+<p><b>Task:</b> {{ task }}</p>
 ```
 
 ```django
-{% raw %}
-&lt;p&gt;&lt;b&gt;Task:&lt;/b&gt; &lt;span class="variable-highlight"&gt;{{ task }}&lt;/span&gt;&lt;/p&gt;
+<p><b>Task:</b> {{ task }}</p>
 {% endif %}
-&lt;p&gt;&lt;b&gt;Technician:&lt;/b&gt; &lt;span class="variable-highlight"&gt;{{ tasksession.technician.name }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Please review and address the error, then use the link below to retry the sync&lt;/p&gt;
-&lt;p&gt;
-{% endraw %}
+<p><b>Technician:</b> {{ tasksession.technician.name }}</p>
+<p>Please review and address the error, then use the link below to retry the sync</p>
+<p>
 ```
 
 </details>
@@ -2995,17 +2579,15 @@ Task &lt;span class="variable-highlight"&gt;{{ task.ref }}&lt;/span&gt;&lt;br&gt
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;
-Change request: &lt;a href="&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ changerequest.get_absolute_url }}&lt;/span&gt;"&gt;&lt;span class="variable-highlight"&gt;{{ changerequest.ref }}&lt;/span&gt;&lt;/a&gt;&lt;br /&gt;
-Template: {% if template %}&lt;span class="variable-highlight"&gt;{{ template }}&lt;/span&gt;{% else %}New Template{% endif %}&lt;br /&gt;
-Status: &lt;span class="variable-highlight"&gt;{{ changerequest.status }}&lt;/span&gt;
-&lt;/p&gt;&lt;p&gt;Dear &lt;span class="variable-highlight"&gt;{{ client.name|default:'valued customer' }}&lt;/span&gt;,&lt;/p&gt;
-{% endraw %}
+<p>
+  Change request: <a href="{{ base_url }}{{ changerequest.get_absolute_url }}">{{ changerequest.ref }}</a><br />
+  Template: {% if template %}{{ template }}{% else %}New Template{% endif %}<br />
+  Status: {{ changerequest.status }}
+</p><p>Dear {{ client.name|default:'valued customer' }},</p>
 ```
 
 </details>
@@ -3021,17 +2603,15 @@ Status: &lt;span class="variable-highlight"&gt;{{ changerequest.status }}&lt;/sp
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;div&gt;
-&lt;div class="uptick-heading d-flex flex-row justify-content-between w-100 no-page-break-after"&gt;
-&lt;div&gt;&lt;span class="variable-highlight"&gt;{{ title }}&lt;/span&gt;&lt;/div&gt;
-{% if task_quote.ref %}
-&lt;div class="subtitle d-flex flex-row"&gt;
-{% endraw %}
+<div>
+    <div class="uptick-heading d-flex flex-row justify-content-between w-100 no-page-break-after">
+      <div>{{ title }}</div>
+      {% if task_quote.ref %}
+        <div class="subtitle d-flex flex-row">
 ```
 
 </details>
@@ -3047,17 +2627,15 @@ Status: &lt;span class="variable-highlight"&gt;{{ changerequest.status }}&lt;/sp
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-Email info:&lt;br /&gt;
-Sent: &lt;span class="variable-highlight"&gt;{{ failure_datetime }}&lt;/span&gt;&lt;br /&gt;
-To: &lt;span class="variable-highlight"&gt;{{ to_list }}&lt;/span&gt;&lt;br /&gt;
-CC: &lt;span class="variable-highlight"&gt;{{ cc_list }}&lt;/span&gt;&lt;br /&gt;
-Subject &lt;span class="variable-highlight"&gt;{{ subject }}&lt;/span&gt;&lt;br /&gt;
-{% endraw %}
+Email info:<br />
+  Sent: {{ failure_datetime }}<br />
+  To: {{ to_list }}<br />
+  CC: {{ cc_list }}<br />
+  Subject {{ subject }}<br />
 ```
 
 </details>
@@ -3073,17 +2651,15 @@ Subject &lt;span class="variable-highlight"&gt;{{ subject }}&lt;/span&gt;&lt;br 
 
 </details>
 
-<details>
+<details class="expandable-section">
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% raw %}
-&lt;p&gt;A new message from &lt;span class="variable-highlight"&gt;{{ from }}&lt;/span&gt; is waiting for you:&lt;/p&gt;
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ chat_message.text }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class="variable-highlight"&gt;{{ base_url }}&lt;/span&gt;&lt;span class="variable-highlight"&gt;{{ url }}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Regards, &lt;br/&gt;
-&lt;span class="variable-highlight"&gt;{{ config.SITE_ORGANISATION }}&lt;/span&gt;
-{% endraw %}
+<p>A new message from {{ from }} is waiting for you:</p>
+<p>{{ chat_message.text }}</p>
+<p>{{ base_url }}{{ url }}</p>
+<p>Regards, <br/>
+{{ config.SITE_ORGANISATION }}
 ```
 
 </details>

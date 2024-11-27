@@ -14,11 +14,6 @@ class VariableContext:
         self.nested_patterns: Dict[str, Set[str]] = defaultdict(set)
 
 def clean_example_content(content: str) -> str:
-    """Clean up the example content by:
-    1. Converting HTML entities back to tags
-    2. Converting **var** to proper formatting
-    3. Cleaning up code blocks
-    """
     # Convert HTML entities back to tags
     content = content.replace('&lt;', '<').replace('&gt;', '>')
     
@@ -179,6 +174,44 @@ code strong {
 }
 </style>
 """
+import os
+import re
+from collections import defaultdict
+from pathlib import Path
+from typing import Dict, Set, List
+
+class VariableContext:
+    def __init__(self):
+        self.files: Set[str] = set()
+        self.filters: Set[str] = set()
+        self.examples: List[Dict] = []
+        self.loop_contexts: Dict[str, Set[str]] = defaultdict(set)
+        self.default_values: Set[str] = set()
+        self.nested_patterns: Dict[str, Set[str]] = defaultdict(set)
+
+def clean_example_content(content: str) -> str:
+    """Clean up the example content by:
+    1. Converting HTML entities back to tags
+    2. Converting **var** to proper formatting
+    3. Cleaning up code blocks
+    """
+    # Convert HTML entities back to tags
+    content = content.replace('&lt;', '<').replace('&gt;', '>')
+    
+    # Convert **variable** to proper formatting
+    # Use a regex to find {{variable}} patterns and format them appropriately
+    content = re.sub(r'\*\*\{\{(.*?)\}\}\*\*', r'`{{\1}}`', content)
+    
+    # Clean up other bold markers that aren't variables
+    content = re.sub(r'\*\*(.*?)\*\*', r'**\1**', content)
+    
+    return content
+
+class TemplateAnalyzer:
+    CSS_STYLES = """
+    <!-- CSS styles remain unchanged -->
+    """
+    
     def __init__(self):
         self.variables: Dict[str, VariableContext] = defaultdict(VariableContext)
     
@@ -288,30 +321,34 @@ code strong {
         if var_info.nested_patterns:
             f.write('<details class="expandable-section">\n')
             f.write('<summary><strong>Properties</strong></summary>\n\n')
-            
-            # Ensure there's a blank line before the table
-            f.write('\n')
-            
-            # Create a more explicit markdown table
-            f.write('| Property | Example Value |\n')  # Clear column headers
-            f.write('|----------|---------------|\n')  # Clear separator line
+            f.write('| Property | Example Value |\n')
+            f.write('|----------|---------------|\n')
             
             for pattern, examples in sorted(var_info.nested_patterns.items()):
                 example = next(iter(examples))
-                # Clean up the pattern and example
                 pattern = pattern.strip().replace('|', '\\|')
                 example = example.strip().replace('|', '\\|')
-                
-                # Remove any existing backticks or quotes that might interfere
                 pattern = pattern.replace('`', '')
                 example = example.replace('`', '')
-                
-                # Format each cell cleanly
                 f.write(f'| `{pattern}` | `{example}` |\n')
             
-            # Ensure there's a blank line after the table
             f.write('\n')
             f.write('</details>\n\n')
+
+    def _write_files_section(self, f, var_info):
+        f.write('<details class="expandable-section">\n')
+        f.write('<summary><strong>Found in files</strong></summary>\n\n')
+        for file_path in sorted(var_info.files):
+            f.write(f'- {os.path.basename(file_path)}\n')
+        f.write('\n</details>\n\n')
+
+    def _write_filters_section(self, f, var_info):
+        if var_info.filters:
+            f.write('<details class="expandable-section">\n')
+            f.write('<summary><strong>Filters Used</strong></summary>\n\n')
+            for filter_name in sorted(var_info.filters):
+                f.write(f'- `{filter_name}`\n')
+            f.write('\n</details>\n\n')
 
     def _write_examples_section(self, f, var_info, var_name):
         if var_info.examples:
@@ -335,58 +372,6 @@ code strong {
             
             f.write('</details>\n\n')
 
-    def _write_files_section(self, f, var_info):
-        f.write('<details class="expandable-section">\n')
-        f.write('<summary><strong>Found in files</strong></summary>\n\n')
-        for file_path in sorted(var_info.files):
-            f.write(f'- {os.path.basename(file_path)}\n')
-        f.write('\n</details>\n\n')
-
-    def _write_filters_section(self, f, var_info):
-        if var_info.filters:
-            f.write('<details class="expandable-section">\n')
-            f.write('<summary><strong>Filters Used</strong></summary>\n\n')
-            for filter_name in sorted(var_info.filters):
-                f.write(f'- `{filter_name}`\n')
-            f.write('\n</details>\n\n')
-
-            
-    def _write_examples_section(self, f, var_info, var_name):
-        if var_info.examples:
-            f.write('<details>\n')
-            f.write('<summary><strong>Usage Examples</strong></summary>\n\n')
-            
-            seen_examples = set()
-            for ex in var_info.examples:
-                if ex["context"] in seen_examples:
-                    continue
-                    
-                lines = []
-                for line in ex["context"].split('\n'):
-                    line = line.strip()
-                    if line:
-                        # Simplify style attributes and highlight variables
-                        line = re.sub(r'style="[^"]*"', 'style="..."', line)
-                        line = re.sub(r'({{\s*[\w\.]+[^}]*}})', 
-                                    r'<span class="variable-highlight">\1</span>', line)
-                        line = line.replace('<', '&lt;').replace('>', '&gt;')
-                        lines.append(line)
-                
-                if lines:
-                    f.write('```django\n')
-                    f.write('{% raw %}\n')
-                    f.write('\n'.join(lines) + '\n')
-                    f.write('{% endraw %}\n')
-                    f.write('```\n\n')
-                    seen_examples.add(ex["context"])
-                    
-                if len(seen_examples) >= 3:
-                    break
-                    
-            f.write('</details>\n\n')
-
- 
-            
 def main():
     analyzer = TemplateAnalyzer()
     input_path = Path('/Users/joe/Documents/Scripts/Variable Extractor/generic')
