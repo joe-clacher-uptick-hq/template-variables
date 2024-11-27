@@ -14,15 +14,24 @@ class VariableContext:
         self.nested_patterns: Dict[str, Set[str]] = defaultdict(set)
 
 def clean_example_content(content: str) -> str:
+    """Clean up the example content by:
+    1. Converting HTML entities back to tags
+    2. Converting **var** to proper formatting
+    3. Escaping Django template tags
+    4. Cleaning up code blocks
+    """
     # Convert HTML entities back to tags
     content = content.replace('&lt;', '<').replace('&gt;', '>')
     
     # Convert **variable** to proper formatting
-    # Use a regex to find {{variable}} patterns and format them appropriately
     content = re.sub(r'\*\*\{\{(.*?)\}\}\*\*', r'`{{\1}}`', content)
     
     # Clean up other bold markers that aren't variables
     content = re.sub(r'\*\*(.*?)\*\*', r'**\1**', content)
+    
+    # Escape Django template tags for Jekyll
+    content = content.replace('{% ', '{%raw%}{% ').replace(' %}', ' %}{%endraw%}')
+    content = content.replace('{{', '{%raw%}{{').replace('}}', '}}{%endraw%}')
     
     return content
 
@@ -317,24 +326,6 @@ class TemplateAnalyzer:
                 
                 f.write('---\n\n')
 
-    def _write_properties_section(self, f, var_info):
-        if var_info.nested_patterns:
-            f.write('<details class="expandable-section">\n')
-            f.write('<summary><strong>Properties</strong></summary>\n\n')
-            f.write('| Property | Example Value |\n')
-            f.write('|----------|---------------|\n')
-            
-            for pattern, examples in sorted(var_info.nested_patterns.items()):
-                example = next(iter(examples))
-                pattern = pattern.strip().replace('|', '\\|')
-                example = example.strip().replace('|', '\\|')
-                pattern = pattern.replace('`', '')
-                example = example.replace('`', '')
-                f.write(f'| `{pattern}` | `{example}` |\n')
-            
-            f.write('\n')
-            f.write('</details>\n\n')
-
     def _write_files_section(self, f, var_info):
         f.write('<details class="expandable-section">\n')
         f.write('<summary><strong>Found in files</strong></summary>\n\n')
@@ -362,6 +353,7 @@ class TemplateAnalyzer:
                 
                 cleaned_context = clean_example_content(ex["context"])
                 if cleaned_context:
+                    # Add raw tags around the entire code block
                     f.write('```django\n')
                     f.write(cleaned_context + '\n')
                     f.write('```\n\n')
@@ -370,6 +362,28 @@ class TemplateAnalyzer:
                 if len(seen_examples) >= 3:
                     break
             
+            f.write('</details>\n\n')
+
+    def _write_properties_section(self, f, var_info):
+        if var_info.nested_patterns:
+            f.write('<details class="expandable-section">\n')
+            f.write('<summary><strong>Properties</strong></summary>\n\n')
+            f.write('| Property | Example Value |\n')
+            f.write('|----------|---------------|\n')
+            
+            for pattern, examples in sorted(var_info.nested_patterns.items()):
+                example = next(iter(examples))
+                pattern = pattern.strip().replace('|', '\\|')
+                example = example.strip().replace('|', '\\|')
+                pattern = pattern.replace('`', '')
+                example = example.replace('`', '')
+                
+                # Escape Django template syntax in the example
+                example = example.replace('{{', '{%raw%}{{').replace('}}', '}}{%endraw%}')
+                
+                f.write(f'| `{pattern}` | `{example}` |\n')
+            
+            f.write('\n')
             f.write('</details>\n\n')
 
 def main():
