@@ -13,6 +13,25 @@ class VariableContext:
         self.default_values: Set[str] = set()
         self.nested_patterns: Dict[str, Set[str]] = defaultdict(set)
 
+def clean_example_content(content: str) -> str:
+    """Clean up the example content by:
+    1. Converting HTML entities back to tags
+    2. Converting **var** to proper formatting
+    3. Cleaning up code blocks
+    """
+    # Convert HTML entities back to tags
+    content = content.replace('&lt;', '<').replace('&gt;', '>')
+    
+    # Convert **variable** to proper formatting
+    # Use a regex to find {{variable}} patterns and format them appropriately
+    content = re.sub(r'\*\*\{\{(.*?)\}\}\*\*', r'`{{\1}}`', content)
+    
+    # Clean up other bold markers that aren't variables
+    content = re.sub(r'\*\*(.*?)\*\*', r'**\1**', content)
+    
+    return content
+
+
 class TemplateAnalyzer:
     CSS_STYLES = """
 <style>
@@ -54,33 +73,61 @@ details.expandable-section[open] > summary::before {
     transform: rotate(90deg);
 }
 
-.loop-iterator-info {
-    background-color: #f8f8f8;
-    padding: 12px;
-    border-radius: 6px;
+table {
+    width: 100%;
+    border-collapse: collapse;
     margin: 15px 0;
-    position: relative;
-    border: 1px solid #eaeaea;
 }
 
-.tooltiptext {
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f5f5f5;
+}
+
+code {
+    background-color: #f5f5f5;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: monospace;
+}
+
+.loop-info {
+    display: inline-block;
+    position: relative;
+    color: #666;
+    font-size: 0.9em;
+    margin-left: 8px;
+    cursor: help;
+}
+
+.loop-info::after {
+    content: "ℹ️";
+    margin-left: 4px;
+}
+
+.loop-info .tooltip {
     visibility: hidden;
-    background-color: #333;
-    color: white;
-    text-align: center;
-    border-radius: 6px;
-    padding: 8px 12px;
     position: absolute;
     z-index: 1;
     bottom: 125%;
     left: 50%;
     transform: translateX(-50%);
+    width: 300px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    border-radius: 6px;
     opacity: 0;
     transition: opacity 0.3s;
-    width: 220px;
 }
 
-.loop-iterator-info:hover .tooltiptext {
+.loop-info:hover .tooltip {
     visibility: visible;
     opacity: 1;
 }
@@ -101,25 +148,18 @@ th {
     background-color: #f5f5f5;
 }
 
-.variable-highlight {
-    background-color: #fff3b8;
-    padding: 2px 4px;
-    border-radius: 3px;
-}
-
-code {
-    background-color: #f5f5f5;
-    padding: 2px 4px;
-    border-radius: 3px;
-    font-family: monospace;
-}
-
 pre {
     background-color: #f8f8f8;
     padding: 15px;
     border-radius: 6px;
     overflow-x: auto;
     margin: 15px 0;
+}
+
+code {
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 pre code {
@@ -131,16 +171,14 @@ pre code {
     color: #333;
 }
 
-pre code strong {
-    font-weight: bold;
+code strong {
     background-color: #fff3b8;
     padding: 2px 4px;
     border-radius: 3px;
+    font-weight: bold;
 }
-
 </style>
 """
-
     def __init__(self):
         self.variables: Dict[str, VariableContext] = defaultdict(VariableContext)
     
@@ -208,68 +246,116 @@ pre code strong {
                 var_info.default_values.add(default_match.group(1))
     
     def generate_markdown(self, output_file: str = "index.md"):
-            with open(output_file, 'w', encoding='utf-8') as f:
-                # Add Jekyll front matter
-                f.write('---\n')
-                f.write('title: Django Template Variables Documentation\n')
-                f.write('layout: default\n')
-                f.write('---\n\n')
-                
-                f.write('# Django Template Variables Documentation\n\n')
-                
-                f.write('## Table of Contents\n')
-                for var_name in sorted(self.variables.keys()):
-                    f.write(f'- [{var_name}](#{var_name.lower()})\n')
-                f.write('\n---\n\n')
-                
-                for var_name, var_info in sorted(self.variables.items()):
+        with open(output_file, 'w', encoding='utf-8') as f:
+            f.write('---\n')
+            f.write('title: Django Template Variables Documentation\n')
+            f.write('layout: default\n')
+            f.write('---\n\n')
+            
+            f.write(self.CSS_STYLES)
+            
+            f.write('# Django Template Variables Documentation\n\n')
+            
+            # Table of Contents
+            f.write('## Table of Contents\n')
+            for var_name in sorted(self.variables.keys()):
+                f.write(f'- [{var_name}](#{var_name.lower()})\n')
+            f.write('\n---\n\n')
+            
+            for var_name, var_info in sorted(self.variables.items()):
+                if var_info.loop_contexts:
+                    f.write(f'## {var_name}\n')
+                    f.write('<div class="loop-info">')
+                    f.write('Loop Iterator')
+                    f.write('<span class="tooltip">This variable represents a single item from a list or collection being looped over.</span>')
+                    f.write('</div>\n\n')
+                else:
                     f.write(f'## {var_name}\n\n')
-                    
-                    if var_info.default_values:
-                        f.write('**Default values:** ' + 
-                            ', '.join(f'`{v}`' for v in sorted(var_info.default_values)) + 
-                            '\n\n')
-                    
-                    if var_info.loop_contexts:
-                        f.write('> This variable is typically used as a loop iterator\n\n')
-                    
-                    self._write_files_section(f, var_info)
-                    self._write_properties_section(f, var_info)
-                    self._write_filters_section(f, var_info)
-                    self._write_examples_section(f, var_info, var_name)
-                    
-                    f.write('---\n\n')
-        
+                
+                if var_info.default_values:
+                    f.write('**Default values:** ' + 
+                        ', '.join(f'`{v}`' for v in sorted(var_info.default_values)) + 
+                        '\n\n')
+                
+                self._write_files_section(f, var_info)
+                self._write_properties_section(f, var_info)
+                self._write_filters_section(f, var_info)
+                self._write_examples_section(f, var_info, var_name)
+                
+                f.write('---\n\n')
+
+    def _write_properties_section(self, f, var_info):
+        if var_info.nested_patterns:
+            f.write('<details class="expandable-section">\n')
+            f.write('<summary><strong>Properties</strong></summary>\n\n')
+            
+            # Ensure there's a blank line before the table
+            f.write('\n')
+            
+            # Create a more explicit markdown table
+            f.write('| Property | Example Value |\n')  # Clear column headers
+            f.write('|----------|---------------|\n')  # Clear separator line
+            
+            for pattern, examples in sorted(var_info.nested_patterns.items()):
+                example = next(iter(examples))
+                # Clean up the pattern and example
+                pattern = pattern.strip().replace('|', '\\|')
+                example = example.strip().replace('|', '\\|')
+                
+                # Remove any existing backticks or quotes that might interfere
+                pattern = pattern.replace('`', '')
+                example = example.replace('`', '')
+                
+                # Format each cell cleanly
+                f.write(f'| `{pattern}` | `{example}` |\n')
+            
+            # Ensure there's a blank line after the table
+            f.write('\n')
+            f.write('</details>\n\n')
+
+    def _write_examples_section(self, f, var_info, var_name):
+        if var_info.examples:
+            f.write('<details class="expandable-section">\n')
+            f.write('<summary><strong>Usage Examples</strong></summary>\n\n')
+            
+            seen_examples = set()
+            for ex in var_info.examples:
+                if ex["context"] in seen_examples:
+                    continue
+                
+                cleaned_context = clean_example_content(ex["context"])
+                if cleaned_context:
+                    f.write('```django\n')
+                    f.write(cleaned_context + '\n')
+                    f.write('```\n\n')
+                    seen_examples.add(ex["context"])
+                
+                if len(seen_examples) >= 3:
+                    break
+            
+            f.write('</details>\n\n')
+
     def _write_files_section(self, f, var_info):
-        f.write('<details>\n')
+        f.write('<details class="expandable-section">\n')
         f.write('<summary><strong>Found in files</strong></summary>\n\n')
         for file_path in sorted(var_info.files):
             f.write(f'- {os.path.basename(file_path)}\n')
         f.write('\n</details>\n\n')
-    
-    def _write_properties_section(self, f, var_info):
-        if var_info.nested_patterns:
-            f.write('<details>\n')
-            f.write('<summary><strong>Properties</strong></summary>\n\n')
-            f.write('| Property | Examples |\n')
-            f.write('|----------|----------|\n')
-            for pattern, examples in sorted(var_info.nested_patterns.items()):
-                f.write(f'| `{pattern}` | {next(iter(examples))} |\n')
-            f.write('\n</details>\n\n')
-    
+
     def _write_filters_section(self, f, var_info):
         if var_info.filters:
-            f.write('<details>\n')
+            f.write('<details class="expandable-section">\n')
             f.write('<summary><strong>Filters Used</strong></summary>\n\n')
             for filter_name in sorted(var_info.filters):
                 f.write(f'- `{filter_name}`\n')
             f.write('\n</details>\n\n')
-    
+
+            
     def _write_examples_section(self, f, var_info, var_name):
         if var_info.examples:
             f.write('<details>\n')
             f.write('<summary><strong>Usage Examples</strong></summary>\n\n')
-
+            
             seen_examples = set()
             for ex in var_info.examples:
                 if ex["context"] in seen_examples:
@@ -279,13 +365,18 @@ pre code strong {
                 for line in ex["context"].split('\n'):
                     line = line.strip()
                     if line:
-                        # Escape HTML tags
+                        # Simplify style attributes and highlight variables
+                        line = re.sub(r'style="[^"]*"', 'style="..."', line)
+                        line = re.sub(r'({{\s*[\w\.]+[^}]*}})', 
+                                    r'<span class="variable-highlight">\1</span>', line)
                         line = line.replace('<', '&lt;').replace('>', '&gt;')
                         lines.append(line)
                 
                 if lines:
                     f.write('```django\n')
+                    f.write('{% raw %}\n')
                     f.write('\n'.join(lines) + '\n')
+                    f.write('{% endraw %}\n')
                     f.write('```\n\n')
                     seen_examples.add(ex["context"])
                     
@@ -293,6 +384,8 @@ pre code strong {
                     break
                     
             f.write('</details>\n\n')
+
+ 
             
 def main():
     analyzer = TemplateAnalyzer()
