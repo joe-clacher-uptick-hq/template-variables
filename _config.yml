@@ -1,8 +1,56 @@
-remote_theme: pages-themes/cayman@v0.2.0
-plugins:
-- jekyll-remote-theme
+# Site settings
 title: Django Template Variables Documentation
-description: Documentation of Django template variables and their usage
+description: Documentation for Django template variables and their usage
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+
+# Build settings
 markdown: kramdown
 kramdown:
+  parse_block_html: true
   syntax_highlighter: rouge
+  input: GFM
+  auto_ids: true
+  toc_levels: 1..3
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
+
+# Theme settings
+theme: jekyll-theme-minimal
+show_downloads: false
+
+# Plugin settings
+plugins:
+  - jekyll-relative-links
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .git
+  - .github
+  - README.md
+  - LICENSE
+  - CNAME
+  - Dockerfile
+  - docker-compose.yml
+
+# Collections
+collections:
+  docs:
+    output: true
+
+# Default front matter
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      layout: "default"
+      
