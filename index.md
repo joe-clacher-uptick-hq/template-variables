@@ -3,156 +3,26 @@ title: Django Template Variables Documentation
 layout: default
 ---
 
+# Django Template Variables Documentation
 
-    <!-- CSS styles remain unchanged -->
-    # Django Template Variables Documentation
-
-## Table of Contents
-- [absolute_url](#absolute_url)
-- [approved_by](#approved_by)
-- [appt](#appt)
-- [attention](#attention)
-- [base_url](#base_url)
-- [bounce_address](#bounce_address)
-- [cc_list](#cc_list)
-- [changerequest](#changerequest)
-- [chat_message](#chat_message)
-- [client](#client)
-- [config](#config)
-- [contractor](#contractor)
-- [contractor_contact](#contractor_contact)
-- [contractor_login_url](#contractor_login_url)
-- [csv_url](#csv_url)
-- [custom_message](#custom_message)
-- [customer](#customer)
-- [declined_by](#declined_by)
-- [description](#description)
-- [email](#email)
-- [end_date](#end_date)
-- [exception](#exception)
-- [failure_datetime](#failure_datetime)
-- [failure_reason](#failure_reason)
-- [formatted_reason](#formatted_reason)
-- [formatted_timestamp](#formatted_timestamp)
-- [formresponse](#formresponse)
-- [from](#from)
-- [inv](#inv)
-- [invoice](#invoice)
-- [item](#item)
-- [lead_engineer](#lead_engineer)
-- [line](#line)
-- [logbook](#logbook)
-- [login_url](#login_url)
-- [message](#message)
-- [name](#name)
-- [no_of_assets](#no_of_assets)
-- [payload](#payload)
-- [promptset](#promptset)
-- [property](#property)
-- [property_refs](#property_refs)
-- [purchaseorder](#purchaseorder)
-- [quote](#quote)
-- [rectification](#rectification)
-- [ref_no](#ref_no)
-- [rejection_reason](#rejection_reason)
-- [remark](#remark)
-- [report](#report)
-- [request_user](#request_user)
-- [retry_link](#retry_link)
-- [routineserviceleveltype](#routineserviceleveltype)
-- [rslt](#rslt)
-- [scope_of_works](#scope_of_works)
-- [sender](#sender)
-- [servicequote](#servicequote)
-- [servicetask](#servicetask)
-- [signoff](#signoff)
-- [signoffitem](#signoffitem)
-- [signoffproperties](#signoffproperties)
-- [signoffproperty](#signoffproperty)
-- [start_date](#start_date)
-- [subject](#subject)
-- [task](#task)
-- [task_origin_defectquote](#task_origin_defectquote)
-- [task_quote](#task_quote)
-- [tasksession](#tasksession)
-- [template](#template)
-- [title](#title)
-- [to_list](#to_list)
-- [url](#url)
-
----
-
-## absolute_url
+## accreditation
 
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-{{ rectification.rejection_reason|markdowner }}
-<p>Access the rectification to provide updated information:</p>
-<p><a href="{{ base_url }}{{ absolute_url }}">{{ base_url }}{{ absolute_url }}</a></p>
-{% endblock %}
-{% extends 'email.html' %}
-```
-
-</details>
-
----
-
-## approved_by
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-</p>
-<p>
-  The service quote for {{ property }} was approved by {{ approved_by }}.
-</p>
-<p>
-```
-
-</details>
-
----
-
-## appt
-<div class="loop-info">Loop Iterator<span class="tooltip">This variable represents a single item from a list or collection being looped over.</span></div>
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
+- [AARHUSFIRE] - [templates] - [Service Report (Prompts)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [ABACUSFAS] - [emails] - [test](https://ABACUSFAS.onuptick.com/configuration/emails)
 
 </details>
 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-| Property | Example Value |
+
+| Property | Example Usage |
 |----------|---------------|
-| `scheduled_start` | `{{appt.scheduled_start}}` |
-| `task.authorisation_ref` | `{{appt.task.authorisation_ref}}` |
-| `task.description` | `{{appt.task.description}}` |
-| `task.name` | `{{appt.task.name}}` |
-| `task.property.name` | `{{appt.task.property.name}}` |
-| `task.ref` | `{{appt.task.ref}}` |
-| `task.scope_of_works` | `{{ appt.task.scope_of_works }}` |
-| `technicians.first` | `{{appt.technicians.first}}` |
+| `name` | {{ accreditation.name }} |
+| `number` | {{ accreditation.number }} |
 
 </details>
 
@@ -160,27 +30,93 @@ layout: default
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% timezone tmz %}
-                        <tr>
-                          <th style="padding: 12px 10px; border-top: 1px solid #dcdddd;" scope="row" colspan="4">{{appt.scheduled_start}}</th>
-                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.description}}</td>
-                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.property.name}}</td>
+
+<td>
+{% for accreditation in technician.accreditations %}
+<div>{{accreditation.name}}: {{ accreditation.number }}</div>
+{% endfor %}
+</td>
+
 ```
 
+</details>
+
+---
+
+## after_photos
+
+<details class="expandable-section">
+<summary><strong>Found in files</strong></summary>
+
+- [AARHUSFIRE] - [templates] - [Service Report (Prompts)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [ABACUSFAS] - [emails] - [test](https://ABACUSFAS.onuptick.com/configuration/emails)
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Usage Examples</strong></summary>
+
 ```django
+
+<strong>After</strong>
+<div class="...">
+{% for photo in after_photos %}
+{% include "webtemplates/2022-photo-tile" with photo=photo class="..." %}
+{% endfor %}
+
+```
+
+</details>
+
+---
+
+## appointments
+
+<details class="expandable-section">
+<summary><strong>Found in files</strong></summary>
+
+- [AARHUSFIRE] - [emails] - [Appointment Scheduled Email](https://AARHUSFIRE.onuptick.com/configuration/emails)
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Properties</strong></summary>
+
+
+| Property | Example Usage |
+|----------|---------------|
+| `scheduled_start` | {{ appt.scheduled_start }} |
+| `task` | {{ appointments.task.name }} |
+| `task.name` | {{ appointments.task.name }} |
+| `task.property` | {{ appointments.task.property.name }} |
+| `task.property.name` | {{ appointments.task.property.name }} |
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Usage Examples</strong></summary>
+
+```django
+
+{% timezone appt.timezone %}
 <tr>
-                          <th style="padding: 12px 10px; border-top: 1px solid #dcdddd;" scope="row" colspan="4">{{appt.scheduled_start}}</th>
-                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.description}}</td>
-                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.property.name}}</td>
-                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.scope_of_works}}</td>
+<th style="..." scope="..." colspan="...">{{appt.scheduled_start}}</th>
+<td style="...">{{appt.task.name}}</td>
+<td style="...">{{appt.task.property.name}}</td>
+
 ```
 
+
+---
+
 ```django
-<th style="padding: 12px 10px; border-top: 1px solid #dcdddd;" scope="row" colspan="4">{{appt.scheduled_start}}</th>
-                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.description}}</td>
-                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.property.name}}</td>
-                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.scope_of_works}}</td>
-                          <td style="padding: 12px 10px; border-top: 1px solid #dcdddd;">{{appt.task.authorisation_ref}}</td>
+
+<tr>
+<th style="..." scope="..." colspan="...">{{appt.scheduled_start}}</th>
+<td style="...">{{appt.task.name}}</td>
+<td style="...">{{appt.task.property.name}}</td>
+</tr>
+
 ```
 
 </details>
@@ -189,21 +125,12 @@ layout: default
 
 ## attention
 
-**Default values:** `Manager`, `manager`
-
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.md
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Filters Used</strong></summary>
-
-- `default (arg: "Manager")`
-- `default (arg: "manager")`
+- [AARHUSFIRE] - [emails] - [Defect Quote Summary Reminder Email](https://AARHUSFIRE.onuptick.com/configuration/emails)
+- [AARHUSFIRE] - [emails] - [Issuance](https://AARHUSFIRE.onuptick.com/configuration/emails)
+- [AARHUSFIRE] - [emails] - [Service Quote Issued Email](https://AARHUSFIRE.onuptick.com/configuration/emails)
 
 </details>
 
@@ -211,27 +138,25 @@ layout: default
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-<p>Regards,<br />
-`config.SITE_ORGANISATION`</p>
-<p>Dear {{ attention }},</p>
-<p>Please find attached your documents for services recently carried out at `property.name`.</p>
-  <p>Your invoice:</p>
+
+{% load getattr %}
+{% block content %}
+<p>Dear {{ attention|default:"Manager" }},</p>
+<p>You have been selected as the main recipient or a CC in this repeating reminder.</p>
+<p>We are waiting for approval for the following defect quotes:</p>
+
 ```
 
-```django
-[[ dispatch_public_url_text ]]
-<p>For any questions, please contact us.</p>
-<p>Dear {{ attention }},</p>
-<p>Please find attached your documents for services recently carried out at `property.name`.</p>
-  <p>Your invoice:</p>
-```
+
+---
 
 ```django
-<td style="width: 600px;">
-            <div style="font-family: 'Arial', sans-serif; font-size: 10.5pt;">
-                <p style="padding: 10px 0;">Dear {{ attention }},</p>
-                <p>Please be advised we will need access to complete the following:</p>
-                <table style="width: 100%; border-collapse: collapse; border-bottom: 1px solid #dcdddd;">
+
+<p>
+Dear {{ attention|default:'valued customer' }},
+</p>
+<p>
+
 ```
 
 </details>
@@ -243,7 +168,7 @@ layout: default
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
+- [AARHUSFIRE] - [emails] - [Monthly Uncovered Assets](https://AARHUSFIRE.onuptick.com/configuration/emails)
 
 </details>
 
@@ -251,39 +176,26 @@ layout: default
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-<p>Please find attached your defect quote for {{ property.name }}.</p>
-<p>To view and approve this quote online, visit:</p>
-<p><a href="{{ base_url }}{{ quote.get_uuid_approval_url }}">{{ base_url }}{{ quote.get_uuid_approval_url }}</a></p>
-<p>We value your opinion, please contact us with any comments you may have.</p>
-<p>Regards,<br />
-```
 
-```django
 <ul>
-    {% for quote in defectquotes %}
-      <li>Reference: {{ quote.ref }}<a href="{{ base_url }}{{ quote.get_uuid_approval_url }}"> (approve online)</a></li>
-    {% endfor %}
-  </ul>
-```
+{% for property in properties %}
+<li><a href="{{base_url}}/properties/{{property.property_id}}/view/assets/?is_covered_by_routine=False&is_active=True">{{ property.property__name }}</a></li>
+{% endfor %}
+</ul>
 
-```django
-<p>
-  Please go to this URL to set your password and start using Uptick:
-  {{ base_url }}{% url 'password_reset_confirm' uidb64=uid token=token %}
-</p>
-{% if account.license == "FIELD" %}
 ```
 
 </details>
 
 ---
 
-## bounce_address
+## before_photos
 
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
+- [AARHUSFIRE] - [templates] - [Service Report (Prompts)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [ABACUSFAS] - [emails] - [test](https://ABACUSFAS.onuptick.com/configuration/emails)
 
 </details>
 
@@ -291,127 +203,13 @@ layout: default
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-<p>
-  Bounce info:<br />
-  Address: {{ bounce_address }}<br />
-  Bounce Reason: {{ formatted_reason }}<br />
-  Email Subject {{ subject }}<br />
-```
 
-</details>
-
----
-
-## cc_list
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-Sent: {{ failure_datetime }}<br />
-  To: {{ to_list }}<br />
-  CC: {{ cc_list }}<br />
-  Subject {{ subject }}<br />
-</p>
-```
-
-</details>
-
----
-
-## changerequest
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `get_absolute_url` | `{{ changerequest.get_absolute_url }}` |
-| `ref` | `{{ changerequest.ref }}` |
-| `status` | `{{ changerequest.status }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-{{ config.SITE_ORGANISATION }}</p>
-{% if status == 'DRAFT' %}
-  <p>Template change request {{ changerequest.ref }} has been created for {{ customer }}.</p>
-{% elif  status == 'REQUESTED' %}
-  <p>{{ sender.name }} submitted feedback for Template change request {{ changerequest.ref }}.</p>
-```
-
-```django
-<p>Template change request {{ changerequest.ref }} has been created for {{ customer }}.</p>
-{% elif  status == 'REQUESTED' %}
-  <p>{{ sender.name }} submitted feedback for Template change request {{ changerequest.ref }}.</p>
-{% else %}
-  <p>Template change request {{ changerequest.ref }} has been approved. Our team will be in contact once completed.</p>
-```
-
-```django
-<p>{{ sender.name }} submitted feedback for Template change request {{ changerequest.ref }}.</p>
-{% else %}
-  <p>Template change request {{ changerequest.ref }} has been approved. Our team will be in contact once completed.</p>
 {% endif %}
-<p>
-```
+<div class="...">
+{% for photo in before_photos %}
+{% include "webtemplates/2022-photo-tile" with photo=photo class="..." %}
+{% endfor %}
 
-</details>
-
----
-
-## chat_message
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `text` | `{{ chat_message.text }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-</p>
-<p>A new message from {{ from }} is waiting for you:</p>
-<p>{{ chat_message.text }}</p>
-<p>{{ base_url }}{{ url }}</p>
-<p>Regards, <br/>
-```
-
-```django
-{% endblock %}
-<p>A new message from {{ from }} is waiting for you:</p>
-<p>{{ chat_message.text }}</p>
-<p>{{ base_url }}{{ url }}</p>
-<p>Regards, <br/>
 ```
 
 </details>
@@ -423,16 +221,17 @@ Sent: {{ failure_datetime }}<br />
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
+- [AARHUSFIRE] - [emails] - [Service Quote Reminder Email](https://AARHUSFIRE.onuptick.com/configuration/emails)
 
 </details>
 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-| Property | Example Value |
+
+| Property | Example Usage |
 |----------|---------------|
-| `primary_contact.name` | `{{ client.primary_contact.name }}` |
+| `name` | {{ client.name }} |
 
 </details>
 
@@ -440,42 +239,40 @@ Sent: {{ failure_datetime }}<br />
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-<p>If the form{{ signoffproperties|pluralize }} on the attached link {{ signoffproperties|pluralize:"is,are" }} not submitted and there is no proof on site that the Essential Safety Measures are being serviced, {{ signoffproperties|pluralize:"a," }} Non-Compliant Building Report{{ signoffproperties|pluralize }} will be issued.</p>
-{% endblock %}
-<p>Dear {{ client.primary_contact.name }},</p>
-<p>This email is in regards to your property {{ property.ref }} {{ property.name }} {{ property.client_ref }}.</p>
-<p>We have received notification from {{ contractor.name }} that they are no longer engaged to maintain the following items:</p>
-```
 
-```django
-<div>{{ servicequote.created|date:"jS F Y" }}</div>
-    {% if servicequote.expiry_date %}<div>This quote is valid until <em>{{ servicequote.expiry_date }}</em></div>{% endif %}
-    <div><strong>Attention: {{ client.primary_contact.name }}</strong></div>
-    {% if servicequote.scope_of_works %}
-      <div class="mt-3">
+<p>Dear {{ client.name|default:'valued customer' }},</p>
+<p>This is a friendly reminder that we’re awaiting your quote approval for {{ property }}.</p>
+{% if servicequote.description %}
+
 ```
 
 </details>
 
 ---
 
-## config
+## consolidated_tasks
 
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
+- [AARHUSFIRE] - [templates] - [Consolidated Invoice](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [templates] - [Invoice](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [templates] - [Service Quote (Totals only)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [templates] - [Service Report (Prompts)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [ABACUSFAS] - [emails] - [test](https://ABACUSFAS.onuptick.com/configuration/emails)
 
 </details>
 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-| Property | Example Value |
+
+| Property | Example Usage |
 |----------|---------------|
-| `CONTACT_EMAIL` | `{{ config.CONTACT_EMAIL }}` |
-| `CONTACT_PHONE` | `{{config.CONTACT_PHONE}}` |
-| `SITE_ORGANISATION` | `{{config.SITE_ORGANISATION}}` |
+| `COMPANY_LICENSES` | {{ consolidated_tasks.COMPANY_LICENSES }} |
+| `INVOICE_PAYMENT_INSTRUCTIONS` | {{ consolidated_tasks.INVOICE_PAYMENT_INSTRUCTIONS }} |
+| `SERVICEQUOTE_TEMPLATE_TERMS_AND_CONDITIONS` | {{ consolidated_tasks.SERVICEQUOTE_TEMPLATE_TERMS_AND_CONDITIONS }} |
+| `SITE_ABN` | {{ consolidated_tasks.SITE_ABN }} |
 
 </details>
 
@@ -483,49 +280,49 @@ Sent: {{ failure_datetime }}<br />
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-<p>{{request_user.email}}</p>
-                <p>
-                  {{ config.CONTACT_PHONE }} <br />
-                  {{ config.SITE_ORGANISATION }}
-                </p>
+
+<small>
+<strong class="...">Company Accreditations:</strong>
+<div class="...">{{ config.COMPANY_LICENSES|markdowner }}</div>
+</small>
+</section>
+
 ```
 
-```django
-<p>
-                  {{ config.CONTACT_PHONE }} <br />
-                  {{ config.SITE_ORGANISATION }}
-                </p>
-            </div>
-```
+
+---
 
 ```django
-<p>We value your opinion, please contact us with any comments you may have.</p>
-<p>Regards,<br />
-{{ config.SITE_ORGANISATION }}</p>
-<p>Dear {{ attention|default:"manager" }},</p>
-<p>Please find attached your documents for services recently carried out at {{ property.name }}.</p>
+
+<p>{{ config.SITE_ABN }}</p>
+<h6>Payment instructions</h6>
+{{ config.INVOICE_PAYMENT_INSTRUCTIONS|markdowner|default:"Please pay invoice by the due date" }}
+</section>
+{% endblock %}
+
 ```
 
 </details>
 
 ---
 
-## contractor
+## creditnotes
 
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
+- [AARHUSFIRE] - [templates] - [Consolidated Invoice](https://AARHUSFIRE.onuptick.com/configuration/templates)
 
 </details>
 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-| Property | Example Value |
+
+| Property | Example Usage |
 |----------|---------------|
-| `account` | `{{ contractor.account }}` |
-| `name` | `{{ contractor.name }}` |
+| `number` | {{ note.number }} |
+| `total` | {{ note.total }} |
 
 </details>
 
@@ -533,48 +330,75 @@ Sent: {{ failure_datetime }}<br />
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{{ config.SITE_ORGANISATION }}</p>
-{% endblock %}
-<p>Dear {{ contractor }},</p>
-<p>You have been assigned the following tasks:</p>
-{% for task in tasks %}
+
+</tr>
+{% if creditnotes %}
+{% for note in creditnotes %}
+<tr>
+<th class="...">Credit {{ note.number }} - {{ note }}</th>
+
 ```
 
-```django
-<p>You can provide your field technicians with this link which will enable them to complete the task via their smart phone (apple or android) without needing to install an app.</p>
-<p>Thanks</p>
-<p>The contractor {{ contractor }} has rejected the task assigned to him for the following reason: {{ rejection_reason }}</p>
-<p>
-  The task that was assigned was:<br>
-```
+</details>
+
+---
+
+## defectquotes
+
+<details class="expandable-section">
+<summary><strong>Found in files</strong></summary>
+
+- [AARHUSFIRE] - [emails] - [Issuance](https://AARHUSFIRE.onuptick.com/configuration/emails)
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Properties</strong></summary>
+
+
+| Property | Example Usage |
+|----------|---------------|
+| `get_uuid_approval_url` | {{ quote.get_uuid_approval_url }} |
+| `ref` | {{ quote.ref }} |
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Usage Examples</strong></summary>
 
 ```django
-</p>
-<p>Thanks</p>
-<p>Dear {{ contractor }},</p>
-<p>Please be advised that the following task has been cancelled:</p>
+
+<p>Your defect quotes:</p>
 <ul>
+{% for quote in defectquotes %}
+<li>Reference: {{ quote.ref }}<a href="{{ base_url }}{{ quote.get_uuid_approval_url }}"> (approve online)</a></li>
+{% endfor %}
+
 ```
 
 </details>
 
 ---
 
-## contractor_contact
+## digital_logbooks
 
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
+- [AARHUSFIRE] - [templates] - [Service Report (Prompts)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [emails] - [Issuance](https://AARHUSFIRE.onuptick.com/configuration/emails)
+- [ABACUSFAS] - [emails] - [test](https://ABACUSFAS.onuptick.com/configuration/emails)
 
 </details>
 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-| Property | Example Value |
+
+| Property | Example Usage |
 |----------|---------------|
-| `name` | `{{ contractor_contact.name }}` |
+| `name` | {{ logbook.name }} |
+| `url` | {{ entry.url }} |
 
 </details>
 
@@ -582,39 +406,39 @@ Sent: {{ failure_datetime }}<br />
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-<p>Regards,<br/>
-{{ config.SITE_ORGANISATION }}</p>
-<p>Dear {{ contractor_contact }},</p>
-<p>Please be advised that the following task has been cancelled:</p>
+
+</div>
+{% endfor %}
+{% for entry in digital_logbooks %}
+<div class="...">
+<div class="...">
+
+```
+
+
+---
+
+```django
+
+<p>Your attached digital logbook entries:</p>
 <ul>
-```
+{% for logbook in digital_logbooks %}
+<li>{{ logbook.name }}</li>
+{% endfor %}
 
-```django
-{{ config.SITE_ORGANISATION }}
-</p>
-<p>Dear {{ contractor_contact.name }},</p>
-<p>You have been assigned a task:</p>
-<p>Task {{ task.ref }}</p>
-```
-
-```django
-</p>
-<p>Thanks</p>
-<p>Dear {{ contractor_contact.name }},</p>
-<p>You have been assigned the following tasks:</p>
-{% for task in tasks %}
 ```
 
 </details>
 
 ---
 
-## contractor_login_url
+## doandchargelineitems
 
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
+- [AARHUSFIRE] - [templates] - [Service Quote (Routines)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [templates] - [Service Quote (Totals only)](https://AARHUSFIRE.onuptick.com/configuration/templates)
 
 </details>
 
@@ -622,147 +446,13 @@ Sent: {{ failure_datetime }}<br />
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-<p>
-  Please sign in the contractor portal using the link below to view a list of any outstanding tasks:<br>
-  <a href="{{ contractor_login_url }}">{{ contractor_login_url }}</a>
-</p>
-<p>You can provide your field technicians with this link which will enable them to complete the task via their smart phone (apple or android) without needing to install an app.</p>
-```
 
-```django
-<p>
-  Please visit the task dashboard on Uptick:<br>
-  <a href="{{ contractor_login_url }}">{{ contractor_login_url }}</a><br>
-  for more details.
-</p>
-```
+</thead>
+<tbody>
+{% for line in doandchargelineitems %}
+<tr class="...">
+<td>
 
-```django
-<p>{{ task.address }}</p>
-<p>Please sign into the contractor portal using the link below to view your outstanding tasks:<br>
-  <a href="{{ contractor_login_url }}">{{ contractor_login_url }}</a>
-</p>
-<p>Thanks</p>
-```
-
-</details>
-
----
-
-## csv_url
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<p>Your custom report, {{ name }}, has been generated.</p>
-<p>{{ description }}</p>
-<p>To download, <a href="{{ csv_url }}">please click here</a>.</p>
-{% endblock %}
-<p>Dear {{ attention }},</p>
-```
-
-</details>
-
----
-
-## custom_message
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-{% if custom_message %}
-<p>
-  {{ custom_message }}
-</p>
-{% endif %}
-```
-
-</details>
-
----
-
-## customer
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-{{ config.SITE_ORGANISATION }}</p>
-{% if status == 'DRAFT' %}
-  <p>Template change request {{ changerequest.ref }} has been created for {{ customer }}.</p>
-{% elif  status == 'REQUESTED' %}
-  <p>{{ sender.name }} submitted feedback for Template change request {{ changerequest.ref }}.</p>
-```
-
-</details>
-
----
-
-## declined_by
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-</p>
-<p>
-  The service quote for {{ property }} was declined by {{ declined_by }}.
-</p>
-<p>
-```
-
-</details>
-
----
-
-## description
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-{% block content %}
-<p>Your custom report, {{ name }}, has been generated.</p>
-<p>{{ description }}</p>
-<p>To download, <a href="{{ csv_url }}">please click here</a>.</p>
-{% endblock %}
 ```
 
 </details>
@@ -770,12 +460,11 @@ Sent: {{ failure_datetime }}<br />
 ---
 
 ## email
-<div class="loop-info">Loop Iterator<span class="tooltip">This variable represents a single item from a list or collection being looped over.</span></div>
 
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
+- [AARHUSFIRE] - [emails] - [Defect Quote Summary Reminder Email](https://AARHUSFIRE.onuptick.com/configuration/emails)
 
 </details>
 
@@ -783,418 +472,154 @@ Sent: {{ failure_datetime }}<br />
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
+
 {% for email in quote_email_lookup|getvalue:quote %}
-        {% if email != recipient %}
-            <li>{{email}}</li>
-        {% endif %}
-    {% endfor %}
-```
-
-</details>
-
----
-
-## end_date
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<td style="border: 3px double #000; padding: 8px; width: 25%;">{{start_date}}</td>
-                        <td style="border: 3px double #000; padding: 8px; width: 25%; background-color: #f0f0f0;">END DATE</td>
-                        <td style="border: 3px double #000; padding: 8px; width: 25%;">{{end_date}}</td>
-                    </tr>
-                    <tr>
-```
-
-</details>
-
----
-
-## exception
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-</p>
-<h3>Error</h3>
-<code>{{ exception }}</code>
-<p>
-  An email failed to send from Uptick! This is sometimes due to an invalid email, but more details below.
-```
-
-</details>
-
----
-
-## failure_datetime
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<p>
-  Email info:<br />
-  Sent: {{ failure_datetime }}<br />
-  To: {{ to_list }}<br />
-  CC: {{ cc_list }}<br />
-```
-
-</details>
-
----
-
-## failure_reason
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-An email failed to send from Uptick! This is sometimes due to an invalid email, but more details below.
-  <br />
-  {{ failure_reason }}
-</p>
-<p>
-```
-
-</details>
-
----
-
-## formatted_reason
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-Bounce info:<br />
-  Address: {{ bounce_address }}<br />
-  Bounce Reason: {{ formatted_reason }}<br />
-  Email Subject {{ subject }}<br />
-  Email Sent: {{ formatted_timestamp }}
-```
-
-</details>
-
----
-
-## formatted_timestamp
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-Bounce Reason: {{ formatted_reason }}<br />
-  Email Subject {{ subject }}<br />
-  Email Sent: {{ formatted_timestamp }}
-</p>
-<p>
-```
-
-</details>
-
----
-
-## formresponse
-<div class="loop-info">Loop Iterator<span class="tooltip">This variable represents a single item from a list or collection being looped over.</span></div>
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `submitter` | `{{ formresponse.submitter }}` |
-| `template_version.template.name` | `{{ formresponse.template_version.template.name }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<ul>
-  {% for formresponse in formresponses %}
-    <li>{{ formresponse }}</li>
-  {% endfor %}
-</ul>
-```
-
-```django
-</p><p>Dear {{ attention }},</p>
-<p>Please find attached a form response regarding work at {{ property.name }}.</p>
-<p>Form: {{ formresponse.template_version.template.name }}</p>
-<p>Submitted by: {{ formresponse.submitter }}</p>
-<p>We value your opinion, please contact us with any comments you may have.</p>
-```
-
-```django
-<p>Please find attached a form response regarding work at {{ property.name }}.</p>
-<p>Form: {{ formresponse.template_version.template.name }}</p>
-<p>Submitted by: {{ formresponse.submitter }}</p>
-<p>We value your opinion, please contact us with any comments you may have.</p>
-<p>Regards,<br />
-```
-
-</details>
-
----
-
-## from
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-{{ config.SITE_ORGANISATION }}
-</p>
-<p>A new message from {{ from }} is waiting for you:</p>
-<p>{{ chat_message.text }}</p>
-<p>{{ base_url }}{{ url }}</p>
-```
-
-```django
-{% endfor %}
-{% endblock %}
-<p>A new message from {{ from }} is waiting for you:</p>
-<p>{{ chat_message.text }}</p>
-<p>{{ base_url }}{{ url }}</p>
-```
-
-</details>
-
----
-
-## inv
-<div class="loop-info">Loop Iterator<span class="tooltip">This variable represents a single item from a list or collection being looped over.</span></div>
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `number` | `{{ inv.number }}` |
-| `ref` | `{{ inv.ref }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<p>This is a reminder that we are waiting for your payment on the following invoices:<br>
-{% for inv in invoices %}<br>
-    Number: {{ inv.number }}<br>
-    Reference: {{ inv.ref }}<br>
-    Due: {{ inv.due_date|date:"jS F Y" }}<br>
-```
-
-```django
-{% for inv in invoices %}<br>
-    Number: {{ inv.number }}<br>
-    Reference: {{ inv.ref }}<br>
-    Due: {{ inv.due_date|date:"jS F Y" }}<br>
-{% endfor %}
-```
-
-</details>
-
----
-
-## invoice
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.md
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `number` | `{{ invoice.number }}` |
-| `ref` | `{{ invoice.ref }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<p>Your invoice:</p>
-  <ul>
-    <li>{{ invoice.number }} {% if invoice.ref %}(`invoice.ref`)</li>
-  </ul>
+{% if email != recipient %}
+<li>{{email}}</li>
 {% endif %}
+{% endfor %}
+
 ```
 
+</details>
+
+---
+
+## entry
+
+<details class="expandable-section">
+<summary><strong>Found in files</strong></summary>
+
+- [AARHUSFIRE] - [templates] - [Service Report (Prompts)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [ABACUSFAS] - [emails] - [test](https://ABACUSFAS.onuptick.com/configuration/emails)
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Properties</strong></summary>
+
+
+| Property | Example Usage |
+|----------|---------------|
+| `files` | {% for file in entry.files %} |
+| `logbook` | {{ entry.logbook.name }} |
+| `logbook.name` | {{ entry.logbook.name }} |
+| `preview_url` | {{ file.preview_url }} |
+| `url` | {{ entry.url }} |
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Usage Examples</strong></summary>
+
 ```django
-<p>Your invoice:</p>
-  <ul>
-    <li>{{ invoice.number|default:"[[ invoice_number ]]" }} {% if invoice.ref %}({{ invoice.ref }}){% endif %}</li>
-  </ul>
+
+<div class="...">
+<a href="{{ entry.url }}">
+<strong>{{ entry.logbook.name|default:'-' }}</strong>
+{% include "reports/library/arrow-up-right-from-square-icon.svg" with width="..." height="..." %}
+</a>
+
+```
+
+
+---
+
+```django
+
+<div class="...">
+<strong>{{ entry.logbook.name|default:'-' }}</strong>
+{% for file in entry.files %}
+<a class="..." href="{{ file.preview_url }}">
+{% include "reports/library/arrow-up-right-from-square-icon.svg" with width="..." height="..." %}
+
+```
+
+</details>
+
+---
+
+## fixedlineitems
+
+<details class="expandable-section">
+<summary><strong>Found in files</strong></summary>
+
+- [AARHUSFIRE] - [templates] - [Service Quote (Totals only)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Usage Examples</strong></summary>
+
+```django
+
+</thead>
+<tbody>
+{% for line in fixedlineitems %}
+<tr class="...">
+<td>
+
+```
+
+</details>
+
+---
+
+## formresponses
+
+<details class="expandable-section">
+<summary><strong>Found in files</strong></summary>
+
+- [AARHUSFIRE] - [emails] - [Issuance](https://AARHUSFIRE.onuptick.com/configuration/emails)
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Usage Examples</strong></summary>
+
+```django
+
 {% endif %}
-```
-
-</details>
-
----
-
-## item
-<div class="loop-info">Loop Iterator<span class="tooltip">This variable represents a single item from a list or collection being looped over.</span></div>
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `label` | `{{ item.label }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
 <ul>
-    {% for item in items %}
-    <li>{{ item.label }}</li>
-    {% endfor %}
-</ul>
+{% for formresponse in formresponses %}
+<li>{{ formresponse }}</li>
+{% endfor %}
+
 ```
 
 </details>
 
 ---
 
-## lead_engineer
+## invoices
 
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<tr>
-                        <td style="border: 3px double #000; padding: 8px; background-color: #f0f0f0;">LEAD ENGINEER</td>
-                        <td style="border: 3px double #000; padding: 8px;" colspan="3">{{lead_engineer}}</td>
-                    </tr>
-                    <tr>
-```
-
-</details>
-
----
-
-## line
-<div class="loop-info">Loop Iterator<span class="tooltip">This variable represents a single item from a list or collection being looped over.</span></div>
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
+- [AARHUSFIRE] - [templates] - [Consolidated Invoice](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [templates] - [Invoice](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [emails] - [Issuance](https://AARHUSFIRE.onuptick.com/configuration/emails)
+- [AARHUSFIRE] - [emails] - [Overdue Invoice Reminder Email](https://AARHUSFIRE.onuptick.com/configuration/emails)
 
 </details>
 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-| Property | Example Value |
+
+| Property | Example Usage |
 |----------|---------------|
-| `annual_subtotal` | `{{ line.annual_subtotal\|currency }}` |
-| `product.name` | `{{ line.product.name }}` |
-| `quantity` | `{{ line.quantity\|floatformat:2 }}` |
-| `routineservicetype.name` | `{{ line.routineservicetype.name }}` |
-| `site_price` | `{{ line.site_price\|currency }}` |
-| `subtotal` | `{{ line.subtotal\|currency }}` |
-| `unit_price` | `{{ line.unit_price\|currency }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Filters Used</strong></summary>
-
-- `currency`
-- `floatformat (arg: 2)`
+| `billingcard` | {{ invoices.billingcard.postal_address }} |
+| `billingcard.postal_address` | {{ invoices.billingcard.postal_address }} |
+| `date` | {{ invoices.date }} |
+| `description` | {{ invoices.description }} |
+| `due_date` | {{ invoices.due_date }} |
+| `gst` | {{ invoices.gst }} |
+| `number` | {{ invoices.number }} |
+| `ref` | {{ invoices.ref }} |
+| `subtotal` | {{ invoices.subtotal }} |
+| `total` | {{ invoices.total }} |
+| `total_after_credits` | {{ invoices.total_after_credits }} |
 
 </details>
 
@@ -1202,73 +627,48 @@ Bounce Reason: {{ formatted_reason }}<br />
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-<tr class="keep-together">
-              <td>
-                <div>{{ line.product.name }}</div>
-                <div class="text-muted">{{ line.description|default:'-' }}</div>
-              </td>
-```
 
-```django
-<div class="text-muted">{{ line.description|default:'-' }}</div>
-              </td>
-              <td class="text-right">{{ line.quantity|floatformat:2 }}</td>
-              <td class="text-right">{{ line.unit_price|currency }}</td>
-              <td class="text-right">{{ line.subtotal|currency }}</td>
-```
-
-```django
-</td>
-              <td class="text-right">{{ line.quantity|floatformat:2 }}</td>
-              <td class="text-right">{{ line.unit_price|currency }}</td>
-              <td class="text-right">{{ line.subtotal|currency }}</td>
-            </tr>
-```
-
-</details>
-
----
-
-## logbook
-<div class="loop-info">Loop Iterator<span class="tooltip">This variable represents a single item from a list or collection being looped over.</span></div>
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `name` | `{{ logbook.name }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
+<p>Your invoice:</p>
 <ul>
-  {% for logbook in digital_logbooks %}
-    <li>{{ logbook.name }}</li>
-  {% endfor %}
+<li>{{ invoice.number|default:"[[ invoice_number ]]" }} {% if invoice.ref %}({{ invoice.ref }}){% endif %}</li>
 </ul>
+{% endif %}
+
+```
+
+
+---
+
+```django
+
+Number: {{ inv.number }}<br>
+Reference: {{ inv.ref }}<br>
+Due: {{ inv.due_date|date:"jS F Y" }}<br>
+{% endfor %}
+For any questions please contact the office.</p>
+
 ```
 
 </details>
 
 ---
 
-## login_url
+## items
 
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
+- [AARHUSFIRE] - [emails] - [Signoff Disclaimed](https://AARHUSFIRE.onuptick.com/configuration/emails)
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Properties</strong></summary>
+
+
+| Property | Example Usage |
+|----------|---------------|
+| `label` | {{ item.label }} |
 
 </details>
 
@@ -1276,23 +676,135 @@ Bounce Reason: {{ formatted_reason }}<br />
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
+
+<p>We have received notification from {{ contractor.name }} that they are no longer engaged to maintain the following items:</p>
+<ul>
+{% for item in items %}
+<li>{{ item.label }}</li>
+{% endfor %}
+
+```
+
+</details>
+
+---
+
+## joyfillformresponses
+
+<details class="expandable-section">
+<summary><strong>Found in files</strong></summary>
+
+- [AARHUSFIRE] - [emails] - [Issuance](https://AARHUSFIRE.onuptick.com/configuration/emails)
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Usage Examples</strong></summary>
+
+```django
+
+{% endif %}
+<ul>
+{% for formresponse in joyfillformresponses %}
+<li>{{ formresponse }}</li>
+{% endfor %}
+
+```
+
+</details>
+
+---
+
+## labour_sessions
+
+<details class="expandable-section">
+<summary><strong>Found in files</strong></summary>
+
+- [AARHUSFIRE] - [templates] - [Service Report (Prompts)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [ABACUSFAS] - [emails] - [test](https://ABACUSFAS.onuptick.com/configuration/emails)
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Properties</strong></summary>
+
+
+| Property | Example Usage |
+|----------|---------------|
+| `finished` | {{ tasksession.finished }} |
+| `get_duration` | {{ tasksession.get_duration }} |
+| `get_type_display` | {{ tasksession.get_type_display }} |
+| `started` | {{ tasksession.started }} |
+| `technician` | {{ tasksession.technician }} |
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Usage Examples</strong></summary>
+
+```django
+
+</thead>
+<tbody>
+{% for tasksession in labour_sessions %}
 <tr>
-  <td align="center" bgcolor="#27a9e3">
-    <a style="color: white; text-decoration: underline;" href="{{ login_url }}">
-      Open your contractor portal
-    </a>
+<td>{{ tasksession.get_type_display }}</td>
+
 ```
 
 </details>
 
 ---
 
-## message
+## lineitem_group
 
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
+- [AARHUSFIRE] - [templates] - [Consolidated Invoice](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [templates] - [Invoice](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [templates] - [Itemised w Prices	](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [templates] - [Itemised w Qty	](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [templates] - [Purchase Order](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [templates] - [Service Quote (Routines)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [templates] - [Service Quote (Totals only)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Properties</strong></summary>
+
+
+| Property | Example Usage |
+|----------|---------------|
+| `annual_subtotal` | {{ lineitem_group.annual_subtotal }} |
+| `asset` | {{ lineitem_group.asset.get_label }} |
+| `asset.get_label` | {{ lineitem_group.asset.get_label }} |
+| `cost_summary` | {{ lineitem_group.cost_summary.gst }} |
+| `cost_summary.gst` | {{ lineitem_group.cost_summary.gst }} |
+| `cost_summary.subtotal` | {{ lineitem_group.cost_summary.subtotal }} |
+| `cost_summary.total` | {{ lineitem_group.cost_summary.total }} |
+| `description` | {{ lineitem_group.description }} |
+| `gst` | {{ lineitem.gst }} |
+| `lineitems` | {% for lineitem in lineitem_group.lineitems %} |
+| `name` | {{ rslt.name }} |
+| `property` | {{ lineitem_group.property.client_ref }} |
+| `property.client_ref` | {{ lineitem_group.property.client_ref }} |
+| `quantity` | {{ lineitem_group.quantity }} |
+| `remark` | {{ lineitem_group.remark.location }} |
+| `remark.get_description` | {{ lineitem_group.remark.get_description }} |
+| `remark.get_public_url` | {{ lineitem_group.remark.get_public_url }} |
+| `remark.get_resolution` | {{ lineitem_group.remark.get_resolution }} |
+| `remark.location` | {{ lineitem_group.remark.location }} |
+| `routineserviceleveltypes` | {% for rslt in lineitem_group.routineserviceleveltypes.all %} |
+| `routineserviceleveltypes.all` | {% for rslt in lineitem_group.routineserviceleveltypes.all %} |
+| `site_price` | {{ lineitem_group.site_price }} |
+| `subtotal` | {{ line.subtotal }} |
+| `task` | {{ lineitem_group.task.scope_of_works }} |
+| `task.description` | {{ lineitem_group.task.description }} |
+| `task.invoice_note` | {{ lineitem_group.task.invoice_note }} |
+| `task.scope_of_works` | {{ lineitem_group.task.scope_of_works }} |
+| `unit_price` | {{ lineitem.unit_price }} |
 
 </details>
 
@@ -1300,31 +812,170 @@ Bounce Reason: {{ formatted_reason }}<br />
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% endblock %}
-<p>A webhook event from Corrigo was rejected.</p>
+
+<td colspan="...">
+<div>
+<strong>{{ lineitem.asset.get_label|default:"General Repairs" }}</strong>
+<div>{{ lineitem.asset.location }}</div>
+</div>
+
+```
+
+
+---
+
+```django
+
+<strong>{{ lineitem.remark.get_severity_display }}</strong>
+<div>
+<a href="{{ lineitem.remark.get_public_url|absolute }}">
+ID: {{ lineitem.remark.id }}
+{% include "reports/library/arrow-up-right-from-square-icon.svg" with width="..." height="..." %}
+
+```
+
+</details>
+
+---
+
+## maintenance_technicians
+
+<details class="expandable-section">
+<summary><strong>Found in files</strong></summary>
+
+- [AARHUSFIRE] - [templates] - [Service Report (Prompts)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [ABACUSFAS] - [emails] - [test](https://ABACUSFAS.onuptick.com/configuration/emails)
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Properties</strong></summary>
+
+
+| Property | Example Usage |
+|----------|---------------|
+| `asset` | {{ row.asset }} |
+| `count` | {{ row.count }} |
+| `inspected_date` | {{ technician.inspected_date }} |
+| `name` | {{ technician.name }} |
+| `service` | {{ row.service }} |
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Usage Examples</strong></summary>
+
+```django
+
+</thead>
+<tbody>
+{% for row in maintenance_summary %}
+<tr>
+<td>{{ row.service }}</td>
+
+```
+
+
+---
+
+```django
+
+</thead>
+<tbody>
+{% for technician in maintenance_technicians %}
+<tr>
+<td>{{ technician.name }}</td>
+
+```
+
+</details>
+
+---
+
+## note
+
+<details class="expandable-section">
+<summary><strong>Found in files</strong></summary>
+
+- [AARHUSFIRE] - [templates] - [Consolidated Invoice](https://AARHUSFIRE.onuptick.com/configuration/templates)
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Properties</strong></summary>
+
+
+| Property | Example Usage |
+|----------|---------------|
+| `number` | {{ note.number }} |
+| `total` | {{ note.total }} |
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Usage Examples</strong></summary>
+
+```django
+
+<tr>
+<th class="...">Credit {{ note.number }} - {{ note }}</th>
+<td class="...">{{ note.total|currency }}</td>
+</tr>
+{% endfor %}
+
+```
+
+</details>
+
+---
+
+## paper_logbooks
+
+<details class="expandable-section">
+<summary><strong>Found in files</strong></summary>
+
+- [AARHUSFIRE] - [templates] - [Service Report (Prompts)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [emails] - [Corrigo Webhook Event Rejection](https://AARHUSFIRE.onuptick.com/configuration/emails)
+- [ABACUSFAS] - [emails] - [test](https://ABACUSFAS.onuptick.com/configuration/emails)
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Usage Examples</strong></summary>
+
+```django
+
+<div class="...">Logbooks</div>
+<div class="...">
+{% for entry in paper_logbooks %}
+<div class="...">
+<div class="...">
+
+```
+
+
+---
+
+```django
+
 <p>Reason: {{ message }}</p>
 <p>Payload:<p>
 <pre><code>{{payload}}</code></pre>
-```
+<p>Regards,<br >Uptick Team</p>
 
-```django
-{{ property_refs|join:", " }}
-      <br />
-      {{ message }}
-    </li>
-  </ul>
 ```
 
 </details>
 
 ---
 
-## name
+## photos
 
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
+- [AARHUSFIRE] - [templates] - [Itemised w Prices	](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [templates] - [Itemised w Qty	](https://AARHUSFIRE.onuptick.com/configuration/templates)
 
 </details>
 
@@ -1332,23 +983,43 @@ Bounce Reason: {{ formatted_reason }}<br />
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-\{% extends 'email.html' %}
-{% block content %}
-<p>Your custom report, {{ name }}, has been generated.</p>
-<p>{{ description }}</p>
-<p>To download, <a href="{{ csv_url }}">please click here</a>.</p>
+
+{% if photos %}
+<div class="...">
+{% for photo in photos %}
+{% include "webtemplates/2022-photo-tile" with photo=photo class="..." %}
+{% endfor %}
+
 ```
 
 </details>
 
 ---
 
-## no_of_assets
+## productlineitems
 
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
+- [AARHUSFIRE] - [templates] - [Service Quote (Routines)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [templates] - [Service Quote (Totals only)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [emails] - [Monthly Uncovered Assets](https://AARHUSFIRE.onuptick.com/configuration/emails)
+- [AARHUSFIRE] - [emails] - [Signoff Generation Notification Email](https://AARHUSFIRE.onuptick.com/configuration/emails)
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Properties</strong></summary>
+
+
+| Property | Example Usage |
+|----------|---------------|
+| `description` | {{ line.description }} |
+| `property__name` | {{ property.property__name }} |
+| `property_id` | {{ productlineitems.productlineitems_id }} |
+| `quantity` | {{ line.quantity }} |
+| `subtotal` | {{ line.subtotal }} |
+| `unit_price` | {{ line.unit_price }} |
 
 </details>
 
@@ -1356,147 +1027,26 @@ Bounce Reason: {{ formatted_reason }}<br />
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-<p>Regards,<br />
-Uptick Team</p>
+
+<ul>
+{% for property in properties %}
+<li><a href="{{base_url}}/properties/{{property.property_id}}/view/assets/?is_covered_by_routine=False&is_active=True">{{ property.property__name }}</a></li>
+{% endfor %}
+</ul>
+
+```
+
+
+---
+
+```django
+
 <p>There are currently {{ no_of_assets }} assets not covered by any Routines. These assets relate to the following properties:</p>
 <ul>
 {% for property in properties %}
-```
+<li><a href="{{base_url}}/properties/{{property.property_id}}/view/assets/?is_covered_by_routine=False&is_active=True">{{ property.property__name }}</a></li>
+{% endfor %}
 
-</details>
-
----
-
-## payload
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<p>Reason: {{ message }}</p>
-<p>Payload:<p>
-<pre><code>{{payload}}</code></pre>
-<p>Regards,<br />
-Uptick Team</p>
-```
-
-</details>
-
----
-
-## promptset
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `name` | `{{ promptset.name }}` |
-| `ref` | `{{ promptset.ref }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<tr>
-                            <th colspan="3" class="border-top-0">
-                              ({{ promptset.ref }}) {{ promptset.name }}
-                            </th>
-                          </tr>
-```
-
-</details>
-
----
-
-## property
-<div class="loop-info">Loop Iterator<span class="tooltip">This variable represents a single item from a list or collection being looped over.</span></div>
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `client_ref` | `{{ property.client_ref }}` |
-| `name` | `{{ property.name }}` |
-| `property__name` | `{{ property.property__name }}` |
-| `property_id` | `{{property.property_id}}` |
-| `ref` | `{{ property.ref }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-{% endblock %}
-<p>Dear {{ attention }},</p>
-<p>Please find attached your defect quote for {{ property.name }}.</p>
-<p>To view and approve this quote online, visit:</p>
-<p><a href="{{ base_url }}{{ quote.get_uuid_approval_url }}">{{ base_url }}{{ quote.get_uuid_approval_url }}</a></p>
-```
-
-```django
-{{ config.SITE_ORGANISATION }}</p>
-<p>Dear {{ attention|default:"manager" }},</p>
-<p>Please find attached your documents for services recently carried out at {{ property.name }}.</p>
-{% if invoice %}
-  <p>Your invoice:</p>
-```
-
-```django
-<p>For any questions, please contact us.</p>
-<p>Dear {{ attention|default:"manager" }},</p>
-<p>Please find attached your documents for services recently carried out at {{ property.name }}.</p>
-{% if invoice %}
-  <p>Your invoice:</p>
-```
-
-</details>
-
----
-
-## property_refs
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.md
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-`contractor`
-      <br />
-      {{ property_refs }}
-      <br />
-      `message`
 ```
 
 </details>
@@ -1508,16 +1058,23 @@ Uptick Team</p>
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
+- [AARHUSFIRE] - [templates] - [Purchase Order](https://AARHUSFIRE.onuptick.com/configuration/templates)
 
 </details>
 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-| Property | Example Value |
+
+| Property | Example Usage |
 |----------|---------------|
-| `delivery_instructions` | `{{purchaseorder.delivery_instructions}}` |
+| `created` | {{ purchaseorder.created }} |
+| `currency` | {{ purchaseorder.currency }} |
+| `delivery_instructions` | {{ purchaseorder.delivery_instructions }} |
+| `description` | {{ purchaseorder.description }} |
+| `gst` | {{ purchaseorder.gst }} |
+| `subtotal` | {{ purchaseorder.subtotal }} |
+| `total` | {{ purchaseorder.total }} |
 
 </details>
 
@@ -1525,44 +1082,54 @@ Uptick Team</p>
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-<p>Dear {{ attention }},</p>
-<p>Please find attached our purchase order{% if task %} for {{ task.name }}{% endif %}.</p>
-<p>Please deliver the parts to {{purchaseorder.delivery_instructions}} </p>
-<p><strong>Delivery Address:<strong></p>
-<p>Regards,<br />
+
+<div class="...">
+<div class="...">
+{{ purchaseorder.description|markdowner }}
+{% if purchaseorder.delivery_instructions %}
+<dl>
+
+```
+
+
+---
+
+```django
+
+<dl>
+<dt>Delivery instructions</dt>
+<dd>{{ purchaseorder.delivery_instructions|markdowner }}</dd>
+</dl>
+{% endif %}
+
 ```
 
 </details>
 
 ---
 
-## quote
-<div class="loop-info">Loop Iterator<span class="tooltip">This variable represents a single item from a list or collection being looped over.</span></div>
+## quotes
 
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.md
-- generic.txt
+- [AARHUSFIRE] - [templates] - [Itemised w Prices	](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [templates] - [Itemised w Qty	](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [emails] - [Defect Quote Summary Reminder Email](https://AARHUSFIRE.onuptick.com/configuration/emails)
 
 </details>
 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-| Property | Example Value |
+
+| Property | Example Usage |
 |----------|---------------|
-| `get_uuid_approval_url` | `{{ quote.get_uuid_approval_url\|absolute }}` |
-| `property.name` | `{{ quote.property.name }}` |
-| `ref` | `{{ quote.ref }}` |
-| `status.upper` | `{{ quote.status.upper }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Filters Used</strong></summary>
-
-- `absolute`
+| `get_uuid_approval_url` | {{ quote.get_uuid_approval_url }} |
+| `gst` | {{ quotes.gst }} |
+| `ref` | {{ quote.ref }} |
+| `subtotal` | {{ quotes.subtotal }} |
+| `total` | {{ quotes.total }} |
 
 </details>
 
@@ -1570,27 +1137,26 @@ Uptick Team</p>
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-</div>
-                                    <div class="d-flex">
-                                      <a href="{{ quote.get_uuid_approval_url }}">
-                                        <div class='d-flex flex-row'>
-                                          <div class="status quote `quote.status.upper`">
+
+<p>You have been selected as the main recipient or a CC in this repeating reminder.</p>
+<p>We are waiting for approval for the following defect quotes:</p>
+{% for quote in quotes %}
+<p>
+<div>Reference: {{ quote.ref }}</div>
+
 ```
 
-```django
-<p>Please find attached your defect quote for {{ property.name }}.</p>
-<p>To view and approve this quote online, visit:</p>
-<p><a href="{{ base_url }}{{ quote.get_uuid_approval_url }}">{{ base_url }}{{ quote.get_uuid_approval_url }}</a></p>
-<p>We value your opinion, please contact us with any comments you may have.</p>
-<p>Regards,<br />
-```
+
+---
 
 ```django
-<ul>
-    {% for quote in defectquotes %}
-      <li>Reference: {{ quote.ref }}<a href="{{ base_url }}{{ quote.get_uuid_approval_url }}"> (approve online)</a></li>
-    {% endfor %}
-  </ul>
+
+<tr>
+<td width="..." class="..."><strong>Subtotal </strong></td>
+<td width="...">{{quote.subtotal|currency}}</td>
+</tr>
+<tr>
+
 ```
 
 </details>
@@ -1602,24 +1168,36 @@ Uptick Team</p>
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
+- [AARHUSFIRE] - [templates] - [Service Report (Prompts)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [emails] - [Appointment Scheduled Email](https://AARHUSFIRE.onuptick.com/configuration/emails)
+- [AARHUSFIRE] - [emails] - [Issuance](https://AARHUSFIRE.onuptick.com/configuration/emails)
+- [AARHUSFIRE] - [emails] - [Overdue Invoice Reminder Email](https://AARHUSFIRE.onuptick.com/configuration/emails)
+- [AARHUSFIRE] - [emails] - [Rectification Rejected](https://AARHUSFIRE.onuptick.com/configuration/emails)
+- [ABACUSFAS] - [emails] - [test](https://ABACUSFAS.onuptick.com/configuration/emails)
 
 </details>
 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-| Property | Example Value |
+
+| Property | Example Usage |
 |----------|---------------|
-| `ref` | `{{ rectification.ref }}` |
-| `rejection_reason` | `{{ rectification.rejection_reason\|markdowner }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Filters Used</strong></summary>
-
-- `markdowner`
+| `asset` | {{ rectification.asset.get_label }} |
+| `asset.get_label` | {{ rectification.asset.get_label }} |
+| `compliant` | {{ rectification.compliant }} |
+| `email` | {{ rectification.email }} |
+| `get_title` | {{ report.get_title }} |
+| `name` | {{ rectification.name }} |
+| `notes` | {{ rectification.notes }} |
+| `quantity` | {{ rectification.quantity }} |
+| `ref` | {{ rectification.ref }} |
+| `rejection_reason` | {{ rectification.rejection_reason }} |
+| `remark` | {{ rectification.remark.get_public_url }} |
+| `remark.get_description` | {{ rectification.remark.get_description }} |
+| `remark.get_public_url` | {{ rectification.remark.get_public_url }} |
+| `remark.get_resolution` | {{ rectification.remark.get_resolution }} |
+| `remark.location` | {{ rectification.remark.location }} |
 
 </details>
 
@@ -1627,504 +1205,99 @@ Uptick Team</p>
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% load markdowner %}
-{% block content %}
-<h4>Rectification {{ rectification.ref }} was rejected.</h4>
-<p>Reason provided:</p>
-{{ rectification.rejection_reason|markdowner }}
+
+<tr class="...">
+<td colspan="...">
+<strong>{{ repair.asset.get_label|default:"General Repairs" }}</strong>
+<div>{{ repair.asset.location }}</div>
+</td>
+
 ```
 
-```django
-<h4>Rectification {{ rectification.ref }} was rejected.</h4>
-<p>Reason provided:</p>
-{{ rectification.rejection_reason|markdowner }}
-<p>Access the rectification to provide updated information:</p>
-<p><a href="{{ base_url }}{{ absolute_url }}">{{ base_url }}{{ absolute_url }}</a></p>
-```
-
-</details>
 
 ---
 
-## ref_no
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
 ```django
-<tr>
-                        <td style="border: 3px double #000; padding: 8px; background-color: #f0f0f0;">OUR REF NO.</td>
-                        <td style="border: 3px double #000; padding: 8px;" colspan="3">{{ref_no}}</td>
-                    </tr>
-                    <tr>
-```
 
-```django
-<tr>
-                        <td style="border: 3px double #000; padding: 8px; background-color: #f0f0f0;">VISIT No.</td>
-                        <td style="border: 3px double #000; padding: 8px;" colspan="3">{{ref_no}}</td>
-                    </tr>
-                    <tr>
-```
-
-</details>
-
----
-
-## rejection_reason
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<p>You can provide your field technicians with this link which will enable them to complete the task via their smart phone (apple or android) without needing to install an app.</p>
-<p>Thanks</p>
-<p>The contractor {{ contractor }} has rejected the task assigned to him for the following reason: {{ rejection_reason }}</p>
-<p>
-  The task that was assigned was:<br>
-```
-
-</details>
-
----
-
-## remark
-<div class="loop-info">Loop Iterator<span class="tooltip">This variable represents a single item from a list or collection being looped over.</span></div>
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.md
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `get_description` | `{{ remark.get_description }}` |
-| `get_public_url` | `{{ remark.get_public_url }}` |
-| `get_resolution` | `{{ remark.get_resolution\|markdowner }}` |
-| `get_severity_display` | `{{ remark.get_severity_display }}` |
-| `id` | `{{ remark.id }}` |
-| `identified` | `{{ remark.identified }}` |
-| `last_verified_date` | `{{ remark.last_verified_date }}` |
-| `location` | `{{ remark.location }}` |
-| `severity` | `{{ remark.severity }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Filters Used</strong></summary>
-
-- `markdowner`
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<div class="body px-3 py-2">
-                              <div>
-                                <strong>Description:</strong> {{ remark.get_description }}
-                              </div>
-                                <div>
-```
-
-```django
-</div>
-                                <div>
-                                  <strong>Resolution:</strong> {{ remark.get_resolution }}
-                                </div>
-                                <div>
-```
-
-```django
-</div>
-                                <div>
-                                  <strong>Location:</strong> {{ remark.location }}
-                                </div>
-                              {% get_quotes_for_remark report remark as remark_quotes %}
-```
-
-</details>
-
----
-
-## report
-<div class="loop-info">Loop Iterator<span class="tooltip">This variable represents a single item from a list or collection being looped over.</span></div>
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `get_title` | `{{ report.get_title }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<ul>
-    {% for report in reports %}
-      <li>{{ report.get_title }} ({{ report.compliant|yesno:"compliant,non-compliant,not applicable"}})</li>
-    {% endfor %}
-  </ul>
-```
-
-</details>
-
----
-
-## request_user
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `email` | `{{request_user.email}}` |
-| `name` | `{{request_user.name}}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-</tbody>
-                </table>
-                <p>If you have any queries or need to change the time, please email me at <a href="mailto:{{request_user.email}}">{{request_user.email}}</a>.</p>
-                <p>Regards,<br>
-                {{request_user.name}}</p>
-```
-
-```django
-<p>If you have any queries or need to change the time, please email me at <a href="mailto:{{request_user.email}}">{{request_user.email}}</a>.</p>
-                <p>Regards,<br>
-                {{request_user.name}}</p>
-                <p>{{request_user.email}}</p>
-                <p>
-```
-
-```django
-<p>Regards,<br>
-                {{request_user.name}}</p>
-                <p>{{request_user.email}}</p>
-                <p>
-                  {{ config.CONTACT_PHONE }} <br />
-```
-
-</details>
-
----
-
-## retry_link
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<p>Please review and address the error, then use the link below to retry the sync</p>
-<p>
-    <a href={{ retry_link }}>Click here</a> and use the <code>POST</code> button to retry the sync.
-</p>
-<h3>Error</h3>
-```
-
-</details>
-
----
-
-## routineserviceleveltype
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `get_routine_display_name` | `{{ routineserviceleveltype.get_routine_display_name }}` |
-| `routineservicetype.standard.name` | `{{ routineserviceleveltype.routineservicetype.standard.name }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-{% for routineserviceleveltype, servicetask_group in servicetasks_grouped_by_type %}
-      <div class="uptick-title no-page-break-after">
-        <div>{{ routineserviceleveltype.get_routine_display_name }}</div>
-        {% if routineserviceleveltype.routineservicetype.standard.name != "Default" %}
-          <div className="text-muted"><small>{{ routineserviceleveltype.routineservicetype.standard.name }}</small></div>
-```
-
-```django
-<div>{{ routineserviceleveltype.get_routine_display_name }}</div>
-        {% if routineserviceleveltype.routineservicetype.standard.name != "Default" %}
-          <div className="text-muted"><small>{{ routineserviceleveltype.routineservicetype.standard.name }}</small></div>
-        {% endif %}
-      </div>
-```
-
-</details>
-
----
-
-## rslt
-<div class="loop-info">Loop Iterator<span class="tooltip">This variable represents a single item from a list or collection being looped over.</span></div>
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `name` | `{{ rslt.name }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-{{ line.routineservicetype.name }} –
-                    {% for rslt in line.routineserviceleveltypes.all %}
-                      <span>{{ rslt.name }}{% if not forloop.last %}, {% endif %}</span>
-                    {% endfor %}
-                  </div>
-```
-
-```django
-<div>{{ line.routineservicetype.name }}</div>
-                  {% for rslt in line.routineserviceleveltypes.all %}
-                    <span>{{ rslt.name }}{% if not forloop.last %},{% endif %}</span>
-                  {% endfor %}
-                </div>
-```
-
-</details>
-
----
-
-## scope_of_works
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<tr>
-                        <td style="border: 3px double #000; padding: 8px; background-color: #f0f0f0;">SCOPE OF WORKS</td>
-                        <td style="border: 3px double #000; padding: 8px;" colspan="3">{{scope_of_works}}</td>
-                    </tr>
-                </table>
-```
-
-</details>
-
----
-
-## sender
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `name` | `{{ sender.name }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<p>Template change request {{ changerequest.ref }} has been created for {{ customer }}.</p>
-{% elif  status == 'REQUESTED' %}
-  <p>{{ sender.name }} submitted feedback for Template change request {{ changerequest.ref }}.</p>
-{% else %}
-  <p>Template change request {{ changerequest.ref }} has been approved. Our team will be in contact once completed.</p>
-```
-
-</details>
-
----
-
-## servicequote
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `annual_gst` | `{{ servicequote.annual_gst\|currency }}` |
-| `annual_subtotal` | `{{ servicequote.annual_subtotal\|currency }}` |
-| `annual_total` | `{{ servicequote.annual_total\|currency }}` |
-| `description` | `{{ servicequote.description }}` |
-| `expiry_date` | `{{ servicequote.expiry_date }}` |
-| `get_absolute_url` | `{{ servicequote.get_absolute_url }}` |
-| `product_gst` | `{{ servicequote.product_gst\|currency }}` |
-| `product_subtotal` | `{{ servicequote.product_subtotal\|currency }}` |
-| `product_total` | `{{ servicequote.product_total\|currency }}` |
-| `ref` | `{{ servicequote.ref }}` |
-| `salesperson.email` | `{{ servicequote.salesperson.email }}` |
-| `salesperson.name` | `{{ servicequote.salesperson.name }}` |
-| `scope_of_works` | `{{ servicequote.scope_of_works\|markdowner }}` |
-| `terms_and_conditions` | `{{ servicequote.terms_and_conditions\|markdowner }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Filters Used</strong></summary>
-
-- `currency`
-- `markdowner`
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
+<strong>{{ repair.remark.get_severity_display }}</strong>
 <div>
-  <strong>Scope of works:</strong>
-  {{ servicequote.description }}
+<a href="{{ repair.remark.get_public_url|absolute }}">
+ID: {{ repair.remark.id }}
+{% include "reports/library/arrow-up-right-from-square-icon.svg" with width="..." height="..." %}
+
+```
+
+</details>
+
+---
+
+## servicelineitems
+
+<details class="expandable-section">
+<summary><strong>Found in files</strong></summary>
+
+- [AARHUSFIRE] - [templates] - [Service Quote (Routines)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [templates] - [Service Quote (Totals only)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Properties</strong></summary>
+
+
+| Property | Example Usage |
+|----------|---------------|
+| `annual_gst` | {{ servicelineitems.annual_gst }} |
+| `annual_subtotal` | {{ servicelineitems.annual_subtotal }} |
+| `annual_tax` | {{ servicelineitems.annual_tax }} |
+| `annual_total` | {{ servicelineitems.annual_total }} |
+| `created` | {{ servicelineitems.created }} |
+| `expiry_date` | {{ servicelineitems.expiry_date }} |
+| `product_gst` | {{ servicelineitems.product_gst }} |
+| `product_subtotal` | {{ servicelineitems.product_subtotal }} |
+| `product_total` | {{ servicelineitems.product_total }} |
+| `ref` | {{ servicelineitems.ref }} |
+| `scope_of_works` | {{ servicelineitems.scope_of_works }} |
+| `terms_and_conditions` | {{ servicelineitems.terms_and_conditions }} |
+
+</details>
+
+<details class="expandable-section">
+<summary><strong>Usage Examples</strong></summary>
+
+```django
+
+<section class="...">
+<h2 class="...">Service Quotation <strong>{{ servicequote.ref }}</strong></h2>
+<div>{{ servicequote.created|date:"jS F Y" }}</div>
+{% if servicequote.expiry_date %}<div>This quote is valid until <em>{{ servicequote.expiry_date }}</em></div>{% endif %}
+<div><strong>Attention: {{ client.primary_contact.name }}</strong></div>
+
+```
+
+
+---
+
+```django
+
+{% if servicequote.scope_of_works %}
+<div class="...">
+{{ servicequote.scope_of_works|markdowner }}
 </div>
-<br />
-```
-
-```django
-Kind regards,<br /><br />
-{% if servicequote.salesperson %}
-<div>{{ servicequote.salesperson.name }}</div>
-<div>{{ servicequote.salesperson.email }}</div>
 {% endif %}
-```
 
-```django
-{% if servicequote.salesperson %}
-<div>{{ servicequote.salesperson.name }}</div>
-<div>{{ servicequote.salesperson.email }}</div>
-{% endif %}
-<p>{{ config.SITE_ORGANISATION }}</p>
 ```
 
 </details>
 
 ---
 
-## servicetask
-<div class="loop-info">Loop Iterator<span class="tooltip">This variable represents a single item from a list or collection being looped over.</span></div>
+## show_rate_column
 
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.md
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `get_result_display.upper` | `{{ servicetask.get_result_display.upper }}` |
-| `item` | `{{ servicetask.item }}` |
-| `item.extra_fields.door_depth` | `{{servicetask.item.extra_fields.door_depth}}` |
-| `item.extra_fields.door_width` | `{{servicetask.item.extra_fields.door_width}}` |
-| `item.get_extra_fields_display.certification_id_present` | `{{servicetask.item.get_extra_fields_display.certification_id_present}}` |
-| `item.get_extra_fields_display.comments` | `{{servicetask.item.get_extra_fields_display.comments}}` |
-| `item.get_extra_fields_display.door_height` | `{{servicetask.item.get_extra_fields_display.door_height}}` |
-| `item.get_extra_fields_display.door_material` | `{{servicetask.item.get_extra_fields_display.door_material}}` |
-| `item.get_extra_fields_display.door_rating` | `{{servicetask.item.get_extra_fields_display.door_rating}}` |
-| `item.get_extra_fields_display.frame_material` | `{{servicetask.item.get_extra_fields_display.frame_material}}` |
-| `item.get_label` | `{{ servicetask.item.get_label }}` |
-| `item.inspection_ref` | `{{ servicetask.item.inspection_ref }}` |
-| `item.location` | `{{ servicetask.item.location }}` |
-| `result` | `{{ servicetask.result }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Filters Used</strong></summary>
-
-- `bsecure_badge_code`
-- `bsecure_url`
+- [AARHUSFIRE] - [templates] - [Purchase Order](https://AARHUSFIRE.onuptick.com/configuration/templates)
 
 </details>
 
@@ -2132,124 +1305,13 @@ Kind regards,<br /><br />
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-<th width="50%" class="bg-white light-text-weight">
-                  <strong>Serial:</strong> `servicetask.item.inspection_ref`
-                  <a href="{{ servicetask.item }}">
-                    <strong>BSecure:</strong> {{ servicetask.item }}
-                    {% include "reports/library/arrow-up-right-from-square-icon.svg" with width="11" height="11" %}
-```
 
-```django
-<strong>Serial:</strong> `servicetask.item.inspection_ref`
-                  <a href="{{ servicetask.item }}">
-                    <strong>BSecure:</strong> {{ servicetask.item }}
-                    {% include "reports/library/arrow-up-right-from-square-icon.svg" with width="11" height="11" %}
-                  </a>
-```
+<th class="..." width="...">Unit Price</th>
+<th class="..." width="...">Subtotal</th>
+<th class="..." width="..."100,0" }}">
+{% if show_rate_column %}{% get_tax_summary_name %} Rate{% endif %}
+</th>
 
-```django
-<tbody>
-            <tr class="keep-together bottom-border">
-              <th width="35%" class="bg-white">{{ servicetask.item.get_label }}</th>
-              <th width="50%" class="bg-white light-text-weight">
-                {% if servicetask.item.inspection_ref %}
-```
-
-</details>
-
----
-
-## signoff
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `account` | `{{ signoff.account }}` |
-| `contractor` | `{{ signoff.contractor }}` |
-| `period_finish` | `{{ signoff.period_finish }}` |
-| `period_start` | `{{ signoff.period_start}}` |
-| `pk` | `{{ signoff.pk }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-{% extends 'email.html' %}
-{% block content %}
-  <h3>Contractor sign off {{ signoff.pk }} results for {{ signoff.contractor }}</h3>
-  <h4>Submitted by {{ signoff.account }} for {{ signoff.period_start}} to {{ signoff.period_finish }}.</h4>
-  {% for signoffproperty in signoff.signoffproperty_set.all %}
-```
-
-```django
-{% block content %}
-  <h3>Contractor sign off {{ signoff.pk }} results for {{ signoff.contractor }}</h3>
-  <h4>Submitted by {{ signoff.account }} for {{ signoff.period_start}} to {{ signoff.period_finish }}.</h4>
-  {% for signoffproperty in signoff.signoffproperty_set.all %}
-  <h5>{{ signoffproperty.property }}</h5>
-```
-
-</details>
-
----
-
-## signoffitem
-<div class="loop-info">Loop Iterator<span class="tooltip">This variable represents a single item from a list or collection being looped over.</span></div>
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `label` | `{{ signoffitem.label }}` |
-| `new_serviced_date` | `{{ signoffitem.new_serviced_date }}` |
-| `new_signoff_note` | `{{ signoffitem.new_signoff_note }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-{% endif %}
-      ]
-      {{ signoffitem.label }}
-      {% if signoffitem.new_signoff_note %}
-      <div style="color: blue">Note: {{ signoffitem.new_signoff_note }}</div>
-```
-
-```django
-{{ signoffitem.label }}
-      {% if signoffitem.new_signoff_note %}
-      <div style="color: blue">Note: {{ signoffitem.new_signoff_note }}</div>
-      {% endif %}
-      {% if signoffitem.new_serviced_date %}
-```
-
-```django
-{% endif %}
-      {% if signoffitem.new_serviced_date %}
-      <div style="color: #666">Service date: {{ signoffitem.new_serviced_date }}</div>
-      {% endif %}
-    </li>
 ```
 
 </details>
@@ -2261,14 +1323,41 @@ Kind regards,<br /><br />
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
+- [AARHUSFIRE] - [templates] - [Service Report (Prompts)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [emails] - [Signoff Disclaimed](https://AARHUSFIRE.onuptick.com/configuration/emails)
+- [AARHUSFIRE] - [emails] - [Signoff Reminder](https://AARHUSFIRE.onuptick.com/configuration/emails)
+- [AARHUSFIRE] - [emails] - [Signoff Request](https://AARHUSFIRE.onuptick.com/configuration/emails)
+- [AARHUSFIRE] - [emails] - [Signoff Response](https://AARHUSFIRE.onuptick.com/configuration/emails)
+- [ABACUSFAS] - [emails] - [test](https://ABACUSFAS.onuptick.com/configuration/emails)
 
 </details>
 
 <details class="expandable-section">
-<summary><strong>Filters Used</strong></summary>
+<summary><strong>Properties</strong></summary>
 
-- `pluralize`
+
+| Property | Example Usage |
+|----------|---------------|
+| `account` | {{ signoffproperties.account }} |
+| `contractor` | {{ signoffproperties.contractor }} |
+| `created` | {{ signoffproperty.created }} |
+| `disclaimed_reason` | {{ signoffproperties.disclaimed_reason }} |
+| `due` | {{ signoffproperties.due }} |
+| `filename` | {{ signature.filename }} |
+| `is_disclaimed` | {{ signoffproperties.is_disclaimed }} |
+| `label` | {{ signoffitem.label }} |
+| `new_is_compliant` | {{ signoffproperties.new_is_compliant }} |
+| `new_serviced_date` | {{ signoffitem.new_serviced_date }} |
+| `new_signoff_note` | {{ signoffitem.new_signoff_note }} |
+| `note` | {{ signoffproperties.note }} |
+| `period_finish` | {{ signoffproperties.period_finish }} |
+| `period_start` | {{ signoffproperties.period_start }} |
+| `pk` | {{ signoffproperties.pk }} |
+| `property` | {{ signoffpropertiesproperty.property }} |
+| `signoffitem_set` | {% for signoffitem in signoffproperties.signoffitem_set.all %} |
+| `signoffitem_set.all` | {% for signoffitem in signoffproperties.signoffitem_set.all %} |
+| `signoffproperty_set` | {% for signoffpropertiesproperty in signoffproperties.signoffpropertiesproperty_set.all %} |
+| `signoffproperty_set.all` | {% for signoffpropertiesproperty in signoffproperties.signoffpropertiesproperty_set.all %} |
 
 </details>
 
@@ -2276,62 +1365,55 @@ Kind regards,<br /><br />
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
+
+<div class="...">Signatures</div>
+<div class="...">
+{% for signature in signatures %}
+<div class="...">
+<div class="...">{% cdn_image signature.path height=100 crop="fill" type="authenticated" %}</div>
+
+```
+
+
+---
+
+```django
+
 {% extends 'email.html' %}
 {% block content %}
 <h4>Request{{ signoffproperties|pluralize }} for {{ contractor.name }} ({{ contractor.account }}).</h4>
 <p>In order to issue compliant reports, we require confirmation that you, as a service contractor, have serviced the relevant Essential Safety Measures to Australian Standards over the previous 12 months.</p>
-<table border="0" cellpadding="10" cellspacing="0" bgcolor="#27a9e3" width="100%">
-```
+<table border="..." cellpadding="..." cellspacing="..." bgcolor="..." width="...">
 
-```django
-{% endfor %}
-</ul>
-<p>If the form{{ signoffproperties|pluralize }} on the attached link {{ signoffproperties|pluralize:"is,are" }} not submitted within the next 30 days and there is no proof on site that the Essential Safety Measures are being serviced, {{ signoffproperties|pluralize:"a," }} Non-Compliant Building Report{{ signoffproperties|pluralize }} will be issued.</p>
-{% endblock %}
-{% extends 'email.html' %}
-```
-
-```django
-{% endfor %}
-</ul>
-<p>If the form{{ signoffproperties|pluralize }} on the attached link {{ signoffproperties|pluralize:"is,are" }} not submitted and there is no proof on site that the Essential Safety Measures are being serviced, {{ signoffproperties|pluralize:"a," }} Non-Compliant Building Report{{ signoffproperties|pluralize }} will be issued.</p>
-{% endblock %}
-<p>Dear {{ client.primary_contact.name }},</p>
 ```
 
 </details>
 
 ---
 
-## signoffproperty
-<div class="loop-info">Loop Iterator<span class="tooltip">This variable represents a single item from a list or collection being looped over.</span></div>
+## summary_remarks
 
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
+- [AARHUSFIRE] - [templates] - [Itemised w Prices	](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [templates] - [Itemised w Qty	](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [templates] - [Service Report (Prompts)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [ABACUSFAS] - [emails] - [test](https://ABACUSFAS.onuptick.com/configuration/emails)
 
 </details>
 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-| Property | Example Value |
+
+| Property | Example Usage |
 |----------|---------------|
-| `created` | `{{ signoffproperty.created\|date }}` |
-| `disclaimed_reason` | `{{signoffproperty.disclaimed_reason}}` |
-| `due` | `{{ signoffproperty.due\|date }}` |
-| `is_disclaimed` | `{{ signoffproperty.is_disclaimed }}` |
-| `note` | `{{ signoffproperty.note }}` |
-| `property` | `{{ signoffproperty.property }}` |
-| `property.name` | `{{ signoffproperty.property.name }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Filters Used</strong></summary>
-
-- `date`
+| `0` | {{ summary_remarks.0 }} |
+| `1` | {{ summary_remarks.1 }} |
+| `10` | {{ summary_remarks.10 }} |
+| `2` | {{ summary_remarks.2 }} |
+| `5` | {{ summary_remarks.5 }} |
 
 </details>
 
@@ -2339,137 +1421,26 @@ Kind regards,<br /><br />
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% for signoffproperty in signoffproperties %}
-  <li>
-  <h5>{{ signoffproperty.property.name }}</h5>
-  <p>
-    Due: {{ signoffproperty.due|date }}
-```
 
-```django
-<h5>{{ signoffproperty.property.name }}</h5>
-  <p>
-    Due: {{ signoffproperty.due|date }}
-  </p>
-  </li>
-```
-
-```django
-{% for signoffproperty in signoffproperties %}
-  <li>
-  <h5>{{ signoffproperty.property.name }}</h5>
-  <p>
-    Due: {{ signoffproperty.due|date }}<br/>
-```
-
-</details>
-
----
-
-## start_date
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
+<tbody>
 <tr>
-                        <td style="border: 3px double #000; padding: 8px; width: 25%; background-color: #f0f0f0;">START DATE</td>
-                        <td style="border: 3px double #000; padding: 8px; width: 25%;">{{start_date}}</td>
-                        <td style="border: 3px double #000; padding: 8px; width: 25%; background-color: #f0f0f0;">END DATE</td>
-                        <td style="border: 3px double #000; padding: 8px; width: 25%;">{{end_date}}</td>
+<td width="..." class="..."><strong>{{ summary_remarks.10|default:"0" }}</strong></td>
+<td width="..." class="..."><strong>Critical Defects</strong></td>
+<td width="..." class="...">A defect that renders a system inoperative.</td>
+
 ```
 
-</details>
 
 ---
 
-## subject
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
 ```django
-To: {{ to_list }}<br />
-  CC: {{ cc_list }}<br />
-  Subject {{ subject }}<br />
-</p>
-<p>
-```
 
-```django
-Address: {{ bounce_address }}<br />
-  Bounce Reason: {{ formatted_reason }}<br />
-  Email Subject {{ subject }}<br />
-  Email Sent: {{ formatted_timestamp }}
-</p>
-```
+</tr>
+<tr>
+<td class="..."><strong>{{ summary_remarks.5|default:"0" }}</strong></td>
+<td class="..."><strong>Non-critical Defects</strong></td>
+<td class="...">A system impairment not likely to critically affect the operation of the system.</td>
 
-</details>
-
----
-
-## task
-<div class="loop-info">Loop Iterator<span class="tooltip">This variable represents a single item from a list or collection being looped over.</span></div>
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `address` | `{{ task.address }}` |
-| `description` | `{{ task.description }}` |
-| `name` | `{{ task.name }}` |
-| `property.name` | `{{ task.property.name }}` |
-| `ref` | `{{ task.ref }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-{% endblock %}
-<p>Dear {{ attention }},</p>
-<p>Please find attached our purchase order{% if task %} for {{ task.name }}{% endif %}.</p>
-<p>Please deliver the parts to {{purchaseorder.delivery_instructions}} </p>
-<p><strong>Delivery Address:<strong></p>
-```
-
-```django
-{% for task in tasks %}
-<p>
-  Task {{ task.ref }}<br>
-  {{ task.description }}<br>
-  {{ task.property.name }}<br>
-```
-
-```django
-<p>
-  Task {{ task.ref }}<br>
-  {{ task.description }}<br>
-  {{ task.property.name }}<br>
-  {{ task.address }}
 ```
 
 </details>
@@ -2481,17 +1452,28 @@ Address: {{ bounce_address }}<br />
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.txt
+- [AARHUSFIRE] - [templates] - [Service Report (Prompts)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [AARHUSFIRE] - [emails] - [Bulk Contractor Contact Task Assignment Email](https://AARHUSFIRE.onuptick.com/configuration/emails)
+- [AARHUSFIRE] - [emails] - [Task Assigned Email](https://AARHUSFIRE.onuptick.com/configuration/emails)
+- [ABACUSFAS] - [emails] - [test](https://ABACUSFAS.onuptick.com/configuration/emails)
 
 </details>
 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-| Property | Example Value |
+
+| Property | Example Usage |
 |----------|---------------|
-| `status` | `{{ task_origin_defectquote.status }}` |
-| `status.upper` | `{{ task_origin_defectquote.status.upper }}` |
+| `address` | {{ task.address }} |
+| `description` | {{ task.description }} |
+| `finished` | {{ task_origin_defectquote.finished }} |
+| `get_duration` | {{ task_origin_defectquote.get_duration }} |
+| `get_type_display` | {{ task_origin_defectquote.get_type_display }} |
+| `get_uuid_approval_url` | {{ task_origin_defectquote.get_uuid_approval_url }} |
+| `ref` | {{ task.ref }} |
+| `started` | {{ task_origin_defectquote.started }} |
+| `technician` | {{ task_origin_defectquote.technician }} |
 
 </details>
 
@@ -2499,49 +1481,52 @@ Address: {{ bounce_address }}<br />
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% include "reports/library/arrow-up-right-from-square-icon.svg" with width="14" height="14" %}
-          </a>
-          <div class="status quote {{ task_origin_defectquote.status }} ml-2 mt-1">
-            {{ task_origin_defectquote.status.upper }}
-          </div>
+
+{% if task_origin_defectquote.ref %}
+<div class="...">
+<a href="{{ task_origin_defectquote.get_uuid_approval_url|absolute }}">
+{{ task_origin_defectquote.ref }}
+{% include "reports/library/arrow-up-right-from-square-icon.svg" with width="..." height="..." %}
+
 ```
 
+
+---
+
 ```django
-</a>
-          <div class="status quote {{ task_origin_defectquote.status }} ml-2 mt-1">
-            {{ task_origin_defectquote.status.upper }}
-          </div>
-        </div>
+
+<td>{{ tasksession.get_type_display }}</td>
+<td>{{ tasksession.technician }}</td>
+<td>{{ tasksession.started|timezone:tasksession.timezone|date:'d/m/Y H:i' }} -
+{{ tasksession.finished|timezone:tasksession.timezone|date:'H:i'|default:"(still in progress)" }}</td>
+<td>{{ tasksession.get_duration|duration }}</td>
+
 ```
 
 </details>
 
 ---
 
-## task_quote
+## technician
 
 <details class="expandable-section">
 <summary><strong>Found in files</strong></summary>
 
-- generic.md
-- generic.txt
+- [AARHUSFIRE] - [templates] - [Service Report (Prompts)](https://AARHUSFIRE.onuptick.com/configuration/templates)
+- [ABACUSFAS] - [emails] - [test](https://ABACUSFAS.onuptick.com/configuration/emails)
 
 </details>
 
 <details class="expandable-section">
 <summary><strong>Properties</strong></summary>
 
-| Property | Example Value |
+
+| Property | Example Usage |
 |----------|---------------|
-| `get_uuid_approval_url` | `{{ task_quote.get_uuid_approval_url }}` |
-| `ref` | `{{ task_quote.ref }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Filters Used</strong></summary>
-
-- `absolute`
+| `accreditations` | {% for accreditation in technician.accreditations %} |
+| `inspected_date` | {{ technician.inspected_date }} |
+| `name` | {{ accreditation.name }} |
+| `number` | {{ accreditation.number }} |
 
 </details>
 
@@ -2549,165 +1534,13 @@ Address: {{ bounce_address }}<br />
 <summary><strong>Usage Examples</strong></summary>
 
 ```django
-{% if task_quote.ref %}
-        <div class="subtitle d-flex flex-row">
-          <a href="{{ task_quote.get_uuid_approval_url }}">
-            `task_quote.ref`
-            {% include "reports/library/arrow-up-right-from-square-icon.svg" with width="14" height="14" %}
-```
 
-```django
-{% if task_quote.ref %}
-        <div class="subtitle d-flex flex-row">
-          <a href="{{ task_quote.get_uuid_approval_url|absolute }}">
-            {{ task_quote.ref }}
-            {% include "reports/library/arrow-up-right-from-square-icon.svg" with width="14" height="14" %}
-```
+<td>{{ technician.inspected_date }}</td>
+<td>
+{% for accreditation in technician.accreditations %}
+<div>{{accreditation.name}}: {{ accreditation.number }}</div>
+{% endfor %}
 
-```django
-<div class="subtitle d-flex flex-row">
-          <a href="{{ task_quote.get_uuid_approval_url|absolute }}">
-            {{ task_quote.ref }}
-            {% include "reports/library/arrow-up-right-from-square-icon.svg" with width="14" height="14" %}
-          </a>
-```
-
-</details>
-
----
-
-## tasksession
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Properties</strong></summary>
-
-| Property | Example Value |
-|----------|---------------|
-| `id` | `{{ tasksession.id }}` |
-| `technician.name` | `{{ tasksession.technician.name }}` |
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-</p>
-<p>Thanks</p>
-<p>Task Session {{ tasksession.id }} encountered an error while syncing to the accounting partner.</p>
-{% if task %}
-<p><b>Task:</b> {{ task }}</p>
-```
-
-```django
-<p><b>Task:</b> {{ task }}</p>
-{% endif %}
-<p><b>Technician:</b> {{ tasksession.technician.name }}</p>
-<p>Please review and address the error, then use the link below to retry the sync</p>
-<p>
-```
-
-</details>
-
----
-
-## template
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<p>
-  Change request: <a href="{{ base_url }}{{ changerequest.get_absolute_url }}">{{ changerequest.ref }}</a><br />
-  Template: {% if template %}{{ template }}{% else %}New Template{% endif %}<br />
-  Status: {{ changerequest.status }}
-</p><p>Dear {{ client.name|default:'valued customer' }},</p>
-```
-
-</details>
-
----
-
-## title
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<div>
-    <div class="uptick-heading d-flex flex-row justify-content-between w-100 no-page-break-after">
-      <div>{{ title }}</div>
-      {% if task_quote.ref %}
-        <div class="subtitle d-flex flex-row">
-```
-
-</details>
-
----
-
-## to_list
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-Email info:<br />
-  Sent: {{ failure_datetime }}<br />
-  To: {{ to_list }}<br />
-  CC: {{ cc_list }}<br />
-  Subject {{ subject }}<br />
-```
-
-</details>
-
----
-
-## url
-
-<details class="expandable-section">
-<summary><strong>Found in files</strong></summary>
-
-- generic.txt
-
-</details>
-
-<details class="expandable-section">
-<summary><strong>Usage Examples</strong></summary>
-
-```django
-<p>A new message from {{ from }} is waiting for you:</p>
-<p>{{ chat_message.text }}</p>
-<p>{{ base_url }}{{ url }}</p>
-<p>Regards, <br/>
-{{ config.SITE_ORGANISATION }}
 ```
 
 </details>
