@@ -1,1 +1,100 @@
 
+---
+---
+
+@import "{{ site.theme }}";
+
+// Basic styles for the documentation
+.markdown-body {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+// Expandable sections styling
+.expandable-section {
+  margin: 1em 0;
+  padding: 1em;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  background-color: #f6f8fa;
+
+  summary {
+    cursor: pointer;
+    font-weight: 500;
+    margin: -1em;
+    padding: 1em;
+    outline: none;
+
+    &:hover {
+      background-color: #f0f3f6;
+    }
+  }
+
+  &[open] summary {
+    border-bottom: 1px solid #e1e4e8;
+    margin-bottom: 1em;
+  }
+}
+
+// Table styling
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+
+  th, td {
+    padding: 8px 12px;
+    border: 1px solid #e1e4e8;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f6f8fa;
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f8f9fa;
+  }
+}
+
+// Code block styling
+.highlight {
+  margin: 1em 0;
+  padding: 16px;
+  background-color: #f6f8fa;
+  border-radius: 6px;
+
+  pre {
+    margin: 0;
+    overflow-x: auto;
+  }
+}
+
+// Properties section
+.properties-table {
+  code {
+    background-color: #f0f3f6;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 85%;
+  }
+}
+
+// Navigation and header styling
+.header {
+  margin-bottom: 2em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+// File links styling
+.file-link {
+  color: #0366d6;
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
