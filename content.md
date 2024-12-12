@@ -1,5 +1,8 @@
 # Django Template Variables Documentation
 
+## Overview
+This documentation covers all available variables in Django templates.
+
 ## accreditation
 
 <details class="expandable-section">
@@ -17,4 +20,4 @@
 | `name` | {{accreditation.name}} |
 | `number` | {{ accreditation.number }} |
 
-... [Content continues as before, just without the Jekyll front matter] ...
+[... Rest of content follows ...]
