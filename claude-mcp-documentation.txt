@@ -1,0 +1,108 @@
+# GitHub API Integration Documentation
+
+## Authentication & Access
+- Integration works with authenticated access to repositories
+- Can access both public and private repositories under authorized scope
+- No explicit authentication method visible - appears to be handled by MCP system
+
+## Core Functions Available
+
+### Repository Reading
+```javascript
+get_file_contents({
+    owner: "repository-owner",
+    repo: "repository-name",
+    path: "path/to/file"  // empty path lists repository contents
+})
+```
+
+### File Creation/Modification
+Primary method (recommended):
+```javascript
+push_files({
+    owner: "repository-owner",
+    repo: "repository-name",
+    branch: "branch-name",
+    message: "commit message",
+    files: [
+        {
+            path: "path/to/file",
+            content: "file content"
+        }
+        // Can include multiple files
+    ]
+})
+```
+
+### Branch Management
+```javascript
+create_branch({
+    owner: "repository-owner",
+    repo: "repository-name",
+    branch: "new-branch-name"
+})
+```
+
+## Key Capabilities
+
+### File Operations
+- Create new files
+- Modify existing files
+- Create multiple files in single commit
+- Empty files (closest to deletion)
+- Read file contents
+- List repository contents
+
+### Directory Operations
+- No direct directory creation
+- Can create directories implicitly via file paths
+  Example: `path: "new-directory/file.txt"` creates both directory and file
+
+### Branch Operations
+- Create new branches
+- Push to specific branches
+- Read from specific branches
+
+## Limitations & Considerations
+
+### File Management
+- No direct file deletion method
+  - Workaround: Can push empty content to effectively nullify file
+- Must include full file content when updating
+- No partial file updates
+
+### API Behavior
+- `push_files` is more reliable than `create_or_update_file`
+- All operations require explicit owner/repo information
+- Branch name must be specified for write operations
+- Successful operations return commit SHA and ref information
+
+## Best Practices
+
+### File Operations
+```javascript
+// Creating/updating multiple files
+push_files({
+    files: [
+        {path: "file1.txt", content: "content1"},
+        {path: "dir/file2.txt", content: "content2"}
+    ],
+    message: "descriptive commit message"
+})
+```
+
+### Branch Operations
+```javascript
+// Create branch then push files
+await create_branch({...})
+await push_files({
+    branch: "new-branch",
+    ...
+})
+```
+
+## Error Handling
+- Operations fail with descriptive error messages
+- Common error: Missing required parameters
+- SHA conflicts when files modified externally
+- Invalid path/permission errors are descriptive
