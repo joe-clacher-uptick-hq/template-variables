@@ -1,0 +1,90 @@
+body {
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 45px;
+}
+
+@media (max-width: 767px) {
+    body {
+        padding: 15px;
+    }
+}
+
+/* Custom styles for expandable sections */
+details {
+    background-color: #f6f8fa;
+    border: 1px solid #d1d5da;
+    border-radius: 6px;
+    margin: 1rem 0;
+    padding: 1rem;
+}
+
+details summary {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+details[open] summary {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #d1d5da;
+}
+
+/* Table styles */
+table {
+    display: table;
+    width: 100%;
+    margin: 16px 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+table tr {
+    background-color: #ffffff;
+    border-top: 1px solid #d1d5da;
+}
+
+table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+}
+
+table th,
+table td {
+    padding: 6px 13px;
+    border: 1px solid #d1d5da;
+}
+
+table th {
+    font-weight: 600;
+}
+
+/* Code block styles */
+code {
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(27,31,35,0.05);
+    border-radius: 6px;
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+}
+
+pre code {
+    padding: 16px;
+    overflow: auto;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 6px;
+    display: block;
+}
+
+/* Property section styles */
+.properties-section {
+    margin: 2rem 0;
+}
+
+.properties-section table td:first-child {
+    width: 30%;
+    white-space: nowrap;
+}
