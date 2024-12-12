@@ -1,4 +1,10 @@
-important details: this repo is at https://github.com/joe-clacher-uptick-hq/template-variables
+THIS REPOSITORY IS LOCATED AT THE BELOW LOCATION:
+{
+  `path`: `test.txt`,
+  `repo`: `template-variables`,
+  `owner`: `joe-clacher-uptick-hq`,
+  `branch`: `main`
+}
 
 # GitHub API Integration Documentation
 
