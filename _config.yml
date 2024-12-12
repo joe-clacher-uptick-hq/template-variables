@@ -1,8 +1,8 @@
 # Site settings
 title: Django Template Variables Documentation
 description: Documentation for Django template variables and their usage
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/template-variables" # the subpath of your site (repo name)
+url: "https://joe-clacher-uptick-hq.github.io" # your GitHub Pages URL
 
 # Build settings
 markdown: kramdown
